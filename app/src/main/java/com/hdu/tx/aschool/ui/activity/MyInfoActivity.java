@@ -18,9 +18,6 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2015/8/14.
  */
 public class MyInfoActivity extends BaseActivity {
-
-    @Bind(R.id.toolbar_title)
-    TextView toolbarTitle;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.appbar)

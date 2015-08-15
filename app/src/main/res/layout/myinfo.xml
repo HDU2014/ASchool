@@ -35,16 +35,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:padding="15dp"
                 android:text="@string/change_header"
                 android:textColor="@color/yellow"
-                android:textSize="15sp"></TextView>
+                android:textSize="15sp"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_dashboard" />
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
 
 
         </LinearLayout>
@@ -86,16 +84,14 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="right"
-            android:padding="15dp"
             android:textColor="@color/black"
             android:text="踏雪无痕"
             android:textSize="15sp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_dashboard" />
+            style="@style/Right_arrow_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
     </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -132,16 +128,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:padding="15dp"
                 android:textColor="@color/black"
                 android:text="男"
                 android:textSize="15sp"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_dashboard" />
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -179,16 +173,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:padding="15dp"
                 android:textColor="@color/black"
                 android:text="24"
                 android:textSize="15sp"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_dashboard" />
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -228,16 +220,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:padding="15dp"
                 android:textColor="@color/black"
                 android:text="杭州电子科技大学"
                 android:textSize="15sp"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_dashboard" />
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -275,16 +265,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:padding="15dp"
                 android:textColor="@color/black"
                 android:text="研一"
                 android:textSize="15sp"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_dashboard" />
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -323,16 +311,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:padding="15dp"
                 android:textColor="@color/black"
                 android:text="未绑定"
                 android:textSize="15sp"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_dashboard" />
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -370,16 +356,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:padding="15dp"
                 android:textColor="@color/black"
                 android:text="杭州"
                 android:textSize="15sp"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_dashboard" />
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"

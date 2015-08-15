@@ -17,22 +17,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.hdu.tx.aschool.R;
+import com.hdu.tx.aschool.base.BaseActivity;
+import com.hdu.tx.aschool.common.view.MyNiftyDialog;
 import com.hdu.tx.aschool.ui.adapter.FragmentAdapter;
 import com.hdu.tx.aschool.ui.fragment.ListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private DrawerLayout mDrawerLayout;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     ActionBarDrawerToggle drawerToggle;
     FloatingActionButton fab;
+    private ImageView headimg_iv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
                 (NavigationView) findViewById(R.id.nv_main_navigation);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
+            headimg_iv= (ImageView) navigationView.findViewById(R.id.headimg_iv);
+            headimg_iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(MainActivity.this,MeActivity.class);
+                    MainActivity.this.startActivity(intent);
+                }
+            });
         }
 
 
@@ -61,14 +76,13 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Snackbar comes out", Snackbar.LENGTH_LONG)
-                        .setAction("Action", new View.OnClickListener() {
+                Snackbar.make(view, R.string.need_login, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.now_regist, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(
-                                        MainActivity.this,
-                                        "Toast comes out",
-                                        Toast.LENGTH_SHORT).show();
+                                Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                                MainActivity.this.startActivity(intent);
+
                             }
                         }).show();
             }
@@ -124,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         switch (menuItem.getItemId()){
                             case R.id.my_info:
-                                Intent intent=new Intent(MainActivity.this,MeActivity.class);
+                                Intent intent=new Intent(MainActivity.this,MyInfoActivity.class);
                                 MainActivity.this.startActivity(intent);
                                 break;
                             case R.id.my_activity:
@@ -135,12 +149,43 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent2=new Intent(MainActivity.this,LoginActivity.class);
                                 MainActivity.this.startActivity(intent2);
                                 break;
+                            case R.id.exit:
+                                final NiftyDialogBuilder dialogBuilder=NiftyDialogBuilder.getInstance(MainActivity.this);
+                                dialogBuilder
+                                        .withTitle("退出")
+                                        .withTitleColor("#ffffffff")
+                                        .withDividerColor("#11000000")
+                                        .withMessage("确定退出程序？")
+                                        .withMessageColor("#FFFFFFFF")
+                                        .withDialogColor(getResources().getColor(R.color.colorPrimary))
+                                        .withIcon(getResources().getDrawable(R.drawable.ic_plus))
+                                        .withDuration(300)
+                                        .withEffect(Effectstype.SlideBottom)
+                                        .withButton1Text("确定")
+                                        .withButton2Text("取消")
+                                        .isCancelableOnTouchOutside(true)
+                                        .setButton1Click(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                onBackPressed();
+                                            }
+                                        })
+                                        .setButton2Click(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialogBuilder.dismiss();
+                                            }
+                                        })
+                                        .show();
+                                break;
                         }
                         return true;
                     }
                 });
 
     }
+
+
 
 
 }

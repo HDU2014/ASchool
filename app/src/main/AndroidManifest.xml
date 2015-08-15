@@ -32,7 +32,8 @@
 
         <activity android:name=".ui.activity.UploadButtonDemoActivity"></activity>
         <activity android:name=".ui.activity.MeActivity"></activity>
-        <activity android:name=".ui.activity.SMSShareDemo"></activity>
+        <activity android:name=".ui.activity.MyInfoActivity"
+            android:label="@string/person_info"></activity>
 
         <activity
             android:name="com.mob.tools.MobUIShell"

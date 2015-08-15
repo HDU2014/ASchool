@@ -20,15 +20,6 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textSize="22sp"
-                    android:text="@string/person_info"
-                    android:textColor="@color/white"/>
             </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
@@ -41,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="10dp">
+            android:paddingTop="?attr/actionBarSize">
+
             <include layout="@layout/myinfo"></include>
         </LinearLayout>
 
