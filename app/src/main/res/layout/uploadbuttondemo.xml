@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    
+    <RelativeLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        >
+        
+    <com.hdu.tx.aschool.ui.widget.progressbutton.CircularProgressButton
+        android:id="@+id/btnWithIcons1"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cornerRadius="48dp"
+        android:layout_centerHorizontal="true"
+        app:iconComplete="@drawable/ic_action_accept"
+        app:iconError="@drawable/ic_action_cancel"
+        app:textIdle="@string/upload" />
+
+    <com.hdu.tx.aschool.ui.widget.progressbutton.CircularProgressButton
+        android:id="@+id/btnWithIcons2"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_below="@+id/btnWithIcons1"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cornerRadius="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        app:iconComplete="@drawable/ic_action_accept"
+        app:iconError="@drawable/ic_action_cancel"
+        app:textIdle="@string/download" />
+
+	</RelativeLayout>
+</RelativeLayout>
