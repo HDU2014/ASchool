@@ -31,5 +31,4 @@ dependencies {
     compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.github.sd6352051.niftydialogeffects:niftydialogeffects:1.0.0@aar'  //https://github.com/sd6352051/NiftyDialogEffects
-    compile 'com.github.wangjiegulu:RapidFloatingActionButton:1.0.3'   //https://github.com/wangjiegulu/RapidFloatingActionButton
 }

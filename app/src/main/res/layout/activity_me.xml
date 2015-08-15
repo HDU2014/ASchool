@@ -21,26 +21,20 @@
             android:minHeight="?attr/actionBarSize"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginStart="100dp"
+            app:expandedTitleMarginStart="120dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <com.hdu.tx.aschool.ui.widget.image.CircleImageView
-                android:layout_marginTop="60dp"
-                android:id="@+id/head_img"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:border_width="2dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_user"
-                app:border_color="#ffffffff" />
+            <include layout="@layout/navigation_header"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax"
+                ></include>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-            </android.support.v7.widget.Toolbar>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -57,7 +51,12 @@
             android:orientation="vertical"
             android:paddingTop="24dp">
 
-            <include layout="@layout/myinfo"></include>
+            <include layout="@layout/mytool"></include>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+            </LinearLayout>
 
         </LinearLayout>
 

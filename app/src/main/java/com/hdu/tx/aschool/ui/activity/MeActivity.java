@@ -23,8 +23,6 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2015/8/14.
  */
 public class MeActivity extends BaseActivity {
-    @Bind(R.id.head_img)
-    CircleImageView headImg;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.collapsing_toolbar)
@@ -48,7 +46,7 @@ public class MeActivity extends BaseActivity {
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle("个人资料");
-        setFabMenu();
+        //setFabMenu();
     }
 
 

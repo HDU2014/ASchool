@@ -35,6 +35,11 @@
     <string name="smssdk_contact">添加联系人</string>
     <string name="need_login">当前模式为游客登陆</string>
     <string name="exit">退出</string>
+    <string name="my_activity">我的活动</string>
+    <string name="my_info">我的信息</string>
+    <string name="wake_setting">提醒设置</string>
+    <string name="my_mingpian">我的名片</string>
+    <string name="sys_setting">系统设置</string>
 
 
 </resources>
