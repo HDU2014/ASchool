@@ -155,7 +155,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/bt_login"
         android:layout_marginRight="20dp"
-        android:text="@string/now_regist"
+        android:text="@string/phone_regist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

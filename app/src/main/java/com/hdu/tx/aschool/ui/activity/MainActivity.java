@@ -136,9 +136,6 @@ public class MainActivity extends AppCompatActivity {
                                 MainActivity.this.startActivity(intent2);
                                 break;
                         }
-
-
-
                         return true;
                     }
                 });

@@ -70,7 +70,7 @@
     <string name="smssdk_contacts_detail">详细资料</string>
     <string name="smssdk_contacts_phones">手机号码: </string>
     <string name="smssdk_choice_invite_phones">选择一个号码发送邀请</string>
-    <string name="smssdk_invite_content">Mob最新短信SDK,欢迎大家使用，你的好友邀请你加入；下载地址： http://www.mob.com</string>
+    <string name="smssdk_invite_content">校园活动平台,欢迎大家使用，你的好友邀请你加入；下载地址： http://www.xxx.xxx</string>
     <string name="smssdk_close_identify_page_dialog">验证码短信可能略有延迟，确定返回并重新开始？</string>
     <string name="smssdk_wait">等待 </string>
     <string name="smssdk_add_contact">添加</string>
@@ -79,5 +79,6 @@
     <string name="smssdk_send_sounds_identify_code">确定后将致电您的手机号，语音播报验证码.如不希望被来电打扰请使用短信验证码。</string>
     <string name="smssdk_make_sure_send_sounds">确认发送？</string>
     <string name="smssdk_send_sounds_success">语音验证码发送成功</string>
+    <string name="phone_regist">手机号注册</string>
 
 </resources>

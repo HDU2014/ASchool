@@ -28,19 +28,17 @@ import android.widget.Toast;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
-import com.hdu.tx.aschool.ui.widget.smssdk.gui.CommonDialog;
-import com.hdu.tx.aschool.ui.widget.smssdk.gui.ContactsPage;
-import com.hdu.tx.aschool.ui.widget.smssdk.gui.RegisterPage;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
-
+import cn.smssdk.gui.CommonDialog;
+import cn.smssdk.gui.ContactsPage;
+import cn.smssdk.gui.RegisterPage;
 
 
 public class SMSShareDemo extends BaseActivity implements OnClickListener, Callback {
 	// 填写从短信SDK应用后台注册得到的APPKEY
 	private static String APPKEY = "9a31ea40a5e8";
-
 	// 填写从短信SDK应用后台注册得到的APPSECRET
 	private static String APPSECRET = "f7ca2df6bf72d5600965b7610b17f322";
 
@@ -82,35 +80,35 @@ public class SMSShareDemo extends BaseActivity implements OnClickListener, Callb
 	}
 
 	private void showAppkeyDialog() {
-//		final Dialog dialog = new Dialog(this, R.style.CommonDialog);
-//		dialog.setContentView(R.layout.smssdk_set_appkey_dialog);
-//		final EditText etAppKey = (EditText) dialog.findViewById(R.id.et_appkey);
-//		etAppKey.setText(APPKEY);
-//		final EditText etAppSecret = (EditText) dialog.findViewById(R.id.et_appsecret);
-//		etAppSecret.setText(APPSECRET);
-//		OnClickListener ocl = new OnClickListener() {
-//			public void onClick(View v) {
-//				if (v.getId() == R.id.btn_dialog_ok) {
-//					APPKEY = etAppKey.getText().toString().trim();
-//					APPSECRET = etAppSecret.getText().toString().trim();
-//					if (TextUtils.isEmpty(APPKEY) || TextUtils.isEmpty(APPSECRET)) {
-//						Toast.makeText(v.getContext(), R.string.smssdk_appkey_dialog_title,
-//								Toast.LENGTH_SHORT).show();
-//					} else {
-//						dialog.dismiss();
-//						setSharePrefrence();
-//						initSDK();
-//					}
-//				} else {
-//					dialog.dismiss();
-//					finish();
-//				}
-//			}
-//		};
-//		dialog.findViewById(R.id.btn_dialog_ok).setOnClickListener(ocl);
-//		dialog.findViewById(R.id.btn_dialog_cancel).setOnClickListener(ocl);
-//		dialog.setCancelable(false);
-//		dialog.show();
+		final Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.smssdk_set_appkey_dialog);
+		final EditText etAppKey = (EditText) dialog.findViewById(R.id.et_appkey);
+		etAppKey.setText(APPKEY);
+		final EditText etAppSecret = (EditText) dialog.findViewById(R.id.et_appsecret);
+		etAppSecret.setText(APPSECRET);
+		OnClickListener ocl = new OnClickListener() {
+			public void onClick(View v) {
+				if (v.getId() == R.id.btn_dialog_ok) {
+					APPKEY = etAppKey.getText().toString().trim();
+					APPSECRET = etAppSecret.getText().toString().trim();
+					if (TextUtils.isEmpty(APPKEY) || TextUtils.isEmpty(APPSECRET)) {
+						Toast.makeText(v.getContext(), "444",
+								Toast.LENGTH_SHORT).show();
+					} else {
+						dialog.dismiss();
+						setSharePrefrence();
+						initSDK();
+					}
+				} else {
+					dialog.dismiss();
+					finish();
+				}
+			}
+		};
+		dialog.findViewById(R.id.btn_dialog_ok).setOnClickListener(ocl);
+		dialog.findViewById(R.id.btn_dialog_cancel).setOnClickListener(ocl);
+		dialog.setCancelable(false);
+		dialog.show();
 	}
 
 	private void initSDK() {
@@ -176,7 +174,6 @@ public class SMSShareDemo extends BaseActivity implements OnClickListener, Callb
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_bind_phone:
-			// 打开注册页面
 			RegisterPage registerPage = new RegisterPage();
 			registerPage.setRegisterCallback(new EventHandler() {
 				public void afterEvent(int event, int result, Object data) {
@@ -206,7 +203,6 @@ public class SMSShareDemo extends BaseActivity implements OnClickListener, Callb
 		if (pd != null && pd.isShowing()) {
 			pd.dismiss();
 		}
-
 		int event = msg.arg1;
 		int result = msg.arg2;
 		Object data = msg.obj;

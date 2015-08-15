@@ -16,4 +16,6 @@
     <color name="yellow">#ff9f40</color>
     <color name="line">#4cc0c0c0</color>
     <color name="little_black">#868686</color>
+    <color name="smssdk_white">#ffffffff</color>
+    <color name="smssdk_gray_press">#44444444</color>
 </resources>
