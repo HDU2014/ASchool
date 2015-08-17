@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ASchool.iml" filepath="$PROJECT_DIR$/ASchool.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mylibrary/SMSSDK.iml" filepath="$PROJECT_DIR$/mylibrary/SMSSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
     </modules>
   </component>
 </project>

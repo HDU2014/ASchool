@@ -160,7 +160,7 @@ public class MainActivity extends BaseActivity {
                                         .withDialogColor(getResources().getColor(R.color.colorPrimary))
                                         .withIcon(getResources().getDrawable(R.drawable.ic_plus))
                                         .withDuration(300)
-                                        .withEffect(Effectstype.SlideBottom)
+                                        .withEffect(Effectstype.RotateBottom)
                                         .withButton1Text("确定")
                                         .withButton2Text("取消")
                                         .isCancelableOnTouchOutside(true)

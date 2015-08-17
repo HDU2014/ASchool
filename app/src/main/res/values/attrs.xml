@@ -13,7 +13,7 @@
         <attr name="colorIdle" format="color"/>
         <attr name="iconError" format="reference"/>
         <attr name="iconComplete" format="reference"/>
-        <attr name="cornerRadius" format="dimension"/>
+        <attr name="cornerRadius1" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="CircleImageView">

@@ -30,5 +30,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'info.hoang8f:fbutton:1.0.5'  //https://github.com/hoang8f/android-flat-button
     compile 'com.github.sd6352051.niftydialogeffects:niftydialogeffects:1.0.0@aar'  //https://github.com/sd6352051/NiftyDialogEffects
+    compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'  //https://github.com/dmytrodanylyk/android-process-button
 }

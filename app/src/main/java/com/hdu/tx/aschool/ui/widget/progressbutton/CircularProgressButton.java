@@ -90,7 +90,7 @@ public class CircularProgressButton extends Button {
 
             mIconComplete = attr.getResourceId(R.styleable.CircularProgressButton_iconComplete, 0);
             mIconError = attr.getResourceId(R.styleable.CircularProgressButton_iconError, 0);
-            mCornerRadius = attr.getDimension(R.styleable.CircularProgressButton_cornerRadius, 0);
+            mCornerRadius = attr.getDimension(R.styleable.CircularProgressButton_cornerRadius1, 0);
 
             int blue = getColor(R.color.blue);
             int red = getColor(R.color.red);
