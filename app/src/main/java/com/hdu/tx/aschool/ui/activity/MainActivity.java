@@ -27,6 +27,7 @@ import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.common.view.MyNiftyDialog;
 import com.hdu.tx.aschool.ui.adapter.FragmentAdapter;
 import com.hdu.tx.aschool.ui.fragment.ListFragment;
+import com.hdu.tx.aschool.ui.fragment.MainFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +41,10 @@ public class MainActivity extends BaseActivity {
     FloatingActionButton fab;
     private ImageView headimg_iv;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -119,7 +118,7 @@ public class MainActivity extends BaseActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(1)));
         mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(2)));
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new ListFragment());
+        fragments.add(new MainFragment());
         fragments.add(new ListFragment());
         fragments.add(new ListFragment());
         FragmentAdapter adapter =

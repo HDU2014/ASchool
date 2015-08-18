@@ -40,6 +40,11 @@
     <string name="wake_setting">提醒设置</string>
     <string name="my_mingpian">我的名片</string>
     <string name="sys_setting">系统设置</string>
+    <string name="activity_title_test">骑行下沙啊啊骑行下骑行</string>
+    <string name="activity_time_test">时间：8月10日13:00</string>
+    <string name="activity_address_test">地点：杭州电子科技大学啊啊</string>
+    <string name="activity_havejoin_test">6人已参加</string>
+    <string name="activity_goto_test">去报名</string>
 
 
 </resources>

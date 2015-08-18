@@ -17,7 +17,6 @@ public class SplashActivity extends BaseActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
 		setContentView(R.layout.splash);
 	}
@@ -27,12 +26,12 @@ public class SplashActivity extends BaseActivity
 	@Override
 	protected void onStart() {
 		super.onStart();
-
 		new Thread(new Runnable() {
 			public void run() {
 				try {
 					Thread.sleep(sleepTime);
 				} catch (InterruptedException e) {
+
 				}
 				startActivity(new Intent(SplashActivity.this, MainActivity.class));
 				finish();
