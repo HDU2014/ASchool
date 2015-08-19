@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
+  <component name="Encoding" useUTFGuessing="false" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/hdu/tx/aschool/entity/Event.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/hdu/tx/aschool/entity/Events.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/hdu/tx/aschool/ui/adapter/MyAdapter.java" charset="GBK" />
@@ -8,3 +8,4 @@
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
+

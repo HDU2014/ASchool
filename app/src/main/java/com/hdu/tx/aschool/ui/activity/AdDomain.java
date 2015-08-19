@@ -7,19 +7,19 @@ package com.hdu.tx.aschool.ui.activity;
  * 
  */
 public class AdDomain {
-	private String id; // ���id
-	private String date; // ����
-	private String title; // ����
-	private String topicFrom; //ѡ������ 
-	private String topic; // ѡ��
-	private String imgUrl; // ͼƬurl
-	private boolean isAd; // �Ƿ�Ϊ���
-	private String startTime; // ��濪ʼʱ��
-	private String endTime; // ������ʱ��
-	private String targetUrl; // Ŀ��url
-	private int width; // ��
-	private int height; // ��
-	private boolean available; // �Ƿ����
+	private String id;
+	private String date;
+	private String title;
+	private String topicFrom;
+	private String topic;
+	private String imgUrl;
+	private boolean isAd;
+	private String startTime;
+	private String endTime;
+	private String targetUrl;
+	private int width;
+	private int height;
+	private boolean available;
 	
 
 	public String getId() {
