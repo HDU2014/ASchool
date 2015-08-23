@@ -124,19 +124,39 @@
             />
     </RelativeLayout>
 
-    <Button
+    <!--<Button-->
+        <!--android:id="@+id/bt_login"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:text="@string/login"-->
+        <!--android:enabled="false"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="18sp"-->
+        <!--android:layout_below="@id/rlpassword"-->
+        <!--android:background="@drawable/loginbuttonbg"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+
+    <com.dd.processbutton.iml.ActionProcessButton
         android:id="@+id/bt_login"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:text="@string/login"
-        android:enabled="false"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_below="@id/rlpassword"
-        android:background="@drawable/loginbuttonbg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/regist"
+        android:textSize="22sp"
+        android:layout_marginTop="24dp"
+        android:layout_below="@id/rlpassword"
+        android:layout_margin="15dp"
+        android:textColor="@android:color/white"
+        app:pb_colorComplete="@color/colorAccent"
+        app:pb_colorNormal="@color/fbutton_normal"
+        app:pb_cornerRadius="5dp"
+        app:pb_colorPressed="@color/fbutton_pressed"
+        app:pb_textComplete="@string/regist_success"
+        app:pb_textProgress="@string/registing"
+        app:pb_textError="@string/regist_error"
+        app:pb_colorError="@color/red_error" />
 
     <TextView
         android:id="@+id/tv_forgetpass"
@@ -154,7 +174,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/bt_login"
         android:layout_marginRight="20dp"
-        android:text="@string/regist"
+        android:text="@string/free_regist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

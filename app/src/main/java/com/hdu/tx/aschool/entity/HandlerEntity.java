@@ -1,7 +1,10 @@
 package com.hdu.tx.aschool.entity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -14,7 +17,6 @@ public class HandlerEntity {
     private HandlerEntity() {
 
     }
-
 
     private static HandlerEntity instance = null;
     /**
@@ -60,6 +62,11 @@ public class HandlerEntity {
                 }
             }
         }
+    }
+
+
+    public void saveUserEntity(Context context,UserInfoEntity userInfoEntity){
+      
     }
 
 

@@ -449,9 +449,14 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 		}
 		String formatedPhone = "+" + code + " " + splitPhoneNum(phone);
 		// 验证码页面
+		Log.i("TAG---phone", phone);
+		Log.i("TAG---code",code);
+		Log.i("TAG",formatedPhone);
+
 		IdentifyNumPage page = new IdentifyNumPage();
 		page.setPhone(phone, code, formatedPhone);
 		page.showForResult(activity, null, this);
+
 	}
 
 }

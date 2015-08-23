@@ -25,14 +25,17 @@ import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.IntentFilter;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.Html;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -392,8 +395,9 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 					res.put("res", true);
 					res.put("page", 2);
 					res.put("phone", data);
-					setResult(res);
-					finish();
+					//setResult(res);
+					//finish();
+					showInputDialog();
 				} else {
 					((Throwable) data).printStackTrace();
 					// 验证码不正确
@@ -562,4 +566,9 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 		}
 	}
 
+
+
+	public void showInputDialog(){
+
+	}
 }

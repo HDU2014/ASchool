@@ -1,4 +1,4 @@
-<android.support.v4.widget.DrawerLayout
+<com.hdu.tx.aschool.ui.View.MainView
     android:id="@+id/dl_main_drawer"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,4 +17,4 @@
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/drawer_view"/>
 
-</android.support.v4.widget.DrawerLayout>
+</com.hdu.tx.aschool.ui.View.MainView>

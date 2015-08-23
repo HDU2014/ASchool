@@ -6,12 +6,12 @@ import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 
 /**
- * Created by Administrator on 2015/8/15.
+ * Created by Administrator on 2015/8/21.
  */
-public class TestActivity extends BaseActivity{
+public class AdDetailActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registactivity);
+        setContentView(R.layout.activity_adetail);
     }
 }

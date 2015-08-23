@@ -20,13 +20,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':mylibrary')
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.android.support:cardview-v7:22.2.0'
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:design:22.2.0'
-    compile 'com.jakewharton:butterknife:7.0.1'   //https://github.com/JakeWharton/butterknife
+    compile 'com.jakewharton:butterknife:7.0.1'
+    //https://github.com/JakeWharton/butterknife
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
     compile 'com.nineoldandroids:library:2.4.0'
@@ -37,4 +38,8 @@ dependencies {
     compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
     //https://github.com/dmytrodanylyk/android-process-button
     compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
+    compile files('libs/volley.jar')
+    compile 'de.greenrobot:greendao:2.0.0'
+    //https://github.com/greenrobot/greenDAO
+    compile files('libs/thinkandroid-1.1-bin.jar')
 }

@@ -1,5 +1,6 @@
 package com.hdu.tx.aschool.ui.activity;
 
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,10 +17,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.dd.processbutton.iml.ActionProcessButton;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
+import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.common.utils.MyStrings;
+import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.ui.IEvent.IEventView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -35,7 +47,7 @@ import cn.smssdk.gui.RegisterPage;
 /**
  * Created by Administrator on 2015/8/12.
  */
-public class LoginActivity extends BaseActivity implements View.OnClickListener, IEventView,Handler.Callback {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, IEventView{
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.iv_username)
@@ -45,7 +57,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Bind(R.id.iv_password)
     ImageView ivPassword;
     @Bind(R.id.bt_login)
-    Button btLogin;
+    ActionProcessButton btLogin;
+
     @Bind(R.id.tv_forgetpass)
     TextView tvForgetpass;
     @Bind(R.id.tv_regist)
@@ -56,8 +69,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Bind(R.id.et_password)
     EditText etPassword;
 
-
-    private final static int PHONENUMEBER_LENGTH = 11;
     @Bind(R.id.textinput)
     TextInputLayout textinput;
     @Bind(R.id.til_pass)
@@ -65,12 +76,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private boolean isRightPhoneNumber;
     private boolean isRightPassword;
-    private boolean ready;
-
-    // 填写从短信SDK应用后台注册得到的APPKEY
-    private static String APPKEY = "9a31ea40a5e8";
-    // 填写从短信SDK应用后台注册得到的APPSECRET
-    private static String APPSECRET = "f7ca2df6bf72d5600965b7610b17f322";
 
     @OnClick({R.id.iv_qq, R.id.iv_weixin, R.id.iv_weibo})
     void select(ImageView imageView) {
@@ -85,14 +90,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         ButterKnife.bind(this);
         initToolbar();
         tvRegist.setOnClickListener(this);
-        initSDK();
+        editTextWatch();
+    }
 
+    private void editTextWatch() {
         EditText editText = textinput.getEditText();
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
 
+            }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 11) {
@@ -144,8 +151,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 }
             }
         });
-
-
     }
 
     /**
@@ -169,66 +174,40 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_regist:
-//                Intent intent = new Intent(this, RegistActivity.class);
-//                startActivity(intent);
-                showRegisterPag();
+                Intent intent = new Intent(this, RegistActivity.class);
+                startActivity(intent);
                 break;
         }
     }
 
-    public TextWatcher usernameTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (count + start == PHONENUMEBER_LENGTH) {
-                isCompleteUsername = true;
-            } else {
-                isCompleteUsername = false;
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            if (isCompleteUsername && isCompletePassword) {
-                btLogin.setEnabled(true);
-            } else {
-                btLogin.setEnabled(false);
-            }
-        }
-    };
-
-    public TextWatcher passwordextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (count + start > 0) {
-                isCompletePassword = true;
-            } else {
-                isCompleteUsername = false;
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            if (isCompleteUsername && isCompleteUsername) {
-                btLogin.setEnabled(true);
-            } else {
-                btLogin.setEnabled(false);
-            }
-        }
-    };
 
     @OnClick(R.id.bt_login)
     void login() {
-        toast(toolbar, "login");
+        if(isCompleteUsername&&isRightPassword){
+            StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.LOGIN, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String s) {
+                    try {
+                        JSONObject object=new JSONObject(s);
+                        if(object.getInt("result")==200){
+                            MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
+                            UserInfo userInfo=new UserInfo();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+
+                }
+            }){
+
+            };
+        }
     }
 
     @OnClick(R.id.tv_forgetpass)
@@ -254,91 +233,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         }
     }
 
-    private void initSDK() {
-        // 初始化短信SDK
-        SMSSDK.initSDK(this, APPKEY, APPSECRET);
-        final Handler handler = new Handler(this);
-        EventHandler eventHandler = new EventHandler() {
-            public void afterEvent(int event, int result, Object data) {
-                Message msg = new Message();
-                msg.arg1 = event;
-                msg.arg2 = result;
-                msg.obj = data;
-                handler.sendMessage(msg);
-            }
-        };
-        // 注册回调监听接口
-        SMSSDK.registerEventHandler(eventHandler);
-        ready = true;
-
-        // 获取新好友个数
-
-        SMSSDK.getNewFriendsCount();
-
-    }
-
-    @Override
-    public boolean handleMessage(Message msg) {
-        int event = msg.arg1;
-        int result = msg.arg2;
-        Object data = msg.obj;
-        if (event == SMSSDK.EVENT_SUBMIT_USER_INFO) {
-            // 短信注册成功后，返回MainActivity,然后提示新好友
-            if (result == SMSSDK.RESULT_COMPLETE) {
-                Toast.makeText(this, R.string.smssdk_user_info_submited, Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                ((Throwable) data).printStackTrace();
-            }
-        }
-        return false;
-    }
 
 
-    // 提交用户信息
-    private void registerUser(String country, String phone) {
-        Random rnd = new Random();
-        int id = Math.abs(rnd.nextInt());
-        String uid = String.valueOf(id);
-        String nickName = "SmsSDK_User_" + uid;
-        String avatar = MyStrings.AVATARS[id % 12];
-        SMSSDK.submitUserInfo(uid, nickName, avatar, country, phone);
-    }
 
-    public void showRegisterPag(){
-        RegisterPage registerPage = new RegisterPage();
-        registerPage.setRegisterCallback(new EventHandler() {
-            public void afterEvent(int event, int result, Object data) {
-                // 解析注册结果
-                if (result == SMSSDK.RESULT_COMPLETE) {
-                    @SuppressWarnings("unchecked")
-                    HashMap<String, Object> phoneMap = (HashMap<String, Object>) data;
-                    String country = (String) phoneMap.get("country");
-                    String phone = (String) phoneMap.get("phone");
-                    // 提交用户信息
-                    registerUser(country, phone);
-                }
-            }
-        });
-        registerPage.show(this);
-    }
 
     @Override
     protected void onDestroy() {
-        if (ready) {
-            // 销毁回调监听接口
-            SMSSDK.unregisterAllEventHandler();
-        }
         super.onDestroy();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (ready) {
-            // 获取新好友个数
-            SMSSDK.getNewFriendsCount();
-        }
     }
 
     @Override

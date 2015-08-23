@@ -1,10 +1,12 @@
 package com.hdu.tx.aschool.ui.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,16 +14,37 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.dd.processbutton.iml.ActionProcessButton;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
+import com.hdu.tx.aschool.base.MyApplication;
+import com.hdu.tx.aschool.common.utils.MySecurity;
+import com.hdu.tx.aschool.common.utils.ThirdKey;
+import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.net.Urls;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import info.hoang8f.widget.FButton;
 
 /**
  * Created by Administrator on 2015/8/12.
@@ -34,7 +57,26 @@ public class RegistActivity extends BaseActivity {
     @Bind(R.id.et_phone)
     EditText etPhone;
     @Bind(R.id.bt_getYZM)
-    Button btGetYZM;
+    FButton btGetYZM;
+    @Bind(R.id.rlpassword)
+    RelativeLayout rlpassword;
+    @OnClick(R.id.tv_unreceive_identify)void onclick3(){
+        if(isCompleteInput[0])getVoiceVerificationCode();
+        else this.toast(toolbar,"手机号码不正确");
+    }
+
+    @OnClick(R.id.bt_regist)
+    void click2() {
+        if(isCompleteInput[0]&&isCompleteInput[1]&&isCompleteInput[2]){
+            btRegist.setProgress(20);
+            submit(etPhone.getText().toString().trim(), etYZM.getText().toString().trim());
+        }else{
+            Snackbar.make(toolbar,R.string.input_format_error,Snackbar.LENGTH_SHORT).show();
+        }
+
+    }
+
+
     @Bind(R.id.til_phone)
     TextInputLayout tilPhone;
     @Bind(R.id.til_yzm)
@@ -44,7 +86,7 @@ public class RegistActivity extends BaseActivity {
 
     @OnClick(R.id.bt_getYZM)
     void click1() {
-        getYanZhengMa();
+        getYanZhengMa(etPhone.getText().toString().trim());
     }
 
     @Bind(R.id.iv_password)
@@ -56,7 +98,7 @@ public class RegistActivity extends BaseActivity {
     @Bind(R.id.et_pass)
     EditText etPass;
     @Bind(R.id.bt_regist)
-    Button btRegist;
+    ActionProcessButton btRegist;
     @Bind(R.id.iv_qq)
     ImageView ivQq;
     @Bind(R.id.iv_weixin)
@@ -66,6 +108,7 @@ public class RegistActivity extends BaseActivity {
 
     private final static int PHONENUMEBER_LENGTH = 11;
     private boolean[] isCompleteInput = new boolean[3];
+    private EventHandler eventHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +116,17 @@ public class RegistActivity extends BaseActivity {
         setContentView(R.layout.registactivity);
         ButterKnife.bind(this);
         initToolbar();
+        initSMSSDK();
+        startTextWatch();
+    }
 
-
+    /**
+     * 监听输入内容
+     */
+    private void startTextWatch() {
         tilPass.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -88,7 +136,6 @@ public class RegistActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                btGetYZM.setEnabled(isCompleteInput[0]);
                 btRegist.setEnabled(isCompleteInput[0] && isCompleteInput[1] && isCompleteInput[2]);
             }
         });
@@ -120,17 +167,53 @@ public class RegistActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                isCompleteInput[1] = (count + start == 6) ? true : false;
+                isCompleteInput[1] = (count + start > 0) ? true : false;
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                btGetYZM.setEnabled(isCompleteInput[0]);
                 btRegist.setEnabled(isCompleteInput[0] && isCompleteInput[1] && isCompleteInput[2]);
             }
         });
-
     }
+
+    /**
+     * 短信验证码
+     */
+    private void initSMSSDK() {
+        SMSSDK.initSDK(this, ThirdKey.APPKEY, ThirdKey.APPSECRET);
+        eventHandler = new EventHandler() {
+            @Override
+            public void afterEvent(final int event, final int result,
+                                   final Object data) {
+                try {
+
+                    if (result == SMSSDK.RESULT_COMPLETE) {
+                        //回调完成
+                        if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                            registFromServer();
+                        } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                            //Toast.makeText(RegistActivity.this,"获取验证码成功。。。",Toast.LENGTH_LONG).show();
+                            RegistActivity.this.toast(toolbar, "开始获取验证码");
+                        }else if(event == SMSSDK.EVENT_GET_VOICE_VERIFICATION_CODE){
+                            RegistActivity.this.toast(toolbar, "开始获取语音验证码");
+                        }
+                    } else {
+                        ((Throwable) data).printStackTrace();
+                        btRegist.setProgress(-1);
+
+                    }
+
+                }catch (Exception e){
+                    Snackbar.make(toolbar,e.toString(),Snackbar.LENGTH_SHORT).show();
+                }
+
+
+            }
+        };
+        SMSSDK.registerEventHandler(eventHandler);
+    }
+
 
     /**
      * 初始化Toolbar
@@ -149,8 +232,11 @@ public class RegistActivity extends BaseActivity {
     }
 
 
+    /**
+     * 倒计时处理
+     */
     Timer timer;
-    int leftTime = 10;
+    int leftTime = 60;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -160,22 +246,22 @@ public class RegistActivity extends BaseActivity {
                 timer.cancel();
                 btGetYZM.setText("重新获取");
                 btGetYZM.setEnabled(true);
-            } else {
-                btGetYZM.setEnabled(false);
             }
         }
     };
 
-    public void getYanZhengMa() {
-
-
+    /**
+     * 获取验证码
+     *
+     * @param phone 手机号码
+     */
+    public void getYanZhengMa(String phone) {
         String phoneNumber = etPhone.getText().toString().trim();
         if (!phoneNumber.matches("[1][3-8][\\d]{9}")) {
-            toast(toolbar,"请输入正确的手机号");
+            toast(toolbar, "请输入正确的手机号");
             return;
         }
-
-        leftTime = 10;
+        leftTime = 60;
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -183,10 +269,90 @@ public class RegistActivity extends BaseActivity {
                 handler.sendEmptyMessage(0);
             }
         }, 0, 1000);
-        toast(toolbar,"get YZM");
         btGetYZM.setEnabled(false);
-        isCompleteInput[0] = false;
+        SMSSDK.getVerificationCode("86", phone);
     }
 
 
+    private void submit(String phone, String yzm) {
+        SMSSDK.submitVerificationCode("86", phone, yzm);
+    }
+
+    /**
+     * 提示使用语音验证码
+     */
+    public void getVoiceVerificationCode() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("语音验证码").setMessage(R.string.smssdk_send_sounds_identify_code)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SMSSDK.getVoiceVerifyCode(etPhone.getText().toString().trim(), "86");
+                    }
+                }).setNegativeButton("取消", null).create().show();
+    }
+
+
+    public void registFromServer(){
+        try{
+
+            StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.REGIST, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String s) {
+                    try {
+                        JSONObject object=new JSONObject(s);
+                        int code=object.getInt("result");
+                        if(code==200){
+                            btRegist.setProgress(100);
+                            UserInfo userInfo=MyApplication.getInstance().getUserInfo();
+                            if(userInfo==null)userInfo=new UserInfo();
+                            userInfo.setId(1l);
+                            userInfo.setUsername(etPhone.getText().toString());
+                            userInfo.setPhoneNumber(etPhone.getText().toString());
+                            userInfo.setLevel(1);
+                            userInfo.setNickname(object.getString("nick_name"));
+                            userInfo.setHeadimg_url(object.getString("head_pic"));
+                        }else{
+                            btRegist.setProgress(-1);
+                        }
+                    } catch (JSONException e) {
+
+                        btRegist.setProgress(-1);
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+
+                    btRegist.setProgress(-1);
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String,String> map=new HashMap<>();
+                    map.put("user_name",etPhone.getText().toString());
+                    String pwd_md5 = new MySecurity().encodyByMD5(etPass.getText().toString());
+                    map.put("password",pwd_md5);
+
+                    return map;
+                }
+            };
+            getVolleyQueue().add(stringRequest);
+
+        }catch (Exception e){
+            toast(toolbar,e.toString());
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SMSSDK.unregisterAllEventHandler();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }

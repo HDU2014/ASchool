@@ -49,7 +49,7 @@
                 android:layout_centerVertical="true"
                 android:hint="@string/phoneNumber"
                 android:inputType="phone"
-
+                android:paddingRight="20dp"
                 android:background="@drawable/edit_no_stroke"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -57,17 +57,32 @@
         </android.support.design.widget.TextInputLayout>
 
 
-
-        <Button
+        <info.hoang8f.widget.FButton
             android:id="@+id/bt_getYZM"
-            android:textColor="@color/white"
-            android:layout_margin="5dp"
-            android:text="@string/getYZM"
-            android:enabled="false"
+            android:layout_below="@+id/btnWithIcons2"
+            app:buttonColor="@color/fbutton_normal"
+            app:shadowColor="?attr/colorPrimaryDark"
+            app:shadowEnabled="true"
+            app:shadowHeight="3dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/loginbuttonbg"
+            android:text="@string/getYZM"
+            app:cornerRadius="5dp"
+            android:layout_margin="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="40dp" />
+
+        <!--<Button-->
+        <!--android:id="@+id/bt_getYZM"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:text="@string/getYZM"-->
+        <!--android:enabled="false"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:background="@drawable/loginbuttonbg"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
 
         <View
             android:background="#88c8c8c8"
@@ -100,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_toRightOf="@id/iv_password"
             android:layout_height="wrap_content">
-            <EditText
+             <EditText
                 android:id="@+id/et_YZM"
                 android:paddingLeft="5dp"
                 android:inputType="number"
@@ -165,26 +180,44 @@
             />
     </RelativeLayout>
 
-    <Button
+
+    <com.dd.processbutton.iml.ActionProcessButton
         android:id="@+id/bt_regist"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:text="@string/regist"
-        android:enabled="false"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_below="@id/rlpassword1"
-        android:background="@drawable/loginbuttonbg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/regist"
+        android:textSize="22sp"
+        android:layout_marginTop="24dp"
+        android:layout_below="@id/rlpassword1"
+        android:layout_margin="15dp"
+        android:textColor="@android:color/white"
+        app:pb_colorComplete="@color/colorAccent"
+        app:pb_colorNormal="@color/fbutton_normal"
+        app:pb_cornerRadius="5dp"
+        app:pb_colorPressed="@color/fbutton_pressed"
+        app:pb_textComplete="@string/regist_success"
+        app:pb_textProgress="@string/registing"
+        app:pb_textError="@string/regist_error"
+        app:pb_colorError="@color/red_error" />
+
+    <TextView
+        android:id="@+id/tv_unreceive_identify"
+        android:layout_below="@id/bt_regist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:text="@string/unreceive_code"
+        android:textColor="#5c5c5c"
+        android:textSize="13sp" />
 
 
     <LinearLayout
         android:id="@+id/ll1"
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
-        android:layout_below="@id/bt_regist"
+        android:layout_below="@id/tv_unreceive_identify"
         android:layout_width="match_parent"
         android:layout_height="20dp">
 

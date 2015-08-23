@@ -8,7 +8,11 @@ import android.widget.EditText;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
+import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.common.view.EditActivity;
+import com.hdu.tx.aschool.dao.DaoMaster;
+import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.entity.UserInfoEntity;
 
 public class SplashActivity extends BaseActivity
 {
@@ -32,6 +36,13 @@ public class SplashActivity extends BaseActivity
 			public void run() {
 				try {
 					Thread.sleep(sleepTime);
+					UserInfo userInfo=MyApplication.getInstance().getUserInfo();
+					if(userInfo==null){
+						userInfo=new UserInfo();
+						userInfo.setLevel(0);
+						userInfo.setId(1l);
+						MyApplication.getInstance().getDaoSession().insert(userInfo);
+					}
 				} catch (InterruptedException e) {
 
 				}
