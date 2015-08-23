@@ -13,6 +13,7 @@ import com.hdu.tx.aschool.common.view.EditActivity;
 import com.hdu.tx.aschool.dao.DaoMaster;
 import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.entity.UserInfoEntity;
+import com.hdu.tx.aschool.ui.View.MainView;
 
 public class SplashActivity extends BaseActivity
 {
@@ -46,7 +47,7 @@ public class SplashActivity extends BaseActivity
 				} catch (InterruptedException e) {
 
 				}
-				startActivity(new Intent(SplashActivity.this, MainActivity.class));
+				startActivity(new Intent(SplashActivity.this, AdDetailActivity.class));
 				finish();
 			}
 		}).start();

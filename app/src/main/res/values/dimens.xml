@@ -9,5 +9,6 @@
     <dimen name="stroke_width">4dp</dimen>
     <dimen name="fab_margin_left">20dp</dimen>
     <dimen name="info_item">15dp</dimen>
+    <dimen name="addetail_item">5dp</dimen>
     <dimen name="item_tool">14dp</dimen>
 </resources>

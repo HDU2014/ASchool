@@ -4,8 +4,11 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/hdu/tx/aschool/entity/Event.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/hdu/tx/aschool/entity/Events.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/hdu/tx/aschool/ui/adapter/MyAdapter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/addetail.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/addetail_cardview_item.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/selectitem.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/spinner_text.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/view_event_card.xml" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
-

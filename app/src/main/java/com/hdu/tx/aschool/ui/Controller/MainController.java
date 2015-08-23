@@ -17,6 +17,7 @@ import com.hdu.tx.aschool.ui.activity.MeActivity;
 import com.hdu.tx.aschool.ui.activity.MyInfoActivity;
 import com.hdu.tx.aschool.ui.activity.UploadButtonDemoActivity;
 import com.hdu.tx.aschool.ui.adapter.FragmentAdapter;
+import com.hdu.tx.aschool.ui.fragment.AdFragment;
 import com.hdu.tx.aschool.ui.fragment.ListFragment;
 import com.hdu.tx.aschool.ui.fragment.MainFragment;
 
@@ -44,7 +45,7 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
         titles.add("我的消息");
         fragments= new ArrayList<>();
         fragments.add(new MainFragment());
-        fragments.add(new ListFragment());
+        fragments.add(new AdFragment());
         fragments.add(new ListFragment());
         mainView.setViewPage(fragments,titles);
 

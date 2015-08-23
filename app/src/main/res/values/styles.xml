@@ -51,4 +51,13 @@
         <item name="android:layout_marginRight">1.5dip</item>
     </style>
 
+   <style name="popwinw_style">
+
+    <item name="android:windowEnterAnimation">@anim/abc_fade_in</item>
+
+    <item name="android:windowExitAnimation">@anim/abc_fade_out</item>
+
+    </style>
+
+
 </resources>

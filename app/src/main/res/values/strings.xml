@@ -40,9 +40,9 @@
     <string name="wake_setting">提醒设置</string>
     <string name="my_mingpian">我的名片</string>
     <string name="sys_setting">系统设置</string>
-    <string name="activity_title_test">骑行下沙啊啊骑行下骑行</string>
-    <string name="activity_time_test">时间：8月10日</string>
-    <string name="activity_address_test">地点：杭州电子科技大学</string>
+    <string name="activity_title_test">足球赛？约</string>
+    <string name="activity_time_test">8/17周五</string>
+    <string name="activity_address_test">杭电1教208</string>
     <string name="activity_havejoin_test">6人已参加</string>
     <string name="activity_goto_test">去报名</string>
     <string name="submit_ok">提交成功</string>
@@ -53,6 +53,12 @@
     <string name="input_format_error">输入格式不正确，请检查</string>
     <string name="regist_success">注册成功</string>
     <string name="free_regist">免费注册</string>
+    <string name="type">类型</string>
+    <string name="time">时间</string>
+    <string name="activity_havecoll_test">250人已收藏</string>
+    <string name="host_name">主办方</string>
+    <string name="address">地点</string>
+    <string name="person_number">报名人数</string>
 
 
 </resources>

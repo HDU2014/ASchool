@@ -23,7 +23,7 @@
         <activity android:name=".ui.activity.LoginActivity"></activity>
 
         <activity android:name=".ui.activity.RegistActivity"></activity>
-
+        <activity android:name=".ui.activity.AdDetailActivity"></activity>
         <activity android:name=".ui.activity.ForgetPassActivity"></activity>
         <activity android:name=".ui.activity.LunBoMainActivity"></activity>
         <activity android:name=".common.view.EditActivity"></activity>
