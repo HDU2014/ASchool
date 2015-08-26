@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="activity_schools">
+        <item>不限学校</item>
+        <item>杭州电子科技大学</item>
+        <item>浙江理工大学</item>
+        <item>浙江传媒学院</item>
+        <item>中国计量学院</item>
+        <item>浙江水利水电学院</item>
+        <item>杭州师范大学</item>
+        <item>浙江工商大学</item>
+    </string-array>
+
+    <string-array name="activity_type">
+        <item>不限类型</item>
+        <item>运动</item>
+        <item>讲座</item>
+        <item>节日</item>
+        <item>创业</item>
+        <item>旅行</item>
+        <item>文艺</item>
+        <item>棋牌</item>
+        <item>骑行</item>
+        <item>招聘</item>
+        <item>沙龙</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="activity_time">
+        <item>不限时间</item>
+        <item>今天</item>
+        <item>3天内</item>
+        <item>1周内</item>
+        <item>1个月内</item>
+    </string-array>
+    <string-array name="grades">
+        <item>中学</item>
+        <item>大一</item>
+        <item>大二</item>
+        <item>大三</item>
+        <item>大四</item>
+        <item>研一</item>
+        <item>研二</item>
+        <item>研三</item>
+        <item>博士</item>
+        <item>保密</item>
+    </string-array>
+
+
+</resources>
