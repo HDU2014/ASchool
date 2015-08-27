@@ -6,12 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.hdu.tx.aschool.dao.DaoMaster;
 import com.hdu.tx.aschool.dao.DaoSession;
 import com.hdu.tx.aschool.dao.UserInfo;
-import com.hdu.tx.aschool.dao.UserInfoDao;
-import com.hdu.tx.aschool.entity.UserInfoEntity;
-import com.hdu.tx.aschool.ui.activity.MainActivity;
-
-
-import java.util.Map;
 
 /**
  * Created by Administrator on 2015/5/22.
@@ -58,6 +52,10 @@ public class MyApplication extends Application {
             userInfo=getDaoSession().getUserInfoDao().load(1l);
         }
         return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo){
+        this.userInfo=userInfo;
     }
 
 }

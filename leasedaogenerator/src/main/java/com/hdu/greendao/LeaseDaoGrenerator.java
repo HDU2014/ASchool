@@ -8,11 +8,11 @@ import de.greenrobot.daogenerator.ToMany;
 
 public class LeaseDaoGrenerator {
     public static void main(String args[]) throws Exception {
-        Schema schema = new Schema(2, "com.hdu.tx.aschool.dao");
+        Schema schema = new Schema(4, "com.hdu.tx.aschool.dao");
         createUserDao(schema);
         createActiDao(schema);
        // new DaoGenerator().generateAll(schema, "D://andorid/hdu2014/ASchool/app/src/main/java");
-        new DaoGenerator().generateAll(schema, "C://Users/chenglin/Desktop/ASchool-master/app/src/main/java");
+        new DaoGenerator().generateAll(schema, "F://APP/androidApp/ASchool-master/app/src/main/java");
     }
 
     public static void  createUserDao(Schema schema){
@@ -34,14 +34,22 @@ public class LeaseDaoGrenerator {
     }
 
     public static void createActiDao(Schema schema){
-        Entity userInfo = schema.addEntity("ActiDao");
+        Entity userInfo = schema.addEntity("ActInfo");
         userInfo.addIdProperty().autoincrement();
+
         userInfo.addStringProperty("hostname");
         userInfo.addStringProperty("imageUrl");
         userInfo.addStringProperty("title");
+
+
         userInfo.addStringProperty("time");
         userInfo.addStringProperty("address");
         userInfo.addStringProperty("describe");
+
+
+        userInfo.addIntProperty("hostId");
+        userInfo.addIntProperty("lookTimes");
+        userInfo.addIntProperty("collectTimes");
         userInfo.addIntProperty("totalpeopel");
         userInfo.addIntProperty("joinedpeopel");
     }

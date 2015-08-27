@@ -5,29 +5,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark">
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    </android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:title="@string/info_update"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
             <EditText
+                android:textColorHint="@color/colorPrimary"
                 android:id="@+id/et_username"
                 android:textCursorDrawable="@null"
                 android:layout_centerVertical="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
+                android:textColor="@color/colorAccent"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -35,6 +45,7 @@
 
 
         <ImageView
+
             android:id="@+id/iv_clear"
             android:layout_margin="5dp"
             android:padding="10dp"
@@ -49,11 +60,11 @@
 
 
     <ImageView
-        android:background="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="10dp"
+        android:background="@color/little_black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 
     <TextView
         android:id="@+id/decript"
@@ -65,13 +76,12 @@
     <com.dd.processbutton.iml.ActionProcessButton
     android:id="@+id/btn_submit"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="wrap_content"
     android:text="@string/smssdk_submit"
     android:layout_marginTop="10dp"
+        android:textSize="22sp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-    android:layout_below="@+id/btn3"
-        android:textSize="20sp"
     android:textColor="@android:color/white"
     app:pb_colorComplete="@color/holo_orange_light"
     app:pb_colorNormal="@color/colorPrimary"
@@ -79,7 +89,7 @@
     app:pb_colorProgress="@color/purple_progress"
     app:pb_textComplete="@string/submit_ok"
     app:pb_textProgress="@string/submiting"
-    app:pb_textError="Error"
+    app:pb_textError="@string/submit_error"
     app:pb_colorError="@color/red_error" />
 
 

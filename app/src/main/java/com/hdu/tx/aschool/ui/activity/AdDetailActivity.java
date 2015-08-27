@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
+import com.hdu.tx.aschool.base.MyApplication;
+import com.hdu.tx.aschool.dao.ActInfo;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,8 +35,6 @@ public class AdDetailActivity extends BaseActivity {
     AppBarLayout appbar;
     @Bind(R.id.title)
     TextView title;
-    @Bind(R.id.look)
-    TextView look;
     @Bind(R.id.nickname_ll)
     LinearLayout nicknameLl;
     @Bind(R.id.lunboll)
@@ -57,7 +57,12 @@ public class AdDetailActivity extends BaseActivity {
             }
         });
         collapsingToolbar.setTitle("活动详情");
+
+
     }
 
+    public void init(){
+
+    }
 
 }

@@ -18,6 +18,9 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         mainView = (MainView) findViewById(R.id.dl_main_drawer);
         mainView.initView(this);
+        if(getIntent().getBooleanExtra("isRefresh",false)){
+            mainView.refreshMyInfo();
+        }
         mainController = new MainController(this, mainView);
     }
 }

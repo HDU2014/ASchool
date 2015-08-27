@@ -67,7 +67,7 @@
     <string name="my_comment">我的评论</string>
     <string name="my_suggestion">我要吐槽</string>
     <string name="login_success">登录成功</string>
-    <string name="logining">正在登录。。。</string>
+    <string name="logining">正在登录...</string>
     <string name="login_error">登录失败，请重试</string>
     <string name="tuijie">推荐</string>
     <string name="activity">活动</string>
@@ -79,6 +79,11 @@
     <string name="mine">我的</string>
     <string name="person1">你的卡卡了点附近</string>
     <string name="friend">好友</string>
+    <string name="default_fill">未填写</string>
+    <string name="info_update">资料修改</string>
+    <string name="submit_error">提交失败</string>
+    <string name="findpassword">找回密码</string>
+    <string name="yam_error">验证码错误</string>
 
 
 </resources>

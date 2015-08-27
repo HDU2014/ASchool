@@ -91,6 +91,7 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
                 index=5;
                 break;
             case R.id.bottom_iv4:
+
                 break;
         }
         if(index!=fragmentIndex){

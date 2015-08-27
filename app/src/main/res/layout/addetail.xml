@@ -22,7 +22,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/look"
+            android:id="@+id/look_tv"
             android:textColor="@color/colorAccent"
             android:text="浏览了2001次"
             android:layout_marginTop="5dp"
@@ -32,18 +32,19 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/collect_tv"
             android:text="收藏了2001次"
             android:textColor="@color/colorAccent"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
             android:layout_below="@id/title"
-            android:layout_toRightOf="@id/look"
+            android:layout_toRightOf="@id/look_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <ImageView
             android:layout_marginTop="10dp"
-            android:layout_below="@id/look"
+            android:layout_below="@id/look_tv"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/little_black" />

@@ -1,6 +1,7 @@
 package com.hdu.tx.aschool.ui.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,11 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -132,7 +131,7 @@ public class RegistActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                isCompleteInput[2] = (count + start > 0) ? true : false;
+                isCompleteInput[2] = (s.length() > 0) ? true : false;
             }
 
             @Override
@@ -150,7 +149,7 @@ public class RegistActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                isCompleteInput[0] = (count + start == PHONENUMEBER_LENGTH) ? true : false;
+                isCompleteInput[0] = (s.length() == PHONENUMEBER_LENGTH) ? true : false;
             }
 
             @Override
@@ -168,7 +167,7 @@ public class RegistActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                isCompleteInput[1] = (count + start > 0) ? true : false;
+                isCompleteInput[1] = (s.length() > 0) ? true : false;
             }
 
             @Override
@@ -297,7 +296,7 @@ public class RegistActivity extends BaseActivity {
     public void registFromServer(){
         try{
 
-            StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.REGIST, new Response.Listener<String>() {
+            StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.USER_REGISTERED, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String s) {
                     try {
@@ -311,18 +310,32 @@ public class RegistActivity extends BaseActivity {
                             userInfo.setUsername(etPhone.getText().toString());
                             userInfo.setPhoneNumber(etPhone.getText().toString());
                             userInfo.setLevel(1);
-
                             userInfo.setNickname(object.getString("nick_name"));
                             userInfo.setHeadimg_url(object.getString("head_pic"));
+                            String default_fill=RegistActivity.this.getResources().getString(R.string.default_fill);
+
+                            userInfo.setInstitute(default_fill);
+                            userInfo.setAge(default_fill);
+                            userInfo.setCity(default_fill);
+                            userInfo.setGrade(default_fill);
+                            userInfo.setSchool(default_fill);
+                            userInfo.setSex(default_fill);
 
                             MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
                             MyApplication.getInstance().getDaoSession().insert(userInfo);
+                            MyApplication.getInstance().setUserInfo(userInfo);
+                            Intent intent=new Intent(RegistActivity.this,MainActivity.class);
+                            intent.putExtra("update_info",true);
+                            RegistActivity.this.startActivity(intent);
+                            RegistActivity.this.finish();
                         }else{
                             btRegist.setProgress(-1);
+                            Snackbar.make(btRegist,object.getString("desc").toString(),Snackbar.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {
 
                         btRegist.setProgress(-1);
+                        Snackbar.make(btRegist,e.toString(),Snackbar.LENGTH_LONG).show();
                     }
 
                 }
@@ -330,6 +343,7 @@ public class RegistActivity extends BaseActivity {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
                     btRegist.setProgress(-1);
+                    Snackbar.make(btRegist,volleyError.toString(),Snackbar.LENGTH_LONG).show();
                 }
             }){
                 @Override

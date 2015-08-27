@@ -1,22 +1,18 @@
 package com.hdu.tx.aschool.ui.activity;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -28,7 +24,6 @@ import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.common.utils.MySecurity;
-import com.hdu.tx.aschool.common.utils.MyStrings;
 import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.ui.IEvent.IEventView;
@@ -38,14 +33,10 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
-import cn.smssdk.gui.RegisterPage;
 
 
 /**
@@ -65,6 +56,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Bind(R.id.tv_forgetpass)
     TextView tvForgetpass;
+
     @Bind(R.id.tv_regist)
     TextView tvRegist;
 
@@ -80,6 +72,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private boolean isRightPhoneNumber;
     private boolean isRightPassword;
+    private StringRequest stringRequest;
 
     @OnClick({R.id.iv_qq, R.id.iv_weixin, R.id.iv_weibo})
     void select(ImageView imageView) {
@@ -104,6 +97,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 11) {
@@ -136,7 +130,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() <= 6) {
+                if (s.length() < 6) {
                     tilPass.setErrorEnabled(true);
                     tilPass.setError("密码强度弱");
                     isRightPassword = false;
@@ -189,31 +183,42 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     void login() {
         if(isRightPhoneNumber&&isRightPassword){
             btLogin.setProgress(30);
-            StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.LOGIN, new Response.Listener<String>() {
+            stringRequest=new StringRequest(Request.Method.POST, Urls.USER_SINGIN, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String s) {
                     try {
                         JSONObject object=new JSONObject(s);
                         if(object.getInt("result")==200){
                             btLogin.setProgress(100);
-                            MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
+
                             UserInfo userInfo=new UserInfo();
                             userInfo.setId(1l);
                             userInfo.setLevel(1);
-//                            userInfo.setPhoneNumber(object.getString("phone_number"));
                             userInfo.setNickname(object.getString("nickname"));
                             userInfo.setUsername(object.getString("username"));
                             userInfo.setHeadimg_url(object.getString("headpic"));
-                            MyApplication.getInstance().getDaoSession().insert(userInfo);
-                            LoginActivity.this.startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            userInfo.setSex(object.getString("gender"));
+                            userInfo.setSchool(object.getString("user_school"));
+                            userInfo.setGrade(object.getString("user_grade"));
+                            userInfo.setInstitute(object.getString("user_xueyuan"));
+                            userInfo.setPhoneNumber(object.getString("phone_num"));
+                            userInfo.setAge(object.getString("user_age"));
+                            userInfo.setCity(object.getString("user_city"));
 
+                            MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
+                            MyApplication.getInstance().getDaoSession().insert(userInfo);
+                            MyApplication.getInstance().setUserInfo(userInfo);
+                            LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            LoginActivity.this.finish();
                         }else{
                             btLogin.setProgress(-1);
                             Snackbar.make(btLogin,object.getString("desc"),Snackbar.LENGTH_LONG).show();
+                            Log.i("TAG", object.getString("desc"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                         btLogin.setProgress(-1);
+                        Snackbar.make(btLogin,e.toString(),Snackbar.LENGTH_LONG).show();
                     }
 
 
@@ -222,6 +227,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
                     btLogin.setProgress(-1);
+                    Snackbar.make(btLogin,volleyError.toString(),Snackbar.LENGTH_LONG).show();
                 }
             }){
                 @Override
@@ -234,16 +240,28 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 }
             };
 
+            try {
+                stringRequest.getHeaders();
+            } catch (AuthFailureError authFailureError) {
+                authFailureError.printStackTrace();
+            }
+
+            Log.i("TAG", stringRequest.getBodyContentType().toString());
+
+
+
             getVolleyQueue().add(stringRequest);
         }
     }
 
     @OnClick(R.id.tv_forgetpass)
     void findPass() {
-        toast(toolbar, "findPass");
         Intent intent = new Intent(this, ForgetPassActivity.class);
         startActivity(intent);
+        finish();
     }
+
+
 
 
     @Override

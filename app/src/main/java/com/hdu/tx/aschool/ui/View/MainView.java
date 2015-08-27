@@ -2,8 +2,6 @@ package com.hdu.tx.aschool.ui.View;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.DrawableContainer;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -14,21 +12,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.MyApplication;
-import com.hdu.tx.aschool.ui.Controller.MainController;
+import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.ui.activity.MainActivity;
-import com.hdu.tx.aschool.ui.activity.MeActivity;
 import com.hdu.tx.aschool.ui.activity.RegistActivity;
 import com.hdu.tx.aschool.ui.adapter.FragmentAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,6 +41,7 @@ public class MainView extends DrawerLayout {
     private ImageView headimg;
     private ViewPager viewPage;
     private TabLayout tabLayout;
+    private TextView nickname;
     private RelativeLayout fragment_ll1,fragment_ll2,fragment_ll3,fragment_ll4;
 
     private ImageView[] bottom_iv=new ImageView[5];
@@ -72,6 +70,7 @@ public class MainView extends DrawerLayout {
         //tabLayout = (TabLayout) findViewById(R.id.tabs);
         navigationView = (NavigationView) findViewById(R.id.nv_main_navigation);
         headimg=(ImageView) navigationView.findViewById(R.id.headimg_iv);
+        nickname= (TextView) navigationView.findViewById(R.id.nickname);
         bottom_iv[0]= (ImageView) findViewById(R.id.bottom_iv0);
         bottom_iv[1]= (ImageView) findViewById(R.id.bottom_iv1);
         bottom_iv[2]= (ImageView) findViewById(R.id.bottom_iv2);
@@ -93,6 +92,7 @@ public class MainView extends DrawerLayout {
                 }
             }).show();
         }
+        refreshMyInfo();
     }
 
     public void setNavigationMenuSelectedListener(
@@ -233,6 +233,12 @@ public class MainView extends DrawerLayout {
 
 
     public void refreshMyInfo(){
+        UserInfo info=MyApplication.getInstance().getUserInfo();
+        if(info.getLevel()==1){
+            Picasso.with(mainActivity).load(MyApplication.getInstance().getUserInfo().getHeadimg_url()).into(headimg);
+            nickname.setText(info.getNickname());
+        }
+
 
     }
 }

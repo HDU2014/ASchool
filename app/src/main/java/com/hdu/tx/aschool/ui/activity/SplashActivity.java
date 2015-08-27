@@ -2,18 +2,12 @@ package com.hdu.tx.aschool.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
-import com.hdu.tx.aschool.common.view.EditActivity;
-import com.hdu.tx.aschool.dao.DaoMaster;
 import com.hdu.tx.aschool.dao.UserInfo;
-import com.hdu.tx.aschool.entity.UserInfoEntity;
-import com.hdu.tx.aschool.ui.View.MainView;
 
 public class SplashActivity extends BaseActivity
 {
