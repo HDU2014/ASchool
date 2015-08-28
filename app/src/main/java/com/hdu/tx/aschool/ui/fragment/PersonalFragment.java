@@ -3,13 +3,13 @@ package com.hdu.tx.aschool.ui.fragment;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
@@ -27,19 +27,19 @@ import butterknife.OnClick;
  * Created by Administrator on 2015/8/23.
  */
 public class PersonalFragment extends BaseFragment {
+
     @Bind(R.id.schools)
     TextView schools;
     @Bind(R.id.types)
     TextView types;
     @Bind(R.id.time)
     TextView time;
-
-    @Bind(R.id.main_content)
-    LinearLayout mainContent;
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
-    private View rootView;
+    @Bind(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
 
+    private View rootView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,10 +71,11 @@ public class PersonalFragment extends BaseFragment {
             outRect.bottom = space;
 
             // Add top margin only for the first item to avoid double space between items
-            if(parent.getChildPosition(view) == 0)
+            if (parent.getChildPosition(view) == 0)
                 outRect.top = space;
         }
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

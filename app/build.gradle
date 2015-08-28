@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    buildToolsVersion "23.0.0"
 
     defaultConfig {
         applicationId "com.hdu.tx.aschool"
@@ -41,4 +41,5 @@ dependencies {
     compile files('libs/volley.jar')
     compile 'de.greenrobot:greendao:2.0.0'
     //https://github.com/greenrobot/greenDAO
+    compile files('libs/easemobchat_2.2.2.jar')
 }

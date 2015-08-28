@@ -3,21 +3,26 @@ package com.hdu.tx.aschool.ui.fragment;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseFragment;
-import com.hdu.tx.aschool.ui.adapter.AdAdapter;
+import com.hdu.tx.aschool.base.MyApplication;
+import com.hdu.tx.aschool.common.utils.MyStrings;
+import com.hdu.tx.aschool.dao.ActInfo;
+import com.hdu.tx.aschool.ui.adapter.OfficeAdapter;
 import com.hdu.tx.aschool.ui.widget.pupuwindow.SelectItemsPop;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,18 +31,18 @@ import butterknife.OnClick;
 /**
  * Created by Administrator on 2015/8/23.
  */
-public class OfficeFragment extends BaseFragment {
+public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+
     @Bind(R.id.schools)
     TextView schools;
     @Bind(R.id.types)
     TextView types;
     @Bind(R.id.time)
     TextView time;
-
-    @Bind(R.id.main_content)
-    LinearLayout mainContent;
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
+    @Bind(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
     private View rootView;
 
     @Nullable
@@ -52,8 +57,41 @@ public class OfficeFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        recyclerView.addItemDecoration(new SpacesItemDecoration(-5));
-        recyclerView.setAdapter(new AdAdapter(getActivity()));
+        OfficeAdapter adapter = new OfficeAdapter(getActivity(), MyApplication.getInstance().getDaoSession().getActInfoDao().loadAll());
+        recyclerView.setAdapter(adapter);
+
+        //初始化上拉刷新组件
+      //  swipeRefresh.setOnRefreshListener(this);
+//        swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_bright,
+//                android.R.color.holo_green_light,
+//                android.R.color.holo_orange_light,
+//                android.R.color.holo_red_light);
+//        swipeRefresh.setDistanceToTriggerSync(100);// 设置下拉距离
+//        swipeRefresh.setSize(SwipeRefreshLayout.LARGE);
+    }
+
+    public List<ActInfo> getData() {
+        List<ActInfo> datas = new ArrayList<ActInfo>();
+        String[] address = getResources().getStringArray(R.array.activity_schools);
+        String[] title = getResources().getStringArray(R.array.activity_type);
+        for (int i = 0; i < 20; i++) {
+            ActInfo info = new ActInfo();
+            info.setImageUrl(MyStrings.AVATARS[new Random().nextInt(12)]);
+            info.setTitle(title[new Random().nextInt(title.length - 1)]);
+            info.setTotalpeopel(i * 100);
+            info.setJoinedpeopel(i * i);
+            info.setCollectTimes(i * 4);
+            info.setAddress(address[new Random().nextInt(7) + 1]);
+            info.setHostname("主办方" + i);
+            info.setTime("2015-8-28 12:" + i);
+            datas.add(info);
+        }
+        return datas;
+    }
+
+    @Override
+    public void onRefresh() {
+        swipeRefresh.setRefreshing(false);
     }
 
 
@@ -71,10 +109,11 @@ public class OfficeFragment extends BaseFragment {
             outRect.bottom = space;
 
             // Add top margin only for the first item to avoid double space between items
-            if(parent.getChildPosition(view) == 0)
+            if (parent.getChildPosition(view) == 0)
                 outRect.top = space;
         }
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

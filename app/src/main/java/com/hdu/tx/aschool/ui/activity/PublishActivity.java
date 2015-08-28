@@ -170,8 +170,8 @@ public class PublishActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Log.v("publish", "gongo");
-                publish();
-                //getActFromServer();
+                //publish();
+                getActFromServer();
             }
         });
 
@@ -215,7 +215,7 @@ public class PublishActivity extends BaseActivity {
                         int code = object.getInt("result");
                         if (code == 200) {
                             btPublish.setProgress(100);
-                            getActFromServer(object.getString("act_id"));
+                           // getActFromServer(object.getString("act_id"));
 
                         } else {
                             btPublish.setProgress(-1);
@@ -263,7 +263,7 @@ public class PublishActivity extends BaseActivity {
     }
 
 
-    public void getActFromServer(final String id){
+    public void getActFromServer(){
         StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.GET_ACTIVITY, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
@@ -280,7 +280,7 @@ public class PublishActivity extends BaseActivity {
                         info.setJoinedpeopel(object.getInt("join_num"));
                         info.setCollectTimes(object.getInt("collect_num"));
                         info.setLookTimes(object.getInt("browse_num"));
-                        MyApplication.getInstance().getDaoSession().getActInfoDao().insert(info);
+                       // MyApplication.getInstance().getDaoSession().getActInfoDao().insert(info);
                         Intent intent=new Intent(PublishActivity.this,AdDetailActivity.class);
                         intent.putExtra("activity",info);
                         PublishActivity.this.startActivity(intent);
@@ -301,7 +301,7 @@ public class PublishActivity extends BaseActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map=new HashMap<>();
-                map.put("act_id",id);
+                map.put("act_id",etTitle.getText().toString());
                 return map;
             }
         };
