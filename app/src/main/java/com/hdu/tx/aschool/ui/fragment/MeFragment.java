@@ -1,5 +1,6 @@
 package com.hdu.tx.aschool.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,10 +11,15 @@ import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseFragment;
+import com.hdu.tx.aschool.base.MyApplication;
+import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.ui.activity.MyInfoActivity;
 import com.hdu.tx.aschool.ui.widget.image.CircleImageView;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2015/8/14.
@@ -49,8 +55,19 @@ public class MeFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        UserInfo info= MyApplication.getInstance().getUserInfo();
+        if(info.getLevel()==1){
+            Picasso.with(getActivity()).load(MyApplication.getInstance().getUserInfo().getHeadimg_url()).into(headIv);
+            nicknameTv.setText(info.getNickname());
+        }
+    }
 
-
+    @OnClick(R.id.head_iv)void gotoInfo(){
+        startActivity(new Intent(getActivity(), MyInfoActivity.class));
+    }
 
     @Override
     public void onDestroyView() {

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/article_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="1dp"
+    card_view:cardElevation="1dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/act_image_iv"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="8dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/footballad" />
+
+        <TextView
+            android:id="@+id/act_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/act_image_iv"
+            android:layout_marginTop="2dp"
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:text="@string/activity_title_test" />
+
+        <TextView
+            android:id="@+id/act_hostname_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/act_image_iv"
+            android:layout_below="@+id/act_title_tv"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="8dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="#77000000"
+            android:text="小米科技" />
+
+        <TextView
+            android:id="@+id/act_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/act_image_iv"
+            android:layout_below="@id/act_hostname_tv"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="#77000000"
+            android:text="@string/activity_time_test" />
+
+        <TextView
+            android:id="@+id/act_address_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/act_time_tv"
+            android:layout_marginLeft="60dp"
+            android:layout_alignBaseline="@id/act_time_tv"
+            android:layout_marginTop="12dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="#77000000"
+            android:text="@string/activity_address_test"/>
+
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/act_time_tv"
+            android:layout_toRightOf="@id/act_image_iv"
+            android:id="@+id/act_collect_iv"
+            android:src="@drawable/collected"
+            android:layout_width="15dp"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:id="@+id/act_collect_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/act_collect_iv"
+            android:layout_below="@+id/act_time_tv"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#77000000"
+            android:text="309" />
+
+        <TextView
+            android:id="@+id/act_joined_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/act_address_tv"
+            android:layout_below="@id/act_time_tv"
+            android:layout_marginTop="5dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="#77000000"
+            android:text="@string/activity_havejoin_test" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

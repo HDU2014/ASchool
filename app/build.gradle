@@ -41,5 +41,4 @@ dependencies {
     compile files('libs/volley.jar')
     compile 'de.greenrobot:greendao:2.0.0'
     //https://github.com/greenrobot/greenDAO
-    compile files('libs/thinkandroid-1.1-bin.jar')
 }

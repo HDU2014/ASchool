@@ -147,7 +147,7 @@ public class UpdateInfoActivity extends BaseActivity {
                         }
                         MyApplication.getInstance().getDaoSession().update(userInfo);
                         MyApplication.getInstance().setUserInfo(userInfo);
-                        setResult(0);
+                        setResult(1);
                         finish();
                     }else{
                         btnSubmit.setProgress(-1);

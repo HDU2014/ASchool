@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/head_img_ll"
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +27,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:src="@drawable/ic_user"
-                app:border_color="#ffffffff"
+                app:border_color="#AAAAAAAA"
                 app:border_width="2dp" />
 
             <TextView

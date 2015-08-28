@@ -190,7 +190,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         JSONObject object=new JSONObject(s);
                         if(object.getInt("result")==200){
                             btLogin.setProgress(100);
-
                             UserInfo userInfo=new UserInfo();
                             userInfo.setId(1l);
                             userInfo.setLevel(1);
