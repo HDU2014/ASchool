@@ -27,10 +27,13 @@
         <activity android:name=".ui.activity.ForgetPassActivity"></activity>
         <activity android:name=".ui.activity.LunBoMainActivity"></activity>
         <activity android:name=".ui.activity.UpdateInfoActivity"></activity>
+        <activity android:name=".ui.activity.PublishActivity"></activity>
+        <activity android:name=".ui.activity.PartyIntrodue"></activity>
 
         <activity android:name=".ui.activity.TestActivity"></activity>
         <activity android:name=".ui.activity.UploadButtonDemoActivity"></activity>
         <activity android:name=".ui.activity.MeActivity"></activity>
+
         <activity
             android:name=".ui.activity.MyInfoActivity"
             android:label="@string/person_info"></activity>

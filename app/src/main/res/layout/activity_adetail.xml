@@ -74,7 +74,7 @@
         <ImageView
             android:id="@+id/collect"
             android:padding="10dp"
-            android:src="@drawable/uncollect"
+            android:src="@drawable/collect_bg"
             android:gravity="center"
             android:layout_weight="2"
             android:layout_width="45dp"

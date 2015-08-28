@@ -84,6 +84,31 @@
     <string name="submit_error">提交失败</string>
     <string name="findpassword">找回密码</string>
     <string name="yam_error">验证码错误</string>
+    <string name="publish_tittle">标题：</string>
 
+    <string name="publish_tittleContent">请输入20个字以内的标题</string>
+    <string name="publish_type">活动类型：</string>
+    <string name="publish_choosetype">选择类型</string>
+    <string name="publish_phone">联系方式：</string>
+    <string name="publish_tphone">请输入电话号码</string>
+    <string name="publish_btime">起始时间：</string>
+    <string name="publish_tbtime">请输入起始时间</string>
+    <string name="publish_peopleNo">活动人数：</string>
+    <string name="publish_tpeopleNo">请输入人数</string>
+    <string name="publish_partadr">活动地点：</string>
+    <string name="publish_tpartadr">请输入活动地点</string>
+    <string name="publish_togetheradr">集合地点：</string>
+    <string name="publish_ttogetheradr">请输入集合地点</string>
+    <string name="publish_partIntrodue">活动介绍：</string>
+    <string name="publish_tpartIntrodue">请简单介绍你的活动</string>
+    <string name="publish_pay">人均预算：</string>
+    <string name="publish_tpay">预计资金</string>
+    <string name="publish_open">是否公开：</string>
+    <string name="publish_pubish">确认发布</string>
+    <string name="finish">完 成</string>
+    <string name="cance">取消</string>
+    <string name="publish_success">发布成功</string>
+    <string name="publishing">正在发布</string>
+    <string name="publish_erro">发布失败</string>
 
 </resources>

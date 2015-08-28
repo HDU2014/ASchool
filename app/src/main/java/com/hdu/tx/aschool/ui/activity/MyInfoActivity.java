@@ -1,8 +1,12 @@
 package com.hdu.tx.aschool.ui.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -22,6 +26,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
+import com.hdu.tx.aschool.common.utils.ConstantValue;
+import com.hdu.tx.aschool.common.utils.PhotoUtil;
 import com.hdu.tx.aschool.dao.DaoSession;
 import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.net.Urls;
@@ -31,6 +37,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,6 +95,7 @@ public class MyInfoActivity extends BaseActivity {
     private UserInfo userInfo;
     private DaoSession daoSession;
     private ProgressDialog progressDialog;
+    private String photoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,9 +123,6 @@ public class MyInfoActivity extends BaseActivity {
 
         refreshMyInfo();
 
-
-
-
     }
 
     private void refreshMyInfo() {
@@ -132,6 +137,23 @@ public class MyInfoActivity extends BaseActivity {
         phoneTv.setText(userInfo.getPhoneNumber());
         cityTv.setText(userInfo.getCity());
     }
+
+    @OnClick(R.id.head_img_ll)void setHeadImg(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("选项").setItems(new String[]{
+                "拍照", "相册"
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(which==0){
+                    photoPath=PhotoUtil.startIntentTakePhotos(MyInfoActivity.this);
+                }else if(which==1){
+                    PhotoUtil.startSelectImageFromLocal(MyInfoActivity.this);
+                }
+            }
+        }).create().show();
+    }
+
 
     @OnClick(R.id.nickname_ll)void setNickname(){
 
@@ -153,7 +175,7 @@ public class MyInfoActivity extends BaseActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final String value=sex[which];
-                submit("user_age", sex[which], new Response.Listener<String>() {
+                submit("gender", sex[which], new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         if(progressDialog.isShowing())progressDialog.dismiss();
@@ -204,7 +226,7 @@ public class MyInfoActivity extends BaseActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final String value=grades[which];
-                submit("user_age", grades[which], new Response.Listener<String>() {
+                submit("user_grade", grades[which], new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         if (progressDialog.isShowing()) progressDialog.dismiss();
@@ -260,8 +282,27 @@ public class MyInfoActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==0){
+        if(resultCode==1){
             refreshMyInfo();
+        }
+        if (resultCode == Activity.RESULT_CANCELED) {
+            return;
+        }
+        if(requestCode==ConstantValue.INTENT_TAKE_PHOTOS){
+            if(photoPath!=null){
+                PhotoUtil.cameraCropImageUri(this, Uri.fromFile(new File(photoPath)),1,1,300,300);
+                Log.i("MyInfoActivity",photoPath);
+            }
+        }else if(requestCode==ConstantValue.INTENT_SELECT_PHOTOS){
+            if(data!=null){
+                Uri photoUri=data.getData();
+                Log.i("MyInfoActivity",photoUri.toString());
+                if(photoUri!=null)PhotoUtil.cameraCropImageUri(this,photoUri,1,1,300,300);
+            }
+        }else if(requestCode==ConstantValue.INTENT_AFTER_CROPPHOTO){
+            String path=ConstantValue.CROP_TEMP_PATH;
+            Bitmap b= BitmapFactory.decodeFile(path);
+            if(b!=null)headImg.setImageBitmap(b);
         }
     }
 

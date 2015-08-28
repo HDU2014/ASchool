@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -63,14 +64,27 @@ public class MainView extends DrawerLayout {
         this.mainActivity=mainActivity;
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         mainActivity.setSupportActionBar(toolbar);
-        drawerToggle = new ActionBarDrawerToggle(mainActivity, this, R.string.hello_world, R.string.hello_world);
+        drawerToggle = new ActionBarDrawerToggle(mainActivity, this, R.string.hello_world, R.string.hello_world){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                refreshMyInfo();
+            }
+        };
         this.setDrawerListener(drawerToggle);
         mainActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainView.this.openDrawer(Gravity.LEFT);
+            }
+        });
         drawerToggle.syncState();
         //tabLayout = (TabLayout) findViewById(R.id.tabs);
         navigationView = (NavigationView) findViewById(R.id.nv_main_navigation);
         headimg=(ImageView) navigationView.findViewById(R.id.headimg_iv);
         nickname= (TextView) navigationView.findViewById(R.id.nickname);
+
         bottom_iv[0]= (ImageView) findViewById(R.id.bottom_iv0);
         bottom_iv[1]= (ImageView) findViewById(R.id.bottom_iv1);
         bottom_iv[2]= (ImageView) findViewById(R.id.bottom_iv2);

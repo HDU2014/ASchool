@@ -23,13 +23,16 @@ public class Urls {
 
     public final static String INDEX="index.php";
 
-
     public final static String USER_DELETE=HOSTNAME+DELETE+INDEX;
     public final static String USER_QUERY=HOSTNAME+QUERY+INDEX;
     public final static String USER_REGISTERED=HOSTNAME+REGISTERED+INDEX;
     public final static String USER_SINGIN=HOSTNAME+SINGIN+INDEX;
     public final static String USER_UPDATE_INFO=HOSTNAME+UPDATE_INFO+INDEX;
     public final static String USER_UPDATE_PASSWORD=HOSTNAME+UPDATE_PASSWORD+INDEX;
+    public final static String PUBLISH="http://activity.xtongtong.cn/release/index.php";
+    public final static String GET_ACTIVITY="http://activity.xtongtong.cn/query/index.php";
+
+
 
 
 

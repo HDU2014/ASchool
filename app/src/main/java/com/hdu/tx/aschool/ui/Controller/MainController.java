@@ -17,6 +17,7 @@ import com.hdu.tx.aschool.ui.activity.LoginActivity;
 import com.hdu.tx.aschool.ui.activity.MainActivity;
 import com.hdu.tx.aschool.ui.activity.MeActivity;
 import com.hdu.tx.aschool.ui.activity.MyInfoActivity;
+import com.hdu.tx.aschool.ui.activity.PublishActivity;
 import com.hdu.tx.aschool.ui.activity.UploadButtonDemoActivity;
 import com.hdu.tx.aschool.ui.adapter.FragmentAdapter;
 import com.hdu.tx.aschool.ui.fragment.AdFragment;
@@ -91,7 +92,8 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
                 index=5;
                 break;
             case R.id.bottom_iv4:
-
+                Intent intent1=new Intent(mainActivity, PublishActivity.class);
+                mainActivity.startActivity(intent1);
                 break;
         }
         if(index!=fragmentIndex){
