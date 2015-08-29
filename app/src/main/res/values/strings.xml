@@ -110,5 +110,14 @@
     <string name="publish_success">发布成功</string>
     <string name="publishing">正在发布</string>
     <string name="publish_erro">发布失败</string>
+    <string name="foucs">关注 5</string>
+    <string name="fans">粉丝20</string>
+    <string name="limit">|</string>
+    <string name="chat">私 聊</string>
+    <string name="btfoucs">关 注</string>
+    <string name="user_info">信息</string>
+    <string name="dynamic">动态</string>
+    <string name="academy">学院</string>
+    <string name="subscribe">TA的订阅</string>
 
 </resources>

@@ -97,7 +97,6 @@
             android:layout_marginLeft="5dp"
             android:textColor="#77000000"
             android:text="309" />
-
         <TextView
             android:id="@+id/act_joined_tv"
             android:layout_width="wrap_content"
@@ -109,7 +108,6 @@
             android:textSize="12sp"
             android:textColor="#77000000"
             android:text="@string/activity_havejoin_test" />
-
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
