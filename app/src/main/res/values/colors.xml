@@ -7,7 +7,8 @@
     <color name="colorPrimaryDark">#0ba823</color>
     <color name="colorAccent">#FF4081</color>
 
-
+    <color name="grey_more">#aeabae</color>
+    <color name="grey_light">#cdcacd</color>
     <color name="grey">#ffdedede</color>
     <color name="blue">#ff0099cc</color>
     <color name="red">#ffff4444</color>

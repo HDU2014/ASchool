@@ -29,6 +29,7 @@
         <activity android:name=".ui.activity.UpdateInfoActivity"></activity>
         <activity android:name=".ui.activity.PublishActivity"></activity>
         <activity android:name=".ui.activity.PartyIntrodue"></activity>
+        <activity android:name=".ui.activity.OtherInfoActivity"></activity>
 
         <activity android:name=".ui.activity.TestActivity"></activity>
         <activity android:name=".ui.activity.UploadButtonDemoActivity"></activity>
