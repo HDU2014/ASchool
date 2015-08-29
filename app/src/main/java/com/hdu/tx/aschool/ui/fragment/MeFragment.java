@@ -13,6 +13,7 @@ import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseFragment;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.ui.activity.LoginActivity;
 import com.hdu.tx.aschool.ui.activity.MyInfoActivity;
 import com.hdu.tx.aschool.ui.widget.image.CircleImageView;
 import com.squareup.picasso.Picasso;
@@ -45,6 +46,7 @@ public class MeFragment extends BaseFragment {
     LinearLayout infoLl;
     @Bind(R.id.suggestion_ll)
     LinearLayout suggestionLl;
+    private UserInfo info;
 
     @Nullable
     @Override
@@ -58,15 +60,22 @@ public class MeFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        UserInfo info= MyApplication.getInstance().getUserInfo();
+         info= MyApplication.getInstance().getUserInfo();
         if(info.getLevel()==1){
             Picasso.with(getActivity()).load(MyApplication.getInstance().getUserInfo().getHeadimg_url()).into(headIv);
             nicknameTv.setText(info.getNickname());
+        }else{
+            nicknameTv.setText("未登陆");
         }
     }
 
     @OnClick(R.id.head_iv)void gotoInfo(){
-        startActivity(new Intent(getActivity(), MyInfoActivity.class));
+        if(info.getLevel()==0){
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }else{
+            startActivity(new Intent(getActivity(), MyInfoActivity.class));
+        }
+
     }
 
     @Override

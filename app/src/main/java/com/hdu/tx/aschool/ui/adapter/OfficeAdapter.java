@@ -45,6 +45,8 @@ public class OfficeAdapter extends RecyclerView.Adapter<OfficeAdapter.ViewHolder
         final View view = holder.mView;
         final ActInfo actInfo=actInfos.get(position);
 
+        String path=actInfo.getImageUrl();
+        if(path!=null&&!"".equals(path))
         Picasso.with(mContext).load(actInfo.getImageUrl()).into(holder.actimg_iv);
         String joined="<font color='blue'>"+actInfo.getJoinedpeopel()+"</font>  报名";
         holder.joined_tv.setText(Html.fromHtml(joined));

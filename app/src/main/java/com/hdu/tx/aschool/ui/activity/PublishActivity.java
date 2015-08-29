@@ -308,4 +308,28 @@ public class PublishActivity extends BaseActivity {
         getVolleyQueue().add(stringRequest);
     }
 
+    public void getQiniuToken(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.GET_QINIU_TOKEN, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }){
+
+        };
+
+
+
+    }
+
+
+
+
+
+
 }

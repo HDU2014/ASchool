@@ -42,4 +42,5 @@ dependencies {
     compile 'de.greenrobot:greendao:2.0.0'
     //https://github.com/greenrobot/greenDAO
     compile files('libs/easemobchat_2.2.2.jar')
+    compile 'com.qiniu:qiniu-android-sdk:7.0.+'
 }

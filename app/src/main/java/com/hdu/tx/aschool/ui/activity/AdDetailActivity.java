@@ -92,6 +92,8 @@ public class AdDetailActivity extends BaseActivity {
     public void init() {
         ActInfo actInfo= (ActInfo) getIntent().getSerializableExtra("activity");
         if(actInfo==null)return;
+        String path=actInfo.getImageUrl();
+        if(path!=null&&!"".equals(path))
         Picasso.with(this).load(actInfo.getImageUrl()).into(actImg);
         title.setText(actInfo.getTitle());
         timeTv.setText(actInfo.getTime());
