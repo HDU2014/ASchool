@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/article_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="1dp"
+    card_view:cardElevation="1dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/event_image"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="8dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/footballad" />
+
+        <TextView
+            android:id="@+id/event_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/event_image"
+            android:layout_marginTop="2dp"
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:text="@string/activity_title_test" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_toRightOf="@+id/event_title"
+           >
+        <TextView
+            android:id="@+id/dynamic_type"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="8dp"
+            android:singleLine="true"
+            android:background="@drawable/dynamic_stroke"
+            android:textSize="14sp"
+
+            android:textColor="#000000"
+            android:text="发起"
+            />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/event_image"
+            android:layout_below="@+id/event_title"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="8dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="#77000000"
+            android:text="小米科技" />
+
+        <TextView
+            android:id="@+id/event_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/event_image"
+            android:layout_below="@id/host"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="#77000000"
+            android:text="@string/activity_time_test" />
+
+        <TextView
+            android:id="@+id/event_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/event_time"
+            android:layout_marginLeft="60dp"
+            android:layout_alignBaseline="@id/event_time"
+            android:layout_marginTop="12dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="#77000000"
+            android:text="@string/activity_address_test"/>
+
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/event_time"
+            android:layout_toRightOf="@id/event_image"
+            android:id="@+id/collect_img"
+
+            android:src="@drawable/collected"
+            android:layout_width="15dp"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:id="@+id/event_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/collect_img"
+            android:layout_below="@+id/event_time"
+            android:layout_alignBaseline="@id/collect_img"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#77000000"
+            android:text="309" />
+
+        <TextView
+            android:id="@+id/event_joined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/event_address"
+            android:layout_below="@+id/event_time"
+            android:layout_marginTop="5dp"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="#77000000"
+            android:text="@string/activity_havejoin_test" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
