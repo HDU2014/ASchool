@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,9 +14,11 @@ import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
+import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.ui.widget.image.CircleImageView;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -89,14 +92,18 @@ public class AdDetailActivity extends BaseActivity {
     public void init() {
         ActInfo actInfo= (ActInfo) getIntent().getSerializableExtra("activity");
         if(actInfo==null)return;
+        String path=actInfo.getImageUrl();
+        if(path!=null&&!"".equals(path))
+        Picasso.with(this).load(actInfo.getImageUrl()).into(actImg);
         title.setText(actInfo.getTitle());
         timeTv.setText(actInfo.getTime());
         addressTv.setText(actInfo.getAddress());
         personNum.setText(actInfo.getJoinedpeopel()+"/"+actInfo.getTotalpeopel());
         hostnameTv.setText(actInfo.getHostname());
         describeTv.setText(actInfo.getDescribe());
+       // MyApplication.getInstance().getDaoSession().insert(actInfo);
+       // Snackbar.make(toolbar,"数据库插入成功",Snackbar.LENGTH_LONG).show();
     }
-
 
     @OnClick(R.id.collect)void setCollect(){
         if(collect.isSelected())collect.setSelected(false);

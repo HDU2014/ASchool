@@ -31,6 +31,8 @@ public class Urls {
     public final static String USER_UPDATE_PASSWORD=HOSTNAME+UPDATE_PASSWORD+INDEX;
     public final static String PUBLISH="http://activity.xtongtong.cn/release/index.php";
     public final static String GET_ACTIVITY="http://activity.xtongtong.cn/query/index.php";
+    public final static String GET_ACTIVITYS="http://activity.xtongtong.cn/query_mult_avtivity/index.php";
+    public final static String GET_QINIU_TOKEN="http://user.xtongtong.cn/get_qiniu_token/index.php";
 
 
 

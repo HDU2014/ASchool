@@ -187,7 +187,7 @@ public class ForgetPassActivity extends BaseActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> map = new HashMap<>();
-                    map.put("user_name", passEt.getText().toString());
+                    map.put("user_name", phoneTv.getText().toString());
                     String pwd_md5 = new MySecurity().encodyByMD5(passEt.getText().toString());
                     map.put("password", pwd_md5);
                     return map;
