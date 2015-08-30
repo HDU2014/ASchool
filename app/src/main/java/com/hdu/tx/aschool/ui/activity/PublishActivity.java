@@ -4,7 +4,12 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -27,13 +32,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.dd.processbutton.iml.SubmitProcessButton;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
+import com.hdu.tx.aschool.common.utils.ConstantValue;
 import com.hdu.tx.aschool.common.utils.MySecurity;
+import com.hdu.tx.aschool.common.utils.MyStrings;
+import com.hdu.tx.aschool.common.utils.PhotoUtil;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.net.Urls;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UpProgressHandler;
+import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,18 +59,20 @@ import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by pualgo on 2015/8/24.
  */
 public class PublishActivity extends BaseActivity {
+    public static final  String TAG="PublishActivity";
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.appbar)
     AppBarLayout appbar;
-    @Bind(R.id.Image_content)
-    ImageView ImageContent;
+    @Bind(R.id.image_content)
+    ImageView imageContent;
     @Bind(R.id.et_tittle)
     EditText etTitle;
     @Bind(R.id.chooseType)
@@ -86,10 +102,12 @@ public class PublishActivity extends BaseActivity {
     @Bind(R.id.checkbox)
     CheckBox checkbox;
     @Bind(R.id.btPublish)
-    ActionProcessButton btPublish;
+    SubmitProcessButton btPublish;
     String mTime;
     String mDate;
     String id;
+
+    private String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +123,9 @@ public class PublishActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+
+
+
 
         calendar = Calendar.getInstance();
         //起始时间编辑框监听
@@ -171,18 +192,35 @@ public class PublishActivity extends BaseActivity {
             public void onClick(View v) {
                 Log.v("publish", "gongo");
                 //publish();
-                getActFromServer();
+               // getActFromServer();
+               // getQiniuToken();
+                publishActivity();
             }
         });
-
     }
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == PublishActivity.REQUSET && resultCode == RESULT_OK) {
             String str = data.getStringExtra(PartyIntrodue.MSG);
             etIntrodue.setText(str);
+        }else if(requestCode== ConstantValue.INTENT_SELECT_PHOTOS){
+            if(data!=null){
+                Uri photoUri=data.getData();
+                if(photoUri!=null)PhotoUtil.cameraCropImageUri(this,photoUri,4,3,800,600);
+            }
+        }else if(requestCode==ConstantValue.INTENT_AFTER_CROPPHOTO){
+            String path=ConstantValue.CROP_TEMP_PATH;
+            Bitmap b= BitmapFactory.decodeFile(path);
+            if(b!=null){
+                imageContent.setImageBitmap(b);
+                imagePath=path;
+            }
 
         }
 
@@ -203,10 +241,8 @@ public class PublishActivity extends BaseActivity {
         }
     };
 
-    public void publish() {
-        btPublish.setProgress(30);
+    public void saveActivity(final String key) {
         try {
-
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.PUBLISH, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String s) {
@@ -215,13 +251,17 @@ public class PublishActivity extends BaseActivity {
                         int code = object.getInt("result");
                         if (code == 200) {
                             btPublish.setProgress(100);
-                           // getActFromServer(object.getString("act_id"));
+                            btPublish.setEnabled(true);
 
                         } else {
                             btPublish.setProgress(-1);
+                            btPublish.setEnabled(true);
+                            toast(toolbar,object.getString("desc"));
                         }
                     } catch (JSONException e) {
                         btPublish.setProgress(-1);
+                        btPublish.setEnabled(true);
+                        toast(toolbar,e.toString());
                     }
 
                 }
@@ -230,6 +270,8 @@ public class PublishActivity extends BaseActivity {
                 public void onErrorResponse(VolleyError volleyError) {
                     btPublish.setProgress(-1);
                     // btRegist.setProgress(-1);
+                    toast(toolbar,volleyError.toString());
+                    btPublish.setEnabled(true);
                 }
             }) {
                 @Override
@@ -238,7 +280,9 @@ public class PublishActivity extends BaseActivity {
 //                    map.put("user_name",etPhone.getText().toString());
 //                    String pwd_md5 = new MySecurity().encodyByMD5(etPass.getText().toString());
 //                    map.put("password",pwd_md5);
-                    return generateMap();
+                    Map<String,String> map=generateMap();
+                    map.put("img_url",key);
+                    return map;
                 }
             };
             getVolleyQueue().add(stringRequest);
@@ -246,6 +290,10 @@ public class PublishActivity extends BaseActivity {
         } catch (Exception e) {
             toast(toolbar, e.toString());
         }
+    }
+
+    @OnClick(R.id.image_content)void selectImage(){
+        PhotoUtil.startSelectImageFromLocal(this);
     }
 
     public Map<String, String> generateMap() {
@@ -258,7 +306,8 @@ public class PublishActivity extends BaseActivity {
         map.put("content", etIntrodue.getText().toString());
         String str=checkbox.isChecked()?"true":"false";
         map.put("open", str);
-        map.put("user_name", etPhone.getText().toString());
+        map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+        map.put("act_phone_num",etPhone.getText().toString());
         return map;
     }
 
@@ -277,6 +326,8 @@ public class PublishActivity extends BaseActivity {
                         info.setAddress(object.getString("act_place"));
                         info.setDescribe(object.getString("content"));
                         info.setHostname(object.getString("user_name"));
+                        info.setHostId(object.getInt("host_id"));
+
                         info.setJoinedpeopel(object.getInt("join_num"));
                         info.setCollectTimes(object.getInt("collect_num"));
                         info.setLookTimes(object.getInt("browse_num"));
@@ -312,24 +363,92 @@ public class PublishActivity extends BaseActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.GET_QINIU_TOKEN, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-
+                try {
+                    JSONObject object=new JSONObject(s);
+                    if(object.getInt("result")==200){
+                        String up_token=object.getString("up_token");
+                        String img_key=object.getString("img_key");
+                        Log.i(TAG,"upToken--->"+up_token+"Key--->"+img_key);
+                        updateImage(imagePath,up_token,img_key);
+                    }else{
+                        toast(toolbar,object.getString("desc"));
+                        btPublish.setEnabled(true);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.i(TAG, e.toString());
+                    btPublish.setEnabled(true);
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
+                Log.i(TAG,volleyError.toString());
+                btPublish.setEnabled(true);
             }
         }){
-
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<>();
+                map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+                return map;
+            }
         };
-
-
-
+        getVolleyQueue().add(stringRequest);
     }
 
 
 
 
+    public void updateImage(final String img_path,final String upToken,final String img_key){
+        UploadManager uploadManager = new UploadManager();
+        uploadManager.put(img_path, img_key, upToken, new UpCompletionHandler() {
+                @Override
+                public void complete(String s, ResponseInfo responseInfo, JSONObject jsonObject) {
+                    Log.i("TAG--updateImage",s);
+                    btPublish.setProgress(90);
+                    saveActivity(s);
+                }
+
+            }, new UploadOptions(null, null, false, new UpProgressHandler() {
+                @Override
+                public void progress(String s, double v) {
+                    int what=(int)(v*90);
+                    handler.sendEmptyMessage(what);
+                }
+            },null));
+        }
+
+
+
+    private Message msg=new Message();
+    public void publishActivity(){
+        if(imagePath==null){
+            Snackbar.make(toolbar,"对不起，您还未选择活动的图片",Snackbar.LENGTH_LONG).
+                    setAction("挑选图片", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            PhotoUtil.startSelectImageFromLocal(PublishActivity.this);
+                        }
+                    }).show();
+            return;
+        }
+        btPublish.setEnabled(false);
+        btPublish.setProgress(1);
+
+        getQiniuToken();
+    }
+
+
+
+
+    public  Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            btPublish.setProgress(msg.what);
+        }
+    };
 
 
 }

@@ -6,6 +6,8 @@ package com.hdu.tx.aschool.net;
 public class Urls {
 
 
+    public final static String NETURL="http://user.xtongtong.cn/get_qiniu_token/";
+
     /**
      * 主机名
      */
@@ -33,6 +35,7 @@ public class Urls {
     public final static String GET_ACTIVITY="http://activity.xtongtong.cn/query/index.php";
     public final static String GET_ACTIVITYS="http://activity.xtongtong.cn/query_mult_avtivity/index.php";
     public final static String GET_QINIU_TOKEN="http://user.xtongtong.cn/get_qiniu_token/index.php";
+    public final static String UPDATE_USER_IMG="http://user.xtongtong.cn/get_qiniu_token/index.php";
 
 
 

@@ -351,4 +351,11 @@ public class MainFragment extends BaseFragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
+    public void getLunBoAct(){
+
+    }
+
+
+
 }
