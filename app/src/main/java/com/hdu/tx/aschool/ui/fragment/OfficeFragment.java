@@ -83,10 +83,9 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
         manager=new LinearLayoutManager(recyclerView.getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setOnScrollListener(scrolllistener);
-       initGetAct();
+
         //adapter = new OfficeAdapter(getActivity(), MyApplication.getInstance().getDaoSession().getActInfoDao().loadAll());
        // recyclerView.setAdapter(adapter);
-
 
         //初始化上拉刷新组件
         swipeRefresh.setOnRefreshListener(this);
@@ -96,6 +95,8 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
                 android.R.color.holo_red_light);
         swipeRefresh.setDistanceToTriggerSync(100);// 设置下拉距离
         swipeRefresh.setSize(SwipeRefreshLayout.LARGE);
+
+        initGetAct();
     }
 
     RecyclerView.OnScrollListener scrolllistener = new RecyclerView.OnScrollListener() {
@@ -185,6 +186,10 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
         ButterKnife.unbind(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
     @OnClick(R.id.schools)
     void onclick1() {
@@ -281,23 +286,18 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
                                 info.setTotalpeopel(infoObject.getInt("act_num"));
                                 info.setAddress(infoObject.getString("act_place"));
                                 info.setDescribe(infoObject.getString("content"));
-                                info.setHostname(infoObject.getString("user_name"));
+                                //info.setHostname(object.getString("user_name"));
+                                info.setHostname("zhubanfang");
+                               // info.setHostId(object.getInt("host_id"));
                                 info.setJoinedpeopel(infoObject.getInt("join_num"));
                                 info.setCollectTimes(infoObject.getInt("collect_num"));
                                 info.setLookTimes(infoObject.getInt("browse_num"));
                                 info.setImageUrl(infoObject.getString("act_img"));
                                 infos.add(info);
                             }
-                            if(adapterData==null)adapterData=new ArrayList<>();
-                            adapterData.clear();
-                            adapterData.addAll(infos);
-                            if(adapter==null){
-                                adapter=new OfficeAdapter(OfficeFragment.this.getActivity(),
-                                        adapterData);
-                                recyclerView.setAdapter(adapter);
-                            }
-                            adapter.notifyDataSetChanged();
-
+                            adapterData=infos;
+                            adapter=new OfficeAdapter(OfficeFragment.this.getActivity(), adapterData);
+                            recyclerView.setAdapter(adapter);
                         }else{
                             superActivity.toast(recyclerView, object.getString("desc"));
                         }

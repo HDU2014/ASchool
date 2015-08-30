@@ -3,6 +3,8 @@ package com.hdu.tx.aschool.base;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.hdu.tx.aschool.dao.DaoMaster;
 import com.hdu.tx.aschool.dao.DaoSession;
 import com.hdu.tx.aschool.dao.UserInfo;
@@ -17,6 +19,7 @@ public class MyApplication extends Application {
     private DaoMaster daoMaster;
     private DaoSession daoSession;
     private UserInfo userInfo;
+    private RequestQueue queue;
 
     @Override
     public void onCreate() {
@@ -58,4 +61,11 @@ public class MyApplication extends Application {
         this.userInfo=userInfo;
     }
 
+
+    public RequestQueue getVolleyQueue(){
+        if (queue == null) {
+            queue = Volley.newRequestQueue(getApplicationContext());
+        }
+        return queue;
+    }
 }
