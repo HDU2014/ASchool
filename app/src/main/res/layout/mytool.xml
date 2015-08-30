@@ -69,6 +69,7 @@
             android:layout_height="40dp" />
 
         <TextView
+            android:id="@+id/my_start"
             android:layout_margin="1dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,6 +114,7 @@
                 android:layout_height="40dp" />
 
             <TextView
+                android:id="@+id/my_enroll"
                 android:layout_margin="1dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -157,6 +159,7 @@
                 android:layout_height="40dp" />
 
             <TextView
+                android:id="@+id/my_collect"
                 android:layout_margin="1dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -201,6 +204,7 @@
                 android:layout_height="40dp" />
 
             <TextView
+                android:id="@+id/my_foucs"
                 android:layout_margin="1dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -245,6 +249,7 @@
                 android:layout_height="40dp" />
 
             <TextView
+                android:id="@+id/my_comment"
                 android:layout_margin="1dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -289,6 +294,7 @@
             android:layout_height="40dp" />
 
         <TextView
+            android:id="@+id/my_infomation"
             android:layout_margin="1dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -333,6 +339,7 @@
                 android:layout_height="40dp" />
 
             <TextView
+                android:id="@+id/my_tuchao"
                 android:layout_margin="1dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

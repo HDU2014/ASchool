@@ -132,6 +132,8 @@ public class MyInfoActivity extends BaseActivity {
     }
 
     private void refreshMyInfo() {
+        if(userInfo==null)
+            return;
         Picasso.with(this).load(userInfo.getHeadimg_url()).into(headImg);
         nicknameTv.setText(userInfo.getNickname());
         Log.i("TAG", userInfo.getHeadimg_url());

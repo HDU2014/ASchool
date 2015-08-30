@@ -2,28 +2,20 @@ package com.hdu.tx.aschool.ui.Controller;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
-import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.ui.View.MainView;
 import com.hdu.tx.aschool.ui.activity.LoginActivity;
 import com.hdu.tx.aschool.ui.activity.MainActivity;
-import com.hdu.tx.aschool.ui.activity.MeActivity;
 import com.hdu.tx.aschool.ui.activity.MyInfoActivity;
 import com.hdu.tx.aschool.ui.activity.PublishActivity;
 import com.hdu.tx.aschool.ui.activity.UploadButtonDemoActivity;
-import com.hdu.tx.aschool.ui.adapter.FragmentAdapter;
-import com.hdu.tx.aschool.ui.fragment.AdFragment;
 import com.hdu.tx.aschool.ui.fragment.ConstractFragment;
 import com.hdu.tx.aschool.ui.fragment.ConversationFragment;
-import com.hdu.tx.aschool.ui.fragment.ListFragment;
 import com.hdu.tx.aschool.ui.fragment.MainFragment;
 import com.hdu.tx.aschool.ui.fragment.MeFragment;
 import com.hdu.tx.aschool.ui.fragment.OfficeFragment;
@@ -107,10 +99,6 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
         menuItem.setChecked(true);
         mainView.closeDrawers();
         switch (menuItem.getItemId()){
-            case R.id.my_info:
-                Intent intent=new Intent(mainActivity,MeActivity.class);
-                mainActivity.startActivity(intent);
-                break;
             case R.id.my_activity:
                 Intent intent1=new Intent(mainActivity,UploadButtonDemoActivity.class);
                 mainActivity.startActivity(intent1);

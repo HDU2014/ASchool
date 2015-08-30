@@ -21,6 +21,7 @@
         <activity android:name=".ui.activity.DetailActivity"></activity>
 
         <activity android:name=".ui.activity.LoginActivity"></activity>
+        <activity android:name=".ui.activity.MyActivity"></activity>
 
         <activity android:name=".ui.activity.RegistActivity"></activity>
         <activity android:name=".ui.activity.AdDetailActivity"></activity>
@@ -33,7 +34,6 @@
 
         <activity android:name=".ui.activity.TestActivity"></activity>
         <activity android:name=".ui.activity.UploadButtonDemoActivity"></activity>
-        <activity android:name=".ui.activity.MeActivity"></activity>
 
         <activity
             android:name=".ui.activity.MyInfoActivity"

@@ -36,6 +36,11 @@ public class Urls {
     public final static String GET_ACTIVITYS="http://activity.xtongtong.cn/query_mult_avtivity/index.php";
     public final static String GET_QINIU_TOKEN="http://user.xtongtong.cn/get_qiniu_token/index.php";
     public final static String UPDATE_USER_IMG="http://user.xtongtong.cn/get_qiniu_token/index.php";
+    public final static String GET_JOIN_ACTIVITY="http://api.xtongtong.cn/api/user_query_activity_join.php";
+    public final static String GET_COLLECT_ACTIVITY="http://api.xtongtong.cn/api/user_query_activity_collect.php";
+    public final static String GET_PUBLISH_ACTIVITY="http://api.xtongtong.cn/api/demo/demo/user_query_activity_release.php";
+
+
 
 
 
