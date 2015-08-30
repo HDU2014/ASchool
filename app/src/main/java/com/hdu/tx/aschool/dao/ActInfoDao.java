@@ -30,7 +30,7 @@ public class ActInfoDao extends AbstractDao<ActInfo, Long> {
         public final static Property Time = new Property(4, String.class, "time", false, "TIME");
         public final static Property Address = new Property(5, String.class, "address", false, "ADDRESS");
         public final static Property Describe = new Property(6, String.class, "describe", false, "DESCRIBE");
-        public final static Property HostId = new Property(7, Integer.class, "hostId", false, "HOST_ID");
+        public final static Property HostId = new Property(7, String.class, "hostId", false, "HOST_ID");
         public final static Property LookTimes = new Property(8, Integer.class, "lookTimes", false, "LOOK_TIMES");
         public final static Property CollectTimes = new Property(9, Integer.class, "collectTimes", false, "COLLECT_TIMES");
         public final static Property Totalpeopel = new Property(10, Integer.class, "totalpeopel", false, "TOTALPEOPEL");
@@ -57,7 +57,7 @@ public class ActInfoDao extends AbstractDao<ActInfo, Long> {
                 "\"TIME\" TEXT," + // 4: time
                 "\"ADDRESS\" TEXT," + // 5: address
                 "\"DESCRIBE\" TEXT," + // 6: describe
-                "\"HOST_ID\" INTEGER," + // 7: hostId
+                "\"HOST_ID\" TEXT," + // 7: hostId
                 "\"LOOK_TIMES\" INTEGER," + // 8: lookTimes
                 "\"COLLECT_TIMES\" INTEGER," + // 9: collectTimes
                 "\"TOTALPEOPEL\" INTEGER," + // 10: totalpeopel
@@ -110,9 +110,9 @@ public class ActInfoDao extends AbstractDao<ActInfo, Long> {
             stmt.bindString(7, describe);
         }
  
-        Integer hostId = entity.getHostId();
+        String hostId = entity.getHostId();
         if (hostId != null) {
-            stmt.bindLong(8, hostId);
+            stmt.bindString(8, hostId);
         }
  
         Integer lookTimes = entity.getLookTimes();
@@ -153,7 +153,7 @@ public class ActInfoDao extends AbstractDao<ActInfo, Long> {
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // time
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // address
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // describe
-            cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // hostId
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // hostId
             cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // lookTimes
             cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // collectTimes
             cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // totalpeopel
@@ -172,7 +172,7 @@ public class ActInfoDao extends AbstractDao<ActInfo, Long> {
         entity.setTime(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setAddress(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setDescribe(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setHostId(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
+        entity.setHostId(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setLookTimes(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
         entity.setCollectTimes(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
         entity.setTotalpeopel(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));

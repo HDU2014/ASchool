@@ -72,6 +72,8 @@ public class AdDetailActivity extends BaseActivity {
     @Bind(R.id.main_content)
     CoordinatorLayout mainContent;
 
+    private ActInfo actInfo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +93,7 @@ public class AdDetailActivity extends BaseActivity {
     }
 
     public void init() {
-        ActInfo actInfo= (ActInfo) getIntent().getSerializableExtra("activity");
+         actInfo= (ActInfo) getIntent().getSerializableExtra("activity");
         if(actInfo==null)return;
         String path=actInfo.getImageUrl();
         if(path!=null&&!"".equals(path))
@@ -111,10 +113,7 @@ public class AdDetailActivity extends BaseActivity {
         else collect.setSelected(true);
     }
     @OnClick(R.id.hostname_tv)void getDetail() {
-        Intent intent=new Intent(AdDetailActivity.this,OtherInfoActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("HostNane",hostnameTv.getText().toString());
-        intent.putExtras(bundle);
+        Intent intent=new Intent(AdDetailActivity.this,OtherInfoActivity.class).putExtra("host_id",actInfo.getHostId());
         AdDetailActivity.this.startActivity(intent);
 
     }

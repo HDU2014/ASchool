@@ -60,16 +60,14 @@ public class DynamicFragment extends BaseFragment {
     CardView articleCardview;
     private View DynamicView;
     private BaseActivity superActiviyt;
-    public ActInfo actInfo;
-    public List<ActInfo> actInfoList;
+
 
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.superActiviyt=(BaseActivity)getActivity();
-        actInfo = new ActInfo();
-        actInfoList = new ArrayList<>();
+
         getActivtyData();
 
     }
@@ -78,7 +76,7 @@ public class DynamicFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        DynamicView = inflater.inflate(R.layout.dynamic_listcard, container, false);
+        DynamicView = inflater.inflate(R.layout.dynamic_cardview, container, false);
         ButterKnife.bind(this, DynamicView);
         return DynamicView;
     }

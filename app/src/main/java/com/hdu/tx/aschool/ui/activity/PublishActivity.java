@@ -212,7 +212,7 @@ public class PublishActivity extends BaseActivity {
         }else if(requestCode== ConstantValue.INTENT_SELECT_PHOTOS){
             if(data!=null){
                 Uri photoUri=data.getData();
-                if(photoUri!=null)PhotoUtil.cameraCropImageUri(this,photoUri,4,3,800,600);
+                if(photoUri!=null)PhotoUtil.cameraCropImageUri(this,photoUri,16,9,800,450);
             }
         }else if(requestCode==ConstantValue.INTENT_AFTER_CROPPHOTO){
             String path=ConstantValue.CROP_TEMP_PATH;
@@ -326,7 +326,7 @@ public class PublishActivity extends BaseActivity {
                         info.setAddress(object.getString("act_place"));
                         info.setDescribe(object.getString("content"));
                         info.setHostname(object.getString("user_name"));
-                        info.setHostId(object.getInt("host_id"));
+                        info.setHostId(object.getString("host_id"));
 
                         info.setJoinedpeopel(object.getInt("join_num"));
                         info.setCollectTimes(object.getInt("collect_num"));

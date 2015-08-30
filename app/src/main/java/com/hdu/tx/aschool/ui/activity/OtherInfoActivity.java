@@ -25,6 +25,9 @@ import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.common.utils.MySecurity;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.JSONHandler;
+import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.ui.adapter.FragmentAdapter;
 import com.hdu.tx.aschool.ui.fragment.DynamicFragment;
@@ -95,7 +98,9 @@ public class OtherInfoActivity extends BaseActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
         initView();
-        getUserInfo();
+        String hostid=getIntent().getStringExtra("host_id");
+
+        getUserInfo(hostid);
     }
 
     public void initView() {
@@ -124,38 +129,26 @@ public class OtherInfoActivity extends BaseActivity {
 
     }
 
-    public void getUserInfo() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.USER_QUERY, new Response.Listener<String>() {
+    public void getUserInfo(final String  hostid) {
+        Map<String,String> map=new HashMap<>();
+        map.put("user_id", hostid);
+        new MyStringRequest(Urls.QUERY_UERINFO_BYID, map, new InternetListener() {
             @Override
-            public void onResponse(String s) {
+            public void success(JSONObject json) {
                 try {
-                    JSONObject object = new JSONObject(s);
-                    if (object.getInt("result") == 200) {
-                        OtherFragment otherFragment = new OtherFragment();
-                        otherUserid.setText(object.getString("nickname"));
-                        Picasso.with(OtherInfoActivity.this).load(object.getString("headpic")).into(otherHeadUser);
-                    } else {
-                        toast(toolbar, object.getString("desc"));
-                    }
+                    UserInfo userInfo= JSONHandler.json2UserInfo(json);
+                    otherUserid.setText(userInfo.getNickname());
+                    Picasso.with(OtherInfoActivity.this).load(userInfo.getHeadimg_url()).into(otherHeadUser);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    toast(toolbar, e.toString());
                 }
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
+            public void error(String desc) {
 
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("user_name", "13336931879");
-                return map;
-            }
-        };
-        getVolleyQueue().add(stringRequest);
+        });
     }
 
 }

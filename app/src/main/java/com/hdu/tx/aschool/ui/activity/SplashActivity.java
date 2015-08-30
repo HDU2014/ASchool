@@ -8,6 +8,7 @@ import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.ui.View.MainView;
 
 public class SplashActivity extends BaseActivity
 {
@@ -34,12 +35,10 @@ public class SplashActivity extends BaseActivity
 					UserInfo userInfo=MyApplication.getInstance().getUserInfo();
 					if(userInfo==null){
 						userInfo=new UserInfo();
-						userInfo.setLevel(0);
+						userInfo.setLevel(0);  //设置游客登录
 						userInfo.setId(1l);
 						MyApplication.getInstance().getDaoSession().insert(userInfo);
 					}
-//					userInfo.setLevel(1);
-//					MyApplication.getInstance().getDaoSession().update(userInfo);
 				} catch (InterruptedException e) {
 
 				}
