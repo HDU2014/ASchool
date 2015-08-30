@@ -76,7 +76,7 @@ public class OfficeAdapter extends RecyclerView.Adapter<OfficeAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return actInfos.size();
+        return actInfos==null?0:actInfos.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

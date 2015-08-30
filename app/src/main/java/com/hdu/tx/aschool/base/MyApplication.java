@@ -2,12 +2,24 @@ package com.hdu.tx.aschool.base;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.dao.DaoMaster;
 import com.hdu.tx.aschool.dao.DaoSession;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
+import java.io.File;
 
 /**
  * Created by Administrator on 2015/5/22.
@@ -20,11 +32,13 @@ public class MyApplication extends Application {
     private DaoSession daoSession;
     private UserInfo userInfo;
     private RequestQueue queue;
+    private DisplayImageOptions options;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance=this;
+        initImageLoader();
     }
 
     public static MyApplication getInstance() {
@@ -67,5 +81,38 @@ public class MyApplication extends Application {
             queue = Volley.newRequestQueue(getApplicationContext());
         }
         return queue;
+    }
+
+
+    private void initImageLoader() {
+        File cacheDir = com.nostra13.universalimageloader.utils.StorageUtils
+                .getOwnCacheDirectory(this,
+                        "imageloader/Cache");
+
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheInMemory(true).cacheOnDisc(true).build();
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                getApplicationContext()).defaultDisplayImageOptions(defaultOptions)
+                .memoryCache(new LruMemoryCache(12 * 1024 * 1024))
+                .memoryCacheSize(12 * 1024 * 1024)
+                .discCacheSize(32 * 1024 * 1024).discCacheFileCount(100)
+                .discCache(new UnlimitedDiscCache(cacheDir))
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .tasksProcessingOrder(QueueProcessingType.LIFO).build();
+        ImageLoader.getInstance().init(config);
+        options = new DisplayImageOptions.Builder()
+                .showStubImage(R.drawable.top_banner_android)
+                .showImageForEmptyUri(R.drawable.top_banner_android)
+                .showImageOnFail(R.drawable.top_banner_android)
+                .cacheInMemory(true).cacheOnDisc(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .imageScaleType(ImageScaleType.EXACTLY).build();
+
+    }
+
+    public  void loadImage(String url,ImageView view){
+        ImageLoader.getInstance().displayImage(url, view,
+                options);
     }
 }

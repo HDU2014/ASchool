@@ -14,9 +14,14 @@
 
             <include layout="@layout/banner"/>
 
-            <include layout="@layout/addetail_gridview"></include>
-            <include layout="@layout/addetail_gridview"></include>
-            <include layout="@layout/addetail_gridview"></include>
+            <include layout="@layout/addetail_gridview"
+                android:id="@+id/tag1"
+                ></include>
+            <include layout="@layout/addetail_gridview"
+                android:id="@+id/tag2"></include>
+
+            <include layout="@layout/addetail_gridview"
+                android:id="@+id/tag3"></include>
 
         </LinearLayout>
 

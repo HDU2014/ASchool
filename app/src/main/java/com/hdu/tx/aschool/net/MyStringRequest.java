@@ -27,6 +27,12 @@ public class MyStringRequest {
         start();
     }
 
+    public MyStringRequest(String action,InternetListener listener) {
+        this.action=action;
+        this.listener=listener;
+        start();
+    }
+
     private void start(){
         StringRequest stringRequest=new StringRequest(Request.Method.POST,
                 action, new Response.Listener<String>() {

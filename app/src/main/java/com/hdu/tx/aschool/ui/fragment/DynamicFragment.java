@@ -60,16 +60,14 @@ public class DynamicFragment extends BaseFragment {
     CardView articleCardview;
     private View DynamicView;
     private BaseActivity superActiviyt;
-    public ActInfo actInfo;
-    public List<ActInfo> actInfoList;
+
 
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.superActiviyt=(BaseActivity)getActivity();
-        actInfo = new ActInfo();
-        actInfoList = new ArrayList<>();
+
         getActivtyData();
 
     }

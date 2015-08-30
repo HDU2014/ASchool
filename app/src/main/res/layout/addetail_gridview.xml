@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.hdu.tx.aschool.ui.View.TagView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/article_cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="2dp"
@@ -29,20 +29,21 @@
             android:id="@+id/act_type"
             android:text="运动"
             android:textSize="20sp"
+                android:layout_weight="1"
             android:textColor="@color/colorAccent"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/more_detail"
+                android:id="@+id/more_tv"
                 android:text="更多"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="right|center_vertical"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
 
         </LinearLayout>
@@ -59,7 +60,7 @@
                 android:layout_height="110dp">
 
                 <ImageView
-                    android:id="@+id/main_img1"
+                    android:id="@+id/act_img1"
                     android:src="@drawable/footballad"
                     android:scaleType="centerCrop"
                     android:layout_gravity="center"
@@ -68,6 +69,8 @@
                     android:layout_height="75dp" />
 
                 <TextView
+                    android:singleLine="true"
+                    android:id="@+id/act_title1"
                     android:gravity="center"
                     android:padding="4dp"
                     android:textSize="15sp"
@@ -84,7 +87,7 @@
                 android:layout_height="110dp">
 
                 <ImageView
-                    android:id="@+id/main_img2"
+                    android:id="@+id/act_img2"
                     android:src="@drawable/footballad"
                     android:scaleType="centerCrop"
                     android:layout_gravity="center"
@@ -93,8 +96,10 @@
                     android:layout_height="75dp" />
 
                 <TextView
+                    android:id="@+id/act_title2"
                     android:gravity="center"
                     android:padding="4dp"
+                    android:singleLine="true"
                     android:textSize="15sp"
                     android:text="足球赛"
                     android:textColor="@color/black"
@@ -110,7 +115,7 @@
                 android:layout_height="110dp">
 
                 <ImageView
-                    android:id="@+id/main_img3"
+                    android:id="@+id/act_img3"
                     android:src="@drawable/footballad"
                     android:scaleType="centerCrop"
                     android:layout_gravity="center"
@@ -119,7 +124,9 @@
                     android:layout_height="75dp" />
 
                 <TextView
+                    android:id="@+id/act_title3"
                     android:gravity="center"
+                    android:singleLine="true"
                     android:padding="4dp"
                     android:textSize="15sp"
                     android:text="足球赛"
@@ -128,16 +135,5 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
-
-
-
-
-
-
     </LinearLayout>
-
-
-
-
-
-</android.support.v7.widget.CardView>
+</com.hdu.tx.aschool.ui.View.TagView>

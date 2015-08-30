@@ -8,7 +8,7 @@ import de.greenrobot.daogenerator.ToMany;
 
 public class LeaseDaoGrenerator {
     public static void main(String args[]) throws Exception {
-        Schema schema = new Schema(4, "com.hdu.tx.aschool.dao");
+        Schema schema = new Schema(6, "com.hdu.tx.aschool.dao");
         createUserDao(schema);
         createActiDao(schema);
        // new DaoGenerator().generateAll(schema, "D://andorid/hdu2014/ASchool/app/src/main/java");
@@ -31,6 +31,8 @@ public class LeaseDaoGrenerator {
         userInfo.addStringProperty("sex");
         userInfo.addStringProperty("city");
         userInfo.addStringProperty("age");
+
+        userInfo.implementsInterface("java.io.Serializable");
     }
 
     public static void createActiDao(Schema schema){
@@ -45,12 +47,14 @@ public class LeaseDaoGrenerator {
         userInfo.addStringProperty("time");
         userInfo.addStringProperty("address");
         userInfo.addStringProperty("describe");
+        userInfo.addStringProperty("hostId");
 
 
-        userInfo.addIntProperty("hostId");
         userInfo.addIntProperty("lookTimes");
         userInfo.addIntProperty("collectTimes");
         userInfo.addIntProperty("totalpeopel");
         userInfo.addIntProperty("joinedpeopel");
+
+        userInfo.implementsInterface("java.io.Serializable");
     }
 }

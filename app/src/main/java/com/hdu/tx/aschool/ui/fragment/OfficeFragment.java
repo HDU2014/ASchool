@@ -26,6 +26,9 @@ import com.hdu.tx.aschool.base.BaseFragment;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.common.utils.MyStrings;
 import com.hdu.tx.aschool.dao.ActInfo;
+import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.JSONHandler;
+import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.ui.activity.AdDetailActivity;
 import com.hdu.tx.aschool.ui.adapter.OfficeAdapter;
@@ -68,6 +71,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
     private LinearLayoutManager manager;
     private boolean isSliding;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -109,7 +113,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
                 // 判断是否滚动到底部，并且是向右滚动
                 if (lastVisibleItem == (adapterData.size()-1) && isSliding) {
                     //加载更多功能的代码
-                    getMoreAct();
+                    //getMoreAct();
                 }
             }
         }
@@ -161,24 +165,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
     }
 
 
-    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-        private int space;
 
-        public SpacesItemDecoration(int space) {
-            this.space = space;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            outRect.left = space;
-            outRect.right = space;
-            outRect.bottom = space;
-
-            // Add top margin only for the first item to avoid double space between items
-            if (parent.getChildPosition(view) == 0)
-                outRect.top = space;
-        }
-    }
 
     @Override
     public void onDestroyView() {
@@ -262,64 +249,54 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
 
 
     public void getMoreAct(){
+        Map<String,String> map=new HashMap<>();
+        map.put("last_aid","-1");
+        map.put("act_num", "15");
+        new MyStringRequest(Urls.GET_ACTIVITYS, map, new InternetListener() {
+            @Override
+            public void success(JSONObject json) {
+                try {
+                    swipeRefresh.setRefreshing(false);
+                    List<ActInfo> infos= JSONHandler.json2ListAct(json);
+                    adapterData=infos;
+                    adapter=new OfficeAdapter(OfficeFragment.this.getActivity(), adapterData);
+                    recyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
+            @Override
+            public void error(String desc) {
+
+            }
+        });
     }
 
 
     public void initGetAct(){
-        swipeRefresh.setRefreshing(true);
-            StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.GET_ACTIVITYS, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String s) {
+        Map<String,String> map=new HashMap<>();
+        map.put("last_aid","-1");
+        map.put("act_num", "15");
+        new MyStringRequest(Urls.GET_ACTIVITYS, map, new InternetListener() {
+            @Override
+            public void success(JSONObject json) {
+                try {
+                    Log.i("TAG",json.toString());
                     swipeRefresh.setRefreshing(false);
-                    try {
-                        JSONObject object=new JSONObject(s);
-                        Log.i("OfficeFragment",s.toString());
-                        if(object.getInt("result")==200){
-                            List<ActInfo> infos=new ArrayList<>();
-                            JSONArray array=object.getJSONArray("activities");
-                            for (int i = 0; i <array.length() ; i++) {
-                                ActInfo info=new ActInfo();
-                                JSONObject infoObject=array.getJSONObject(i);
-                                info.setTitle(infoObject.getString("title"));
-                                info.setTime(infoObject.getString("start_time"));
-                                info.setTotalpeopel(infoObject.getInt("act_num"));
-                                info.setAddress(infoObject.getString("act_place"));
-                                info.setDescribe(infoObject.getString("content"));
-                                //info.setHostname(object.getString("user_name"));
-                                info.setHostname("zhubanfang");
-                               // info.setHostId(object.getInt("host_id"));
-                                info.setJoinedpeopel(infoObject.getInt("join_num"));
-                                info.setCollectTimes(infoObject.getInt("collect_num"));
-                                info.setLookTimes(infoObject.getInt("browse_num"));
-                                info.setImageUrl(infoObject.getString("act_img"));
-                                infos.add(info);
-                            }
-                            adapterData=infos;
-                            adapter=new OfficeAdapter(OfficeFragment.this.getActivity(), adapterData);
-                            recyclerView.setAdapter(adapter);
-                        }else{
-                            superActivity.toast(recyclerView, object.getString("desc"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        superActivity.toast(recyclerView,e.toString());
-                    }
+                    List<ActInfo> infos= JSONHandler.json2ListAct(json);
+                    adapterData=infos;
+                    adapter=new OfficeAdapter(OfficeFragment.this.getActivity(), adapterData);
+                    recyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    swipeRefresh.setRefreshing(false);
-                }
-            }){
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> map=new HashMap<>();
-                    map.put("last_aid","-1");
-                    map.put("act_num","15");
-                    return map;
-                }
-            };
-            superActivity.getVolleyQueue().add(stringRequest);
-        }
+            }
+
+            @Override
+            public void error(String desc) {
+
+            }
+        });
+    }
 }

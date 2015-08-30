@@ -4,7 +4,7 @@ package com.hdu.tx.aschool.dao;
 /**
  * Entity mapped to table "USER_INFO".
  */
-public class UserInfo {
+public class UserInfo implements java.io.Serializable {
 
     private Long id;
     private String username;

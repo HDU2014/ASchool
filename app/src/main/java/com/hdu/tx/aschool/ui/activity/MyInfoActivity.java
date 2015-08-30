@@ -390,12 +390,14 @@ public class MyInfoActivity extends BaseActivity {
                     public void success(JSONObject desc) {
                         try {
                             toast(toolbar,desc.getString("desc"));
+                            Log.i("TAG",desc.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                     @Override
                     public void error(String desc) {
+                        Log.i("TAG",desc.toString());
                         toast(toolbar,desc);
                     }
                 });
