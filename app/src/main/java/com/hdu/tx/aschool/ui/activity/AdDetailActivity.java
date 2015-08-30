@@ -1,5 +1,6 @@
 package com.hdu.tx.aschool.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -98,7 +99,7 @@ public class AdDetailActivity extends BaseActivity {
         title.setText(actInfo.getTitle());
         timeTv.setText(actInfo.getTime());
         addressTv.setText(actInfo.getAddress());
-        personNum.setText(actInfo.getJoinedpeopel()+"/"+actInfo.getTotalpeopel());
+        personNum.setText(actInfo.getJoinedpeopel() + "/" + actInfo.getTotalpeopel());
         hostnameTv.setText(actInfo.getHostname());
         describeTv.setText(actInfo.getDescribe());
        // MyApplication.getInstance().getDaoSession().insert(actInfo);
@@ -109,5 +110,12 @@ public class AdDetailActivity extends BaseActivity {
         if(collect.isSelected())collect.setSelected(false);
         else collect.setSelected(true);
     }
+    @OnClick(R.id.hostname_tv)void getDetail() {
+        Intent intent=new Intent(AdDetailActivity.this,OtherInfoActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("HostNane",hostnameTv.getText().toString());
+        intent.putExtras(bundle);
+        AdDetailActivity.this.startActivity(intent);
 
+    }
 }

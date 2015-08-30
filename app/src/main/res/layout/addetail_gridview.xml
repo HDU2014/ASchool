@@ -26,7 +26,8 @@
                 android:layout_height="30dp" />
 
             <TextView
-            android:text="猜你喜欢"
+            android:id="@+id/act_type"
+            android:text="运动"
             android:textSize="20sp"
             android:textColor="@color/colorAccent"
             android:layout_marginLeft="10dp"
@@ -35,6 +36,7 @@
             android:layout_height="match_parent" />
 
             <TextView
+                android:id="@+id/more_detail"
                 android:text="更多"
                 android:textSize="20sp"
                 android:layout_marginRight="10dp"
@@ -57,7 +59,7 @@
                 android:layout_height="110dp">
 
                 <ImageView
-
+                    android:id="@+id/main_img1"
                     android:src="@drawable/footballad"
                     android:scaleType="centerCrop"
                     android:layout_gravity="center"
@@ -82,7 +84,7 @@
                 android:layout_height="110dp">
 
                 <ImageView
-
+                    android:id="@+id/main_img2"
                     android:src="@drawable/footballad"
                     android:scaleType="centerCrop"
                     android:layout_gravity="center"
@@ -108,7 +110,7 @@
                 android:layout_height="110dp">
 
                 <ImageView
-
+                    android:id="@+id/main_img3"
                     android:src="@drawable/footballad"
                     android:scaleType="centerCrop"
                     android:layout_gravity="center"
