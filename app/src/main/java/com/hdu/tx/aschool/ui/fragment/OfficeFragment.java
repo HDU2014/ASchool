@@ -249,53 +249,54 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
 
 
     public void getMoreAct(){
-        Map<String,String> map=new HashMap<>();
-        map.put("last_aid","-1");
-        map.put("act_num", "15");
-        new MyStringRequest(Urls.GET_ACTIVITYS, map, new InternetListener() {
+
+        new MyStringRequest(Urls.ACTIVITY_QUERY_MUTI, new InternetListener() {
             @Override
             public void success(JSONObject json) {
-                try {
                     swipeRefresh.setRefreshing(false);
                     List<ActInfo> infos= JSONHandler.json2ListAct(json);
                     adapterData=infos;
                     adapter=new OfficeAdapter(OfficeFragment.this.getActivity(), adapterData);
                     recyclerView.setAdapter(adapter);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
 
             @Override
             public void error(String desc) {
 
+            }
+
+            @Override
+            public Map<String, String> setParams() {
+                Map<String,String> map=new HashMap<>();
+                map.put("last_aid","-1");
+                map.put("act_num", "15");
+                return map;
             }
         });
     }
 
 
     public void initGetAct(){
-        Map<String,String> map=new HashMap<>();
-        map.put("last_aid","-1");
-        map.put("act_num", "15");
-        new MyStringRequest(Urls.GET_ACTIVITYS, map, new InternetListener() {
+        new MyStringRequest(Urls.ACTIVITY_QUERY_MUTI, new InternetListener() {
             @Override
             public void success(JSONObject json) {
-                try {
                     Log.i("TAG",json.toString());
                     swipeRefresh.setRefreshing(false);
                     List<ActInfo> infos= JSONHandler.json2ListAct(json);
                     adapterData=infos;
                     adapter=new OfficeAdapter(OfficeFragment.this.getActivity(), adapterData);
                     recyclerView.setAdapter(adapter);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
 
             @Override
-            public void error(String desc) {
+            public void error(String desc) {}
 
+            @Override
+            public Map<String, String> setParams() {
+                Map<String,String> map=new HashMap<>();
+                map.put("last_aid","-1");
+                map.put("act_num", "15");
+                return map;
             }
         });
     }

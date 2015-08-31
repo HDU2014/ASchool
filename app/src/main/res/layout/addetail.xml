@@ -123,7 +123,7 @@
 
             <TextView
                 android:id="@+id/address_tv"
-                android:singleLine="true"
+                android:maxLines="2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -191,6 +191,49 @@
             android:background="@color/line" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/nickname_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <com.hdu.tx.aschool.ui.widget.image.CircleImageView
+                android:id="@+id/host_head_pic"
+                android:src="@drawable/ic_user"
+                android:layout_gravity="center"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/hostname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:text="杭州电子科技大学学生会"
+                android:textSize="15sp"/>
+
+            <ImageView
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -229,47 +272,7 @@
 
 
 
-    <LinearLayout
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/nickname_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:padding="3dp">
-
-            <ImageView
-                android:src="@drawable/ic_user"
-                android:layout_gravity="center"
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
-
-            <TextView
-                android:id="@+id/hostname_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:text="杭州电子科技大学学生会"
-                android:textSize="15sp"/>
-
-            <ImageView
-                style="@style/Right_arrow_image"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
-        </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/line" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_marginTop="15dp"

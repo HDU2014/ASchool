@@ -1,5 +1,7 @@
 package com.hdu.tx.aschool.net;
 
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -16,49 +18,47 @@ import java.util.Map;
  * Created by chenglin on 2015/8/29.
  */
 public class MyStringRequest {
+    private static final String TAG ="MyStringRequest" ;
     private String action;
-    private Map<String,String> map;
     private InternetListener listener;
 
-    public MyStringRequest(String action,Map<String,String> map,InternetListener listener) {
-        this.action=action;
-        this.map=map;
-        this.listener=listener;
-        start();
-    }
-
     public MyStringRequest(String action,InternetListener listener) {
-        this.action=action;
+        this.action=Urls.API_URL+action+Urls.PHP;
         this.listener=listener;
         start();
     }
 
     private void start(){
         StringRequest stringRequest=new StringRequest(Request.Method.POST,
-                action, new Response.Listener<String>() {
+               action , new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
+                Log.d(TAG, "解析" + action + "请求返回的JSON：" + s);
                 try {
                     JSONObject object=new JSONObject(s);
                     if(object.getInt("result")==200){
                         listener.success(object);
                     }else{
+                        Log.d(TAG,"请求"+action+"地址失败:"+object.getString("desc"));
                         listener.error(object.getString("desc"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e(TAG, "解析" + action + "请求返回的JSON错误：" + e.toString());
                     listener.error(e.toString());
+
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                Log.e(TAG, "请求"+action+"地址错误："+volleyError.toString());
                 listener.error(volleyError.toString());
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                return map;
+                return listener.setParams();
             }
         };
         MyApplication.getInstance().getVolleyQueue().add(stringRequest);

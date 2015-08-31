@@ -28,6 +28,9 @@ import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.common.utils.MySecurity;
 import com.hdu.tx.aschool.common.utils.ThirdKey;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.JSONHandler;
+import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
 
 import org.json.JSONException;
@@ -294,74 +297,36 @@ public class RegistActivity extends BaseActivity {
 
 
     public void registFromServer(){
-        try{
+        new MyStringRequest(Urls.USER_REGIST, new InternetListener() {
+            @Override
+            public void success(JSONObject json) {
+                UserInfo userInfo= JSONHandler.json2UserInfo(json);
+                userInfo.setLevel(1);
+                userInfo.setId(1l);
+                userInfo.setLoadTimes(1);
+                MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
+                MyApplication.getInstance().getDaoSession().insert(userInfo);
+                MyApplication.getInstance().setUserInfo(userInfo);
+                Intent intent=new Intent(RegistActivity.this,MyInfoActivity.class);
+                RegistActivity.this.startActivity(intent);
+                RegistActivity.this.finish();
+            }
 
-            StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.USER_REGISTERED, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String s) {
-                    try {
-                        JSONObject object=new JSONObject(s);
-                        int code=object.getInt("result");
-                        if(code==200){
-                            btRegist.setProgress(100);
-                            UserInfo userInfo=MyApplication.getInstance().getUserInfo();
-                            if(userInfo==null) userInfo=new UserInfo();
-                            userInfo.setId(1l);
-                            userInfo.setUsername(etPhone.getText().toString());
-                            userInfo.setPhoneNumber(etPhone.getText().toString());
-                            userInfo.setLevel(1);
-                            userInfo.setNickname(object.getString("nick_name"));
-                            userInfo.setHeadimg_url(object.getString("head_pic"));
-                            String default_fill=RegistActivity.this.getResources().getString(R.string.default_fill);
+            @Override
+            public void error(String desc) {
+                btRegist.setProgress(-1);
+                Snackbar.make(btRegist,desc,Snackbar.LENGTH_LONG).show();
+            }
 
-                            userInfo.setInstitute(default_fill);
-                            userInfo.setAge(default_fill);
-                            userInfo.setCity(default_fill);
-                            userInfo.setGrade(default_fill);
-                            userInfo.setSchool(default_fill);
-                            userInfo.setSex(default_fill);
-
-                            MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
-                            MyApplication.getInstance().getDaoSession().insert(userInfo);
-                            MyApplication.getInstance().setUserInfo(userInfo);
-                            Intent intent=new Intent(RegistActivity.this,MainActivity.class);
-                            intent.putExtra("update_info",true);
-                            RegistActivity.this.startActivity(intent);
-                            RegistActivity.this.finish();
-                        }else{
-                            btRegist.setProgress(-1);
-                            Snackbar.make(btRegist,object.getString("desc").toString(),Snackbar.LENGTH_LONG).show();
-                        }
-                    } catch (JSONException e) {
-
-                        btRegist.setProgress(-1);
-                        Snackbar.make(btRegist,e.toString(),Snackbar.LENGTH_LONG).show();
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    btRegist.setProgress(-1);
-                    Snackbar.make(btRegist,volleyError.toString(),Snackbar.LENGTH_LONG).show();
-                }
-            }){
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> map=new HashMap<>();
-
-                    map.put("user_name",etPhone.getText().toString());
-                    String pwd_md5 = new MySecurity().encodyByMD5(etPass.getText().toString());
-                    map.put("password",pwd_md5);
-
-                    return map;
-                }
-            };
-            getVolleyQueue().add(stringRequest);
-
-        }catch (Exception e){
-            toast(toolbar,e.toString());
-        }
+            @Override
+            public Map<String, String> setParams() {
+                Map<String,String> map=new HashMap<>();
+                map.put("user_name",etPhone.getText().toString());
+                String pwd_md5 = new MySecurity().encodyByMD5(etPass.getText().toString());
+                map.put("password",pwd_md5);
+                return map;
+            }
+        });
     }
 
     @Override

@@ -5,7 +5,9 @@ import com.hdu.tx.aschool.dao.UserInfo;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chenglin on 2015/8/29.
@@ -13,4 +15,5 @@ import java.util.List;
 public interface InternetListener {
     void success(JSONObject json);
     void error(String desc);
+    Map<String,String> setParams();
 }

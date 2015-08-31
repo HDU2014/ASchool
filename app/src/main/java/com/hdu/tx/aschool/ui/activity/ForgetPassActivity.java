@@ -1,6 +1,7 @@
 package com.hdu.tx.aschool.ui.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,6 +28,8 @@ import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.common.utils.MySecurity;
 import com.hdu.tx.aschool.common.utils.ThirdKey;
+import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
 
 import org.json.JSONException;
@@ -158,46 +161,26 @@ public class ForgetPassActivity extends BaseActivity {
      * 向服务器请求找回密码
      */
     private void requestServer() {
-        try {
-
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.USER_UPDATE_PASSWORD, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String s) {
-                    try {
-                        JSONObject object = new JSONObject(s);
-                        int code = object.getInt("result");
-                        if (code == 200) {
-                            btFind.setProgress(100);
-
-                        } else {
-                            btFind.setProgress(-1);
-                        }
-                    } catch (JSONException e) {
-
-                        btFind.setProgress(-1);
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    btFind.setProgress(-1);
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> map = new HashMap<>();
-                    map.put("user_name", phoneTv.getText().toString());
-                    String pwd_md5 = new MySecurity().encodyByMD5(passEt.getText().toString());
-                    map.put("password", pwd_md5);
-                    return map;
-                }
-            };
-            getVolleyQueue().add(stringRequest);
-
-        } catch (Exception e) {
-            toast(toolbar, e.toString());
-        }
+        new MyStringRequest(Urls.USER_UPDATE_PASSWORD, new InternetListener() {
+            @Override
+            public void success(JSONObject json) {
+                btFind.setProgress(100);
+                startActivity(new Intent(ForgetPassActivity.this, LoginActivity.class));
+                finish();
+            }
+            @Override
+            public void error(String desc) {
+                btFind.setProgress(-1);
+            }
+            @Override
+            public Map<String, String> setParams() {
+                Map<String, String> map = new HashMap<>();
+                map.put("user_name", phoneTv.getText().toString());
+                String pwd_md5 = new MySecurity().encodyByMD5(passEt.getText().toString());
+                map.put("password", pwd_md5);
+                return map;
+            }
+        });
     }
 
 

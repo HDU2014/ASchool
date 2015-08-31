@@ -10,7 +10,9 @@ public class ActInfo implements java.io.Serializable {
     private Long id;
     private String hostname;
     private String imageUrl;
+    private String hostimageUrl;
     private String title;
+    private String actId;
     private String time;
     private String address;
     private String describe;
@@ -19,6 +21,9 @@ public class ActInfo implements java.io.Serializable {
     private Integer collectTimes;
     private Integer totalpeopel;
     private Integer joinedpeopel;
+    private Boolean isCollect;
+    private Boolean isJoin;
+    private Boolean isHost;
 
     public ActInfo() {
     }
@@ -27,11 +32,13 @@ public class ActInfo implements java.io.Serializable {
         this.id = id;
     }
 
-    public ActInfo(Long id, String hostname, String imageUrl, String title, String time, String address, String describe, String hostId, Integer lookTimes, Integer collectTimes, Integer totalpeopel, Integer joinedpeopel) {
+    public ActInfo(Long id, String hostname, String imageUrl, String hostimageUrl, String title, String actId, String time, String address, String describe, String hostId, Integer lookTimes, Integer collectTimes, Integer totalpeopel, Integer joinedpeopel, Boolean isCollect, Boolean isJoin, Boolean isHost) {
         this.id = id;
         this.hostname = hostname;
         this.imageUrl = imageUrl;
+        this.hostimageUrl = hostimageUrl;
         this.title = title;
+        this.actId = actId;
         this.time = time;
         this.address = address;
         this.describe = describe;
@@ -40,6 +47,9 @@ public class ActInfo implements java.io.Serializable {
         this.collectTimes = collectTimes;
         this.totalpeopel = totalpeopel;
         this.joinedpeopel = joinedpeopel;
+        this.isCollect = isCollect;
+        this.isJoin = isJoin;
+        this.isHost = isHost;
     }
 
 
@@ -67,12 +77,28 @@ public class ActInfo implements java.io.Serializable {
         this.imageUrl = imageUrl;
     }
 
+    public String getHostimageUrl() {
+        return hostimageUrl;
+    }
+
+    public void setHostimageUrl(String hostimageUrl) {
+        this.hostimageUrl = hostimageUrl;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getActId() {
+        return actId;
+    }
+
+    public void setActId(String actId) {
+        this.actId = actId;
     }
 
     public String getTime() {
@@ -137,6 +163,30 @@ public class ActInfo implements java.io.Serializable {
 
     public void setJoinedpeopel(Integer joinedpeopel) {
         this.joinedpeopel = joinedpeopel;
+    }
+
+    public Boolean getIsCollect() {
+        return isCollect;
+    }
+
+    public void setIsCollect(Boolean isCollect) {
+        this.isCollect = isCollect;
+    }
+
+    public Boolean getIsJoin() {
+        return isJoin;
+    }
+
+    public void setIsJoin(Boolean isJoin) {
+        this.isJoin = isJoin;
+    }
+
+    public Boolean getIsHost() {
+        return isHost;
+    }
+
+    public void setIsHost(Boolean isHost) {
+        this.isHost = isHost;
     }
 
 }

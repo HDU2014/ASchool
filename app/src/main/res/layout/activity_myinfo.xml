@@ -16,10 +16,25 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
+                android:title="@string/my_info"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                <TextView
+                    android:layout_marginLeft="200dp"
+                    android:id="@+id/jump_tv"
+                    android:visibility="visible"
+                    android:layout_marginRight="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:gravity="right"
+                    android:text="@string/jump"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 

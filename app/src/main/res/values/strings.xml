@@ -42,7 +42,7 @@
     <string name="sys_setting">系统设置</string>
     <string name="activity_title_test">足球赛？约</string>
     <string name="activity_time_test">8/17周五</string>
-    <string name="activity_address_test">杭电1教208</string>
+    <string name="activity_address_test">杭电1教2081</string>
     <string name="activity_havejoin_test">6 报名</string>
     <string name="activity_goto_test">去报名</string>
     <string name="submit_ok">提交成功</string>
@@ -119,5 +119,8 @@
     <string name="dynamic">动态</string>
     <string name="academy">学院</string>
     <string name="subscribe">TA的订阅</string>
+    <string name="jump">跳过此步</string>
+    <string name="complect_info">完善资料</string>
+    <string name="collect">收藏</string>
 
 </resources>

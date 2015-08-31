@@ -7,6 +7,7 @@ package com.hdu.tx.aschool.dao;
 public class UserInfo implements java.io.Serializable {
 
     private Long id;
+    private Integer loadTimes;
     private String username;
     private String nickname;
     private Integer level;
@@ -28,8 +29,9 @@ public class UserInfo implements java.io.Serializable {
         this.id = id;
     }
 
-    public UserInfo(Long id, String username, String nickname, Integer level, String school, String major, String headimg_url, String phoneNumber, Boolean isBindPhone, String grade, String institute, String sex, String city, String age) {
+    public UserInfo(Long id, Integer loadTimes, String username, String nickname, Integer level, String school, String major, String headimg_url, String phoneNumber, Boolean isBindPhone, String grade, String institute, String sex, String city, String age) {
         this.id = id;
+        this.loadTimes = loadTimes;
         this.username = username;
         this.nickname = nickname;
         this.level = level;
@@ -51,6 +53,14 @@ public class UserInfo implements java.io.Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getLoadTimes() {
+        return loadTimes;
+    }
+
+    public void setLoadTimes(Integer loadTimes) {
+        this.loadTimes = loadTimes;
     }
 
     public String getUsername() {

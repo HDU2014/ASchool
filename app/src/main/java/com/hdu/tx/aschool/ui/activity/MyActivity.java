@@ -20,6 +20,7 @@ import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.JSONHandler;
 import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.ui.adapter.OfficeAdapter;
@@ -68,13 +69,13 @@ public class MyActivity extends BaseActivity {
         if (str.equals("MyStart")) {
 
             getSupportActionBar().setTitle("我的发起");
-            MyUrl=Urls.GET_PUBLISH_ACTIVITY;
+            MyUrl = Urls.GET_PUBLISH_ACTIVITY;
         } else if (str.equals("MyCollect")) {
             getSupportActionBar().setTitle("我的收藏");
-            MyUrl=Urls.GET_COLLECT_ACTIVITY;
+            MyUrl = Urls.GET_COLLECT_ACTIVITY;
         } else if (str.equals("MyEnroll")) {
             getSupportActionBar().setTitle("我的报名");
-            MyUrl=Urls.GET_JOIN_ACTIVITY;
+            MyUrl = Urls.GET_JOIN_ACTIVITY;
         }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,47 +88,26 @@ public class MyActivity extends BaseActivity {
 
         initGetAct();
     }
+
     public void initGetAct() {
-        Map<String, String> map = new HashMap<>();
-            map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
-        new MyStringRequest(MyUrl, map, new InternetListener() {
+        new MyStringRequest("url", new InternetListener() {
             @Override
-            public void success(JSONObject desc) {
-
-                List<ActInfo> infos = new ArrayList<>();
-                JSONArray array = null;
-                try {
-                    array = desc.getJSONArray("activities");
-                    for (int i = 0; i < array.length(); i++) {
-                        ActInfo info = new ActInfo();
-                        JSONObject infoObject = array.getJSONObject(i);
-                        info.setTitle(infoObject.getString("title"));
-                        info.setTime(infoObject.getString("start_time"));
-                        info.setTotalpeopel(infoObject.getInt("act_num"));
-                        info.setAddress(infoObject.getString("act_place"));
-                        info.setDescribe(infoObject.getString("content"));
-                        info.setHostname("zhubanfang");
-                        info.setJoinedpeopel(infoObject.getInt("join_num"));
-                        info.setCollectTimes(infoObject.getInt("collect_num"));
-                        info.setLookTimes(infoObject.getInt("browse_num"));
-                        info.setImageUrl(infoObject.getString("act_img"));
-                        infos.add(info);
-                    }
-                    adapterData = infos;
-                    adapter = new OfficeAdapter(MyActivity.this, adapterData);
-                    recyclerView.setAdapter(adapter);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+            public void success(JSONObject json) {
+                List<ActInfo> infos = JSONHandler.json2ListAct(json);
+                adapterData = infos;
+                adapter = new OfficeAdapter(MyActivity.this, adapterData);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
             public void error(String desc) {
 
             }
+
+            @Override
+            public Map<String, String> setParams() {
+                return null;
+            }
         });
-
-
     }
 }
