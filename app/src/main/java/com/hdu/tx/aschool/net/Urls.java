@@ -47,6 +47,7 @@ public class Urls {
     public final static String ACTIVITY_QUERY_LUNBO="activity_query_mult_avtivity_lunbo"; //轮播活动查询
     public final static String ACTIVITY_JOIN_IN="avtivity_join_in"; //参加活动
     public final static String ACTIVITY_COLLECT_IN="avtivity_collect"; //参加活动
+    public final static String ACTIVITY_DYNAMIC="user_query_activity_join_&_release"; //参加活动
 
 
     //用户接口

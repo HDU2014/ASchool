@@ -15,6 +15,7 @@ import com.hdu.tx.aschool.base.BaseFragment;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.JSONHandler;
 import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.ui.adapter.OtherDynamicAdapter;
@@ -119,45 +120,27 @@ public class DynamicFragment extends BaseFragment {
     public void initGetAct() {
         Map<String, String> map = new HashMap<>();
         map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
-        new MyStringRequest(Urls.GET_DYNAMIC_ACTIVITY, map, new InternetListener() {
+        new MyStringRequest(Urls.ACTIVITY_DYNAMIC, new InternetListener() {
             @Override
-            public void success(JSONObject desc) {
-
-                List<ActInfo> infos = new ArrayList<>();
-                JSONArray array = null;
-                try {
-                    array = desc.getJSONArray("activities");
-                    for (int i = 0; i < array.length(); i++) {
-                        ActInfo info = new ActInfo();
-                        JSONObject infoObject = array.getJSONObject(i);
-                        info.setTitle(infoObject.getString("title"));
-                        info.setTime(infoObject.getString("start_time"));
-                        info.setTotalpeopel(infoObject.getInt("act_num"));
-                        info.setAddress(infoObject.getString("act_place"));
-                        info.setDescribe(infoObject.getString("content"));
-                        info.setHostname("zhubanfang");
-                        info.setJoinedpeopel(infoObject.getInt("join_num"));
-                        info.setCollectTimes(infoObject.getInt("collect_num"));
-                        info.setLookTimes(infoObject.getInt("browse_num"));
-                        info.setImageUrl(infoObject.getString("act_img"));
-                        infos.add(info);
-                        Log.v("MSG",infoObject.getString("title"));
-                    }
-                    actInfosData = infos;
-                    adapter = new OtherDynamicAdapter(DynamicFragment.this.getActivity(), actInfosData);
-                    recyclerView.setAdapter(adapter);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+            public void success(JSONObject json) {
+                List<ActInfo> infos = JSONHandler.json2ListAct(json);
+                actInfosData = infos;
+                adapter = new OtherDynamicAdapter(DynamicFragment.this.getActivity(), actInfosData);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
             public void error(String desc) {
 
             }
+
+            @Override
+            public Map<String, String> setParams() {
+                Map<String, String> map = new HashMap<>();
+                map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+                return map;
+            }
         });
-
-
     }
+
 }
