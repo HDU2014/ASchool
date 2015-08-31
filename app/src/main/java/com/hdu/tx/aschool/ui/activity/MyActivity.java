@@ -86,29 +86,7 @@ public class MyActivity extends BaseActivity {
         recyclerView.setLayoutManager(manager);
 
         initGetAct();
-        //recyclerView.setOnScrollListener(scrolllistener);
     }
-
-//    public void setMyTitle(String str) {
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        if (str.equals("MyStart")) {
-//            getSupportActionBar().setTitle("我的发起");
-//        } else if (str.equals("MyCollect")) {
-//            getSupportActionBar().setTitle("我的收藏");
-//        } else if (str.equals("MyEnroll")) {
-//            getSupportActionBar().setTitle("我的报名");
-//        }
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
-//
-//    }
-
     public void initGetAct() {
         Map<String, String> map = new HashMap<>();
             map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
@@ -128,9 +106,7 @@ public class MyActivity extends BaseActivity {
                         info.setTotalpeopel(infoObject.getInt("act_num"));
                         info.setAddress(infoObject.getString("act_place"));
                         info.setDescribe(infoObject.getString("content"));
-                        //info.setHostname(object.getString("user_name"));
                         info.setHostname("zhubanfang");
-                        // info.setHostId(object.getInt("host_id"));
                         info.setJoinedpeopel(infoObject.getInt("join_num"));
                         info.setCollectTimes(infoObject.getInt("collect_num"));
                         info.setLookTimes(infoObject.getInt("browse_num"));
@@ -152,67 +128,6 @@ public class MyActivity extends BaseActivity {
             }
         });
 
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.GET_ACTIVITYS, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String s) {
-//                try {
-//                    JSONObject object = new JSONObject(s);
-//                    Log.i("OfficeFragment", s.toString());
-//                    if (object.getInt("result") == 200) {
-//                        List<ActInfo> infos = new ArrayList<>();
-//                        JSONArray array = object.getJSONArray("activities");
-//                        for (int i = 0; i < array.length(); i++) {
-//                            ActInfo info = new ActInfo();
-//                            JSONObject infoObject = array.getJSONObject(i);
-//                            info.setTitle(infoObject.getString("title"));
-//                            info.setTime(infoObject.getString("start_time"));
-//                            info.setTotalpeopel(infoObject.getInt("act_num"));
-//                            info.setAddress(infoObject.getString("act_place"));
-//                            info.setDescribe(infoObject.getString("content"));
-//                            //info.setHostname(object.getString("user_name"));
-//                            info.setHostname("zhubanfang");
-//                            // info.setHostId(object.getInt("host_id"));
-//                            info.setJoinedpeopel(infoObject.getInt("join_num"));
-//                            info.setCollectTimes(infoObject.getInt("collect_num"));
-//                            info.setLookTimes(infoObject.getInt("browse_num"));
-//                            info.setImageUrl(infoObject.getString("act_img"));
-//                            infos.add(info);
-//                        }
-//                        adapterData = infos;
-//                        adapter = new OfficeAdapter(MyActivity.this, adapterData);
-//                        recyclerView.setAdapter(adapter);
-//                    } else {
-//                        // this.toast(recyclerView, object.getString("desc"));
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    // superActivity.toast(recyclerView,e.toString());
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError volleyError) {
-//            }
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> map = new HashMap<>();
-//                if (str.equals("MyStart")) {
-//                    map.put("last_aid", "-1");
-//                    map.put("act_num", "15");
-//
-//                } else if (str.equals("MyCollect")) {
-//                    map.put("last_aid", "-1");
-//                    map.put("act_num", "15");
-//
-//                } else if (str.equals( "MyEnroll")) {
-//                    map.put("last_aid", "-1");
-//                    map.put("act_num", "15");
-//
-//                }
-//                return map;
-//            }
-//        };
-//        getVolleyQueue().add(stringRequest);
+
     }
 }

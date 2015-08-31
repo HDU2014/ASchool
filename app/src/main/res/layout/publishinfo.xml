@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/ic_banner" />
+            android:src="@drawable/addimg" />
 
         >
     </LinearLayout>

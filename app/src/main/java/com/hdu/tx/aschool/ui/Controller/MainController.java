@@ -99,14 +99,14 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
         menuItem.setChecked(true);
         mainView.closeDrawers();
         switch (menuItem.getItemId()){
-            case R.id.my_activity:
-                Intent intent1=new Intent(mainActivity,UploadButtonDemoActivity.class);
-                mainActivity.startActivity(intent1);
-                break;
-            case R.id.my_messages:
-                Intent intent2=new Intent(mainActivity,LoginActivity.class);
-                mainActivity.startActivity(intent2);
-                break;
+//            case R.id.my_activity:
+//                Intent intent1=new Intent(mainActivity,UploadButtonDemoActivity.class);
+//                mainActivity.startActivity(intent1);
+//                break;
+//            case R.id.my_messages:
+//                Intent intent2=new Intent(mainActivity,LoginActivity.class);
+//                mainActivity.startActivity(intent2);
+//                break;
             case R.id.exit:
                 mainView.showExitAppDialog();
                 break;
