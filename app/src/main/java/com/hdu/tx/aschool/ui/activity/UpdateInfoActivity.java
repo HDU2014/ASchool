@@ -121,7 +121,8 @@ public class UpdateInfoActivity extends BaseActivity {
             return;
         }
 
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.USER_UPDATE_INFO, new Response.Listener<String>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,Urls.API_URL+ Urls.USER_UPDATE_INFO
+                +Urls.PHP, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 try {

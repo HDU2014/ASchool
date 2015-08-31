@@ -30,9 +30,9 @@ import com.hdu.tx.aschool.common.utils.ConstantValue;
 import com.hdu.tx.aschool.common.utils.PhotoUtil;
 import com.hdu.tx.aschool.dao.DaoSession;
 import com.hdu.tx.aschool.dao.UserInfo;
-import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.net.InternetListener;
 import com.hdu.tx.aschool.net.MyStringRequest;
+import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.ui.widget.image.CircleImageView;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
@@ -56,7 +56,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2015/8/14.
  */
 public class MyInfoActivity extends BaseActivity {
-    private static final String TAG ="MyInfoActivity" ;
+    private static final String TAG = "MyInfoActivity";
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.appbar)
@@ -97,6 +97,11 @@ public class MyInfoActivity extends BaseActivity {
     TextView ageTv;
     @Bind(R.id.age_ll)
     LinearLayout ageLl;
+    @Bind(R.id.jump_tv)
+    TextView jumpTv;
+    @OnClick(R.id.jump_tv)void onclick(){startMainActivity();}
+    @Bind(R.id.head_img_ll)
+    LinearLayout headImgLl;
 
     private Intent intent;
     private Bundle bundle;
@@ -104,35 +109,40 @@ public class MyInfoActivity extends BaseActivity {
     private DaoSession daoSession;
     private ProgressDialog progressDialog;
     private String photoPath;
+    private boolean isFrist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myinfo);
         ButterKnife.bind(this);
+        userInfo = MyApplication.getInstance().getUserInfo();
+        daoSession = MyApplication.getInstance().getDaoSession();
+        isFrist = userInfo.getLoadTimes() == 1 ? true : false;
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle(R.string.my_info);
+        if(isFrist)toolbar.setTitle( R.string.complect_info);
+        else toolbar.setTitle( R.string.my_info);
+        jumpTv.setVisibility(isFrist?View.VISIBLE:View.GONE);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+              if(isFrist)startMainActivity();
+                else onBackPressed();
             }
         });
-        progressDialog=new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("正在发送请求...");
 
         intent = new Intent(MyInfoActivity.this, UpdateInfoActivity.class);
         bundle = new Bundle();
-        userInfo= MyApplication.getInstance().getUserInfo();
-        daoSession= MyApplication.getInstance().getDaoSession();
         refreshMyInfo();
 
     }
 
     private void refreshMyInfo() {
-        if(userInfo==null)
+        if (userInfo == null)
             return;
         Picasso.with(this).load(userInfo.getHeadimg_url()).into(headImg);
         nicknameTv.setText(userInfo.getNickname());
@@ -146,16 +156,17 @@ public class MyInfoActivity extends BaseActivity {
         cityTv.setText(userInfo.getCity());
     }
 
-    @OnClick(R.id.head_img_ll)void setHeadImg(){
+    @OnClick(R.id.head_img_ll)
+    void setHeadImg() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("选项").setItems(new String[]{
                 "拍照", "相册"
         }, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(which==0){
-                    photoPath=PhotoUtil.startIntentTakePhotos(MyInfoActivity.this);
-                }else if(which==1){
+                if (which == 0) {
+                    photoPath = PhotoUtil.startIntentTakePhotos(MyInfoActivity.this);
+                } else if (which == 1) {
                     PhotoUtil.startSelectImageFromLocal(MyInfoActivity.this);
                 }
             }
@@ -163,7 +174,8 @@ public class MyInfoActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.nickname_ll)void setNickname(){
+    @OnClick(R.id.nickname_ll)
+    void setNickname() {
 
         bundle.putString("title", "修改昵称");
         bundle.putString("descript", "修改昵称让好友们都记住你吧！");
@@ -174,11 +186,12 @@ public class MyInfoActivity extends BaseActivity {
         MyInfoActivity.this.startActivityForResult(intent, 6);
     }
 
-    @OnClick(R.id.sex_ll)void setSex(){
+    @OnClick(R.id.sex_ll)
+    void setSex() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MyInfoActivity.this);
         builder.setTitle("请选择性别");
         final String[] sex = {"男", "女"};
-        if(!progressDialog.isShowing())progressDialog.show();
+        if (!progressDialog.isShowing()) progressDialog.show();
         builder.setItems(sex, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -205,7 +218,8 @@ public class MyInfoActivity extends BaseActivity {
         builder.show();
     }
 
-    @OnClick(R.id.age_ll)void setAge(){
+    @OnClick(R.id.age_ll)
+    void setAge() {
         bundle.putString("title", "修改年龄");
         bundle.putString("descript", "修改你的年龄让我们为你推荐最好的活动");
         bundle.putString("hint", ageTv.getText().toString());
@@ -215,7 +229,8 @@ public class MyInfoActivity extends BaseActivity {
         MyInfoActivity.this.startActivityForResult(intent, 5);
     }
 
-    @OnClick(R.id.school_ll)void setSchool(){
+    @OnClick(R.id.school_ll)
+    void setSchool() {
         bundle.putString("title", "修改学校");
         bundle.putString("descript", "修改你的学校让更多的校友发现你们");
         bundle.putString("hint", schoolTv.getText().toString());
@@ -225,11 +240,12 @@ public class MyInfoActivity extends BaseActivity {
         MyInfoActivity.this.startActivityForResult(intent, 4);
     }
 
-    @OnClick(R.id.grade_ll)void setGrade(){
+    @OnClick(R.id.grade_ll)
+    void setGrade() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MyInfoActivity.this);
         builder.setTitle("请选择年级");
         final String[] grades = getResources().getStringArray(R.array.grades);
-        if(!progressDialog.isShowing())progressDialog.show();
+        if (!progressDialog.isShowing()) progressDialog.show();
         builder.setItems(grades, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -256,7 +272,8 @@ public class MyInfoActivity extends BaseActivity {
         builder.show();
     }
 
-    @OnClick(R.id.insititude_ll)void setInsititude(){
+    @OnClick(R.id.insititude_ll)
+    void setInsititude() {
         bundle.putString("title", "修改学院");
         bundle.putString("descript", "修改你的学院让你认识更多的朋友");
         bundle.putString("hint", insititudeTv.getText().toString());
@@ -266,7 +283,8 @@ public class MyInfoActivity extends BaseActivity {
         MyInfoActivity.this.startActivityForResult(intent, 3);
     }
 
-    @OnClick(R.id.phone_ll)void setPhone(){
+    @OnClick(R.id.phone_ll)
+    void setPhone() {
         bundle.putString("title", "修改手机号");
         bundle.putString("descript", "修改你的手机号让大家方便联系你");
         bundle.putString("hint", phoneTv.getText().toString());
@@ -277,7 +295,8 @@ public class MyInfoActivity extends BaseActivity {
         MyInfoActivity.this.startActivityForResult(intent, 2);
     }
 
-    @OnClick(R.id.city_ll)void setCity(){
+    @OnClick(R.id.city_ll)
+    void setCity() {
         bundle.putString("title", "修改城市");
         bundle.putString("descript", "修改你的城市让同城的伙伴嗨起来");
         bundle.putString("hint", cityTv.getText().toString());
@@ -290,27 +309,27 @@ public class MyInfoActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==1){
+        if (resultCode == 1) {
             refreshMyInfo();
         }
         if (resultCode == Activity.RESULT_CANCELED) {
             return;
         }
-        if(requestCode==ConstantValue.INTENT_TAKE_PHOTOS){
-            if(photoPath!=null){
-                PhotoUtil.cameraCropImageUri(this, Uri.fromFile(new File(photoPath)),1,1,300,300);
-                Log.i("MyInfoActivity",photoPath);
+        if (requestCode == ConstantValue.INTENT_TAKE_PHOTOS) {
+            if (photoPath != null) {
+                PhotoUtil.cameraCropImageUri(this, Uri.fromFile(new File(photoPath)), 1, 1, 300, 300);
+                Log.i("MyInfoActivity", photoPath);
             }
-        }else if(requestCode==ConstantValue.INTENT_SELECT_PHOTOS){
-            if(data!=null){
-                Uri photoUri=data.getData();
-                Log.i("MyInfoActivity",photoUri.toString());
-                if(photoUri!=null)PhotoUtil.cameraCropImageUri(this,photoUri,1,1,300,300);
+        } else if (requestCode == ConstantValue.INTENT_SELECT_PHOTOS) {
+            if (data != null) {
+                Uri photoUri = data.getData();
+                Log.i("MyInfoActivity", photoUri.toString());
+                if (photoUri != null) PhotoUtil.cameraCropImageUri(this, photoUri, 1, 1, 300, 300);
             }
-        }else if(requestCode==ConstantValue.INTENT_AFTER_CROPPHOTO){
-            String path=ConstantValue.CROP_TEMP_PATH;
-            Bitmap b= BitmapFactory.decodeFile(path);
-            if(b!=null){
+        } else if (requestCode == ConstantValue.INTENT_AFTER_CROPPHOTO) {
+            String path = ConstantValue.CROP_TEMP_PATH;
+            Bitmap b = BitmapFactory.decodeFile(path);
+            if (b != null) {
                 headImg.setImageBitmap(b);
                 getQiniuToken(path);
             }
@@ -318,17 +337,18 @@ public class MyInfoActivity extends BaseActivity {
     }
 
 
-    void submit(final String params, final String value,Response.Listener<String> listener){
+    void submit(final String params, final String value, Response.Listener<String> listener) {
 
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.USER_UPDATE_INFO, listener, new Response.ErrorListener() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.API_URL+Urls.USER_UPDATE_INFO
+                +Urls.PHP, listener, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Snackbar.make(toolbar,volleyError.toString(),Snackbar.LENGTH_LONG).show();
+                Snackbar.make(toolbar, volleyError.toString(), Snackbar.LENGTH_LONG).show();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=new HashMap<>();
+                Map<String, String> map = new HashMap<>();
                 map.put(params, value);
                 map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
                 return map;
@@ -338,19 +358,18 @@ public class MyInfoActivity extends BaseActivity {
     }
 
 
-
-    public void getQiniuToken(final String path){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.GET_QINIU_TOKEN, new Response.Listener<String>() {
+    public void getQiniuToken(final String path) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.GET_QINIU_TOKEN, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 try {
-                    JSONObject object=new JSONObject(s);
-                    if(object.getInt("result")==200){
-                        String up_token=object.getString("up_token");
-                        String img_key=object.getString("img_key");
-                        Log.i(TAG,"upToken--->"+up_token+"Key--->"+img_key);
-                        updateImage(path,up_token,img_key);
-                    }else{
+                    JSONObject object = new JSONObject(s);
+                    if (object.getInt("result") == 200) {
+                        String up_token = object.getString("up_token");
+                        String img_key = object.getString("img_key");
+                        Log.i(TAG, "upToken--->" + up_token + "Key--->" + img_key);
+                        updateImage(path, up_token, img_key);
+                    } else {
                         toast(toolbar, object.getString("desc"));
 
                     }
@@ -365,10 +384,10 @@ public class MyInfoActivity extends BaseActivity {
             public void onErrorResponse(VolleyError volleyError) {
                 Log.i(TAG, volleyError.toString());
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=new HashMap<>();
+                Map<String, String> map = new HashMap<>();
                 map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
                 return map;
             }
@@ -376,29 +395,34 @@ public class MyInfoActivity extends BaseActivity {
         getVolleyQueue().add(stringRequest);
     }
 
-    public void updateImage(final String img_path,final String upToken,final String img_key){
+    public void updateImage(final String img_path, final String upToken, final String img_key) {
         UploadManager uploadManager = new UploadManager();
         uploadManager.put(img_path, img_key, upToken, new UpCompletionHandler() {
             @Override
-            public void complete(String s, ResponseInfo responseInfo, JSONObject jsonObject) {
-                Log.i("TAG--updateImage", s);
-                Map<String,String> map=new HashMap<String, String>();
-                map.put("user_name",MyApplication.getInstance().getUserInfo().getUsername());
-                map.put("img_key",s);
-                new MyStringRequest(Urls.UPDATE_USER_IMG, map, new InternetListener() {
+            public void complete(final String s, ResponseInfo responseInfo, JSONObject jsonObject) {
+                new MyStringRequest(Urls.USER_UPLOAD_PHOTO, new InternetListener() {
                     @Override
                     public void success(JSONObject desc) {
                         try {
-                            toast(toolbar,desc.getString("desc"));
-                            Log.i("TAG",desc.toString());
+                            toast(toolbar, desc.getString("desc"));
+                            Log.i("TAG", desc.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
+
                     @Override
                     public void error(String desc) {
-                        Log.i("TAG",desc.toString());
-                        toast(toolbar,desc);
+                        Log.i("TAG", desc.toString());
+                        toast(toolbar, desc);
+                    }
+
+                    @Override
+                    public Map<String, String> setParams() {
+                        Map<String, String> map = new HashMap<String, String>();
+                        map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+                        map.put("img_key", s);
+                        return map;
                     }
                 });
 
@@ -409,6 +433,18 @@ public class MyInfoActivity extends BaseActivity {
             @Override
             public void progress(String s, double v) {
             }
-        },null));
+        }, null));
+    }
+
+
+    public void startMainActivity(){
+        Intent intent=new Intent(MyInfoActivity.this,MainActivity.class);
+        startActivity(intent);
+        if(isFrist){
+            userInfo.setLoadTimes(2);
+            MyApplication.getInstance().getDaoSession().update(userInfo);
+        }
+        finish();
+
     }
 }

@@ -25,6 +25,10 @@ import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.common.utils.MySecurity;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.net.HttpCallback;
+import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.JSONHandler;
+import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.ui.IEvent.IEventView;
 
@@ -43,6 +47,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2015/8/12.
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener, IEventView{
+    private static final String TAG ="LoginActivity" ;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.iv_username)
@@ -56,15 +61,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Bind(R.id.tv_forgetpass)
     TextView tvForgetpass;
-
     @Bind(R.id.tv_regist)
     TextView tvRegist;
-
-    public boolean isCompleteUsername;
-    public boolean isCompletePassword;
     @Bind(R.id.et_password)
     EditText etPassword;
-
     @Bind(R.id.textinput)
     TextInputLayout textinput;
     @Bind(R.id.til_pass)
@@ -183,75 +183,38 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     void login() {
         if(isRightPhoneNumber&&isRightPassword){
             btLogin.setProgress(30);
-            stringRequest=new StringRequest(Request.Method.POST, Urls.USER_SINGIN, new Response.Listener<String>() {
+            new MyStringRequest(Urls.USER_LOGIN, new InternetListener() {
                 @Override
-                public void onResponse(String s) {
-                    try {
-                        JSONObject object=new JSONObject(s);
-                        if(object.getInt("result")==200){
-                            btLogin.setProgress(100);
-                            UserInfo userInfo=new UserInfo();
-                            userInfo.setId(1l);
-                            userInfo.setLevel(1);
-                            userInfo.setNickname(object.getString("nickname"));
-                            userInfo.setUsername(object.getString("username"));
-                            userInfo.setHeadimg_url(object.getString("headpic"));
-                            userInfo.setSex(object.getString("gender"));
-                            userInfo.setSchool(object.getString("user_school"));
-                            userInfo.setGrade(object.getString("user_grade"));
-                            userInfo.setInstitute(object.getString("user_xueyuan"));
-                            userInfo.setPhoneNumber(object.getString("phone_num"));
-                            userInfo.setAge(object.getString("user_age"));
-                            userInfo.setCity(object.getString("user_city"));
-
-                            MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
-                            MyApplication.getInstance().getDaoSession().insert(userInfo);
-                            MyApplication.getInstance().setUserInfo(userInfo);
-                            LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            LoginActivity.this.finish();
-                        }else{
-                            btLogin.setProgress(-1);
-                            Snackbar.make(btLogin,object.getString("desc"),Snackbar.LENGTH_LONG).show();
-                            Log.i("TAG", object.getString("desc"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        btLogin.setProgress(-1);
-                        Snackbar.make(btLogin,e.toString(),Snackbar.LENGTH_LONG).show();
-                    }
-
-
+                public void success(JSONObject json) {
+                    btLogin.setProgress(100);
+                    UserInfo userInfo= JSONHandler.json2UserInfo(json);
+                    userInfo.setId(1l);
+                    userInfo.setLevel(1);
+                    userInfo.setLoadTimes(2);
+                    MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
+                    MyApplication.getInstance().getDaoSession().insert(userInfo);
+                    MyApplication.getInstance().setUserInfo(userInfo);
+                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    LoginActivity.this.finish();
                 }
-            }, new Response.ErrorListener() {
                 @Override
-                public void onErrorResponse(VolleyError volleyError) {
+                public void error(String desc) {
                     btLogin.setProgress(-1);
-                    Snackbar.make(btLogin,volleyError.toString(),Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(btLogin,desc,Snackbar.LENGTH_LONG).show();
                 }
-            }){
                 @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
+                public Map<String, String> setParams() {
                     Map<String,String> map=new HashMap<>();
                     map.put("user_name",etUsername.getText().toString().trim());
                     String pwd_md5 = new MySecurity().encodyByMD5(etPassword.getText().toString());
                     map.put("password",pwd_md5);
                     return map;
                 }
-            };
-
-            try {
-                stringRequest.getHeaders();
-            } catch (AuthFailureError authFailureError) {
-                authFailureError.printStackTrace();
-            }
-
-            Log.i("TAG", stringRequest.getBodyContentType().toString());
-
-
-
-            getVolleyQueue().add(stringRequest);
+            });
         }
     }
+
+
 
     @OnClick(R.id.tv_forgetpass)
     void findPass() {
@@ -259,9 +222,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         startActivity(intent);
         finish();
     }
-
-
-
 
     @Override
     public void selectThirdAccount(ImageView imageView) {
@@ -277,8 +237,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 break;
         }
     }
-
-
 
 
 

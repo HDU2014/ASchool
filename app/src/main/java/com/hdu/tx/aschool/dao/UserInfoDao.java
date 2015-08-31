@@ -24,19 +24,20 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Username = new Property(1, String.class, "username", false, "USERNAME");
-        public final static Property Nickname = new Property(2, String.class, "nickname", false, "NICKNAME");
-        public final static Property Level = new Property(3, Integer.class, "level", false, "LEVEL");
-        public final static Property School = new Property(4, String.class, "school", false, "SCHOOL");
-        public final static Property Major = new Property(5, String.class, "major", false, "MAJOR");
-        public final static Property Headimg_url = new Property(6, String.class, "headimg_url", false, "HEADIMG_URL");
-        public final static Property PhoneNumber = new Property(7, String.class, "phoneNumber", false, "PHONE_NUMBER");
-        public final static Property IsBindPhone = new Property(8, Boolean.class, "isBindPhone", false, "IS_BIND_PHONE");
-        public final static Property Grade = new Property(9, String.class, "grade", false, "GRADE");
-        public final static Property Institute = new Property(10, String.class, "institute", false, "INSTITUTE");
-        public final static Property Sex = new Property(11, String.class, "sex", false, "SEX");
-        public final static Property City = new Property(12, String.class, "city", false, "CITY");
-        public final static Property Age = new Property(13, String.class, "age", false, "AGE");
+        public final static Property LoadTimes = new Property(1, Integer.class, "loadTimes", false, "LOAD_TIMES");
+        public final static Property Username = new Property(2, String.class, "username", false, "USERNAME");
+        public final static Property Nickname = new Property(3, String.class, "nickname", false, "NICKNAME");
+        public final static Property Level = new Property(4, Integer.class, "level", false, "LEVEL");
+        public final static Property School = new Property(5, String.class, "school", false, "SCHOOL");
+        public final static Property Major = new Property(6, String.class, "major", false, "MAJOR");
+        public final static Property Headimg_url = new Property(7, String.class, "headimg_url", false, "HEADIMG_URL");
+        public final static Property PhoneNumber = new Property(8, String.class, "phoneNumber", false, "PHONE_NUMBER");
+        public final static Property IsBindPhone = new Property(9, Boolean.class, "isBindPhone", false, "IS_BIND_PHONE");
+        public final static Property Grade = new Property(10, String.class, "grade", false, "GRADE");
+        public final static Property Institute = new Property(11, String.class, "institute", false, "INSTITUTE");
+        public final static Property Sex = new Property(12, String.class, "sex", false, "SEX");
+        public final static Property City = new Property(13, String.class, "city", false, "CITY");
+        public final static Property Age = new Property(14, String.class, "age", false, "AGE");
     };
 
 
@@ -53,19 +54,20 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"USER_INFO\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"USERNAME\" TEXT," + // 1: username
-                "\"NICKNAME\" TEXT," + // 2: nickname
-                "\"LEVEL\" INTEGER," + // 3: level
-                "\"SCHOOL\" TEXT," + // 4: school
-                "\"MAJOR\" TEXT," + // 5: major
-                "\"HEADIMG_URL\" TEXT," + // 6: headimg_url
-                "\"PHONE_NUMBER\" TEXT," + // 7: phoneNumber
-                "\"IS_BIND_PHONE\" INTEGER," + // 8: isBindPhone
-                "\"GRADE\" TEXT," + // 9: grade
-                "\"INSTITUTE\" TEXT," + // 10: institute
-                "\"SEX\" TEXT," + // 11: sex
-                "\"CITY\" TEXT," + // 12: city
-                "\"AGE\" TEXT);"); // 13: age
+                "\"LOAD_TIMES\" INTEGER," + // 1: loadTimes
+                "\"USERNAME\" TEXT," + // 2: username
+                "\"NICKNAME\" TEXT," + // 3: nickname
+                "\"LEVEL\" INTEGER," + // 4: level
+                "\"SCHOOL\" TEXT," + // 5: school
+                "\"MAJOR\" TEXT," + // 6: major
+                "\"HEADIMG_URL\" TEXT," + // 7: headimg_url
+                "\"PHONE_NUMBER\" TEXT," + // 8: phoneNumber
+                "\"IS_BIND_PHONE\" INTEGER," + // 9: isBindPhone
+                "\"GRADE\" TEXT," + // 10: grade
+                "\"INSTITUTE\" TEXT," + // 11: institute
+                "\"SEX\" TEXT," + // 12: sex
+                "\"CITY\" TEXT," + // 13: city
+                "\"AGE\" TEXT);"); // 14: age
     }
 
     /** Drops the underlying database table. */
@@ -84,69 +86,74 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             stmt.bindLong(1, id);
         }
  
+        Integer loadTimes = entity.getLoadTimes();
+        if (loadTimes != null) {
+            stmt.bindLong(2, loadTimes);
+        }
+ 
         String username = entity.getUsername();
         if (username != null) {
-            stmt.bindString(2, username);
+            stmt.bindString(3, username);
         }
  
         String nickname = entity.getNickname();
         if (nickname != null) {
-            stmt.bindString(3, nickname);
+            stmt.bindString(4, nickname);
         }
  
         Integer level = entity.getLevel();
         if (level != null) {
-            stmt.bindLong(4, level);
+            stmt.bindLong(5, level);
         }
  
         String school = entity.getSchool();
         if (school != null) {
-            stmt.bindString(5, school);
+            stmt.bindString(6, school);
         }
  
         String major = entity.getMajor();
         if (major != null) {
-            stmt.bindString(6, major);
+            stmt.bindString(7, major);
         }
  
         String headimg_url = entity.getHeadimg_url();
         if (headimg_url != null) {
-            stmt.bindString(7, headimg_url);
+            stmt.bindString(8, headimg_url);
         }
  
         String phoneNumber = entity.getPhoneNumber();
         if (phoneNumber != null) {
-            stmt.bindString(8, phoneNumber);
+            stmt.bindString(9, phoneNumber);
         }
  
         Boolean isBindPhone = entity.getIsBindPhone();
         if (isBindPhone != null) {
-            stmt.bindLong(9, isBindPhone ? 1L: 0L);
+            stmt.bindLong(10, isBindPhone ? 1L: 0L);
         }
  
         String grade = entity.getGrade();
         if (grade != null) {
-            stmt.bindString(10, grade);
+            stmt.bindString(11, grade);
         }
  
         String institute = entity.getInstitute();
         if (institute != null) {
-            stmt.bindString(11, institute);
+            stmt.bindString(12, institute);
         }
  
         String sex = entity.getSex();
         if (sex != null) {
-            stmt.bindString(12, sex);
+            stmt.bindString(13, sex);
         }
  
         String city = entity.getCity();
         if (city != null) {
-            stmt.bindString(13, city);
+            stmt.bindString(14, city);
         }
  
         String age = entity.getAge();
         if (age != null) {
-            stmt.bindString(14, age);
+            stmt.bindString(15, age);
         }
     }
 
@@ -161,19 +168,20 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
     public UserInfo readEntity(Cursor cursor, int offset) {
         UserInfo entity = new UserInfo( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // username
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // nickname
-            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // level
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // school
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // major
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // headimg_url
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // phoneNumber
-            cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) != 0, // isBindPhone
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // grade
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // institute
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // sex
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // city
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // age
+            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // loadTimes
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // username
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // nickname
+            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // level
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // school
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // major
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // headimg_url
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // phoneNumber
+            cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) != 0, // isBindPhone
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // grade
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // institute
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // sex
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // city
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // age
         );
         return entity;
     }
@@ -182,19 +190,20 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
     @Override
     public void readEntity(Cursor cursor, UserInfo entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setUsername(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setNickname(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setLevel(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
-        entity.setSchool(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setMajor(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setHeadimg_url(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setPhoneNumber(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setIsBindPhone(cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) != 0);
-        entity.setGrade(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setInstitute(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setSex(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setCity(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setAge(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setLoadTimes(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setUsername(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setNickname(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setLevel(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
+        entity.setSchool(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setMajor(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setHeadimg_url(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setPhoneNumber(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setIsBindPhone(cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) != 0);
+        entity.setGrade(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setInstitute(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setSex(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setCity(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setAge(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
      }
     
     /** @inheritdoc */

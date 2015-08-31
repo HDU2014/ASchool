@@ -130,25 +130,25 @@ public class OtherInfoActivity extends BaseActivity {
     }
 
     public void getUserInfo(final String  hostid) {
-        Map<String,String> map=new HashMap<>();
-        map.put("user_id", hostid);
-        new MyStringRequest(Urls.QUERY_UERINFO_BYID, map, new InternetListener() {
-            @Override
-            public void success(JSONObject json) {
-                try {
-                    UserInfo userInfo= JSONHandler.json2UserInfo(json);
-                    otherUserid.setText(userInfo.getNickname());
-                    Picasso.with(OtherInfoActivity.this).load(userInfo.getHeadimg_url()).into(otherHeadUser);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void error(String desc) {
-
-            }
-        });
+//        Map<String,String> map=new HashMap<>();
+//        map.put("user_id", hostid);
+//        new MyStringRequest(Urls.QUERY_UERINFO_BYID, map, new InternetListener() {
+//            @Override
+//            public void success(JSONObject json) {
+//                try {
+//                    UserInfo userInfo= JSONHandler.json2UserInfo(json);
+//                    otherUserid.setText(userInfo.getNickname());
+//                    Picasso.with(OtherInfoActivity.this).load(userInfo.getHeadimg_url()).into(otherHeadUser);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void error(String desc) {
+//
+//            }
+//        });
     }
 
 }

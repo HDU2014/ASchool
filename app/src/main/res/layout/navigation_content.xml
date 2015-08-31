@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
+    android:orientation="vertical"
     android:id="@+id/main_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-
     android:layout_height="wrap_content">
 
     <android.support.design.widget.AppBarLayout
@@ -198,11 +198,10 @@
 
         </android.support.v7.widget.Toolbar>
 
-
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    <FrameLayout
+
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -211,23 +210,14 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="55dp"
             />
 
-
         <RelativeLayout
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <View
-                android:id="@+id/line"
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/grey"
-                ></View>
-
+            android:layout_height="match_parent">
             <LinearLayout
+                android:layout_alignParentBottom="true"
                 android:layout_below="@id/line"
                 android:background="@color/white"
                 android:orientation="horizontal"
@@ -275,9 +265,13 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+
+
+
+    </FrameLayout>
+
+</LinearLayout>
 
 <!--<LinearLayout-->
 <!--android:layout_below="@id/viewpager"-->

@@ -42,6 +42,8 @@ import com.hdu.tx.aschool.common.utils.MyStrings;
 import com.hdu.tx.aschool.common.utils.PhotoUtil;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
@@ -191,9 +193,6 @@ public class PublishActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Log.v("publish", "gongo");
-                //publish();
-               // getActFromServer();
-               // getQiniuToken();
                 publishActivity();
             }
         });
@@ -242,54 +241,27 @@ public class PublishActivity extends BaseActivity {
     };
 
     public void saveActivity(final String key) {
-        try {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.PUBLISH, new Response.Listener<String>() {
+            new MyStringRequest(Urls.ACTIVITY_PUBLISH, new InternetListener() {
                 @Override
-                public void onResponse(String s) {
-                    try {
-                        JSONObject object = new JSONObject(s);
-                        int code = object.getInt("result");
-                        if (code == 200) {
-                            btPublish.setProgress(100);
-                            btPublish.setEnabled(true);
-
-                        } else {
-                            btPublish.setProgress(-1);
-                            btPublish.setEnabled(true);
-                            toast(toolbar,object.getString("desc"));
-                        }
-                    } catch (JSONException e) {
-                        btPublish.setProgress(-1);
-                        btPublish.setEnabled(true);
-                        toast(toolbar,e.toString());
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    btPublish.setProgress(-1);
-                    // btRegist.setProgress(-1);
-                    toast(toolbar,volleyError.toString());
+                public void success(JSONObject json) {
+                    btPublish.setProgress(100);
                     btPublish.setEnabled(true);
                 }
-            }) {
+
                 @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    // Map<String, String> map = new HashMap<>();
-//                    map.put("user_name",etPhone.getText().toString());
-//                    String pwd_md5 = new MySecurity().encodyByMD5(etPass.getText().toString());
-//                    map.put("password",pwd_md5);
-                    Map<String,String> map=generateMap();
-                    map.put("img_url",key);
+                public void error(String desc) {
+                    btPublish.setProgress(-1);
+                    btPublish.setEnabled(true);
+                    toast(toolbar, desc);
+                }
+
+                @Override
+                public Map<String, String> setParams() {
+                    Map<String, String> map = generateMap();
+                    map.put("img_url", key);
                     return map;
                 }
-            };
-            getVolleyQueue().add(stringRequest);
-
-        } catch (Exception e) {
-            toast(toolbar, e.toString());
-        }
+            });
     }
 
     @OnClick(R.id.image_content)void selectImage(){
@@ -311,90 +283,34 @@ public class PublishActivity extends BaseActivity {
         return map;
     }
 
-
-    public void getActFromServer(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.GET_ACTIVITY, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String s) {
-                try {
-                    JSONObject object=new JSONObject(s);
-                    if(object.getInt("result")==200){
-                        ActInfo info=new ActInfo();
-                        info.setTitle(object.getString("title"));
-                        info.setTime(object.getString("start_time"));
-                        info.setTotalpeopel(object.getInt("act_num"));
-                        info.setAddress(object.getString("act_place"));
-                        info.setDescribe(object.getString("content"));
-                        info.setHostname(object.getString("user_name"));
-                        info.setHostId(object.getString("host_id"));
-
-                        info.setJoinedpeopel(object.getInt("join_num"));
-                        info.setCollectTimes(object.getInt("collect_num"));
-                        info.setLookTimes(object.getInt("browse_num"));
-                       // MyApplication.getInstance().getDaoSession().getActInfoDao().insert(info);
-                        Intent intent=new Intent(PublishActivity.this,AdDetailActivity.class);
-                        intent.putExtra("activity",info);
-                        PublishActivity.this.startActivity(intent);
-                    }else{
-                        toast(toolbar,object.getString("desc"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    toast(toolbar,e.toString());
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=new HashMap<>();
-                map.put("act_id",etTitle.getText().toString());
-                return map;
-            }
-        };
-        getVolleyQueue().add(stringRequest);
-    }
-
     public void getQiniuToken(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.GET_QINIU_TOKEN, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String s) {
-                try {
-                    JSONObject object=new JSONObject(s);
-                    if(object.getInt("result")==200){
-                        String up_token=object.getString("up_token");
-                        String img_key=object.getString("img_key");
-                        Log.i(TAG,"upToken--->"+up_token+"Key--->"+img_key);
-                        updateImage(imagePath,up_token,img_key);
-                    }else{
-                        toast(toolbar,object.getString("desc"));
-                        btPublish.setEnabled(true);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.i(TAG, e.toString());
-                    btPublish.setEnabled(true);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Log.i(TAG,volleyError.toString());
-                btPublish.setEnabled(true);
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=new HashMap<>();
-                map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
-                return map;
-            }
-        };
-        getVolleyQueue().add(stringRequest);
+       new  MyStringRequest(Urls.USER_GET_UPTOKEN, new InternetListener() {
+           @Override
+           public void success(JSONObject json) {
+               String up_token= null;
+               try {
+                   up_token = json.getString("up_token");
+                   String img_key=json.getString("img_key");
+                   Log.i(TAG,"upToken--->"+up_token+"Key--->"+img_key);
+                   updateImage(imagePath,up_token,img_key);
+               } catch (JSONException e) {
+                   e.printStackTrace();
+               }
+           }
+
+           @Override
+           public void error(String desc) {
+               toast(toolbar,desc);
+               btPublish.setEnabled(true);
+           }
+
+           @Override
+           public Map<String, String> setParams() {
+               Map<String,String> map=new HashMap<>();
+               map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+               return map;
+           }
+       });
     }
 
 
@@ -449,6 +365,8 @@ public class PublishActivity extends BaseActivity {
             btPublish.setProgress(msg.what);
         }
     };
+
+
 
 
 }

@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
-    android:id="@+id/main_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nsv"
     android:layout_width="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-            <include layout="@layout/banner"/>
+        <include layout="@layout/banner"></include>
 
-            <include layout="@layout/addetail_gridview"
-                android:id="@+id/tag1"
-                ></include>
-            <include layout="@layout/addetail_gridview"
-                android:id="@+id/tag2"></include>
+        <include layout="@layout/cardview_tag"
+            android:id="@+id/tag1"></include>
 
-            <include layout="@layout/addetail_gridview"
-                android:id="@+id/tag3"></include>
+        <include layout="@layout/cardview_tag"
+            android:id="@+id/tag2"></include>
 
-        </LinearLayout>
+        <include layout="@layout/cardview_tag"
+            android:id="@+id/tag3"></include>
+
+
+    </LinearLayout>
+
+
+
+
 
 </android.support.v4.widget.NestedScrollView>

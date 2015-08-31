@@ -37,7 +37,14 @@ public class SplashActivity extends BaseActivity
 						userInfo=new UserInfo();
 						userInfo.setLevel(0);  //设置游客登录
 						userInfo.setId(1l);
+						userInfo.setLoadTimes(1);
 						MyApplication.getInstance().getDaoSession().insert(userInfo);
+					}else{
+						int times;
+						if(userInfo.getLoadTimes()==null)times=0;
+						else times=userInfo.getLoadTimes();
+						userInfo.setLoadTimes(times+1);
+						MyApplication.getInstance().getDaoSession().update(userInfo);
 					}
 				} catch (InterruptedException e) {
 

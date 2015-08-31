@@ -8,7 +8,7 @@ import de.greenrobot.daogenerator.ToMany;
 
 public class LeaseDaoGrenerator {
     public static void main(String args[]) throws Exception {
-        Schema schema = new Schema(6, "com.hdu.tx.aschool.dao");
+        Schema schema = new Schema(9, "com.hdu.tx.aschool.dao");
         createUserDao(schema);
         createActiDao(schema);
        // new DaoGenerator().generateAll(schema, "D://andorid/hdu2014/ASchool/app/src/main/java");
@@ -18,6 +18,7 @@ public class LeaseDaoGrenerator {
     public static void  createUserDao(Schema schema){
         Entity userInfo = schema.addEntity("UserInfo");
         userInfo.addIdProperty();
+        userInfo.addIntProperty("loadTimes");
         userInfo.addStringProperty("username");
         userInfo.addStringProperty("nickname");
         userInfo.addIntProperty("level");
@@ -31,7 +32,6 @@ public class LeaseDaoGrenerator {
         userInfo.addStringProperty("sex");
         userInfo.addStringProperty("city");
         userInfo.addStringProperty("age");
-
         userInfo.implementsInterface("java.io.Serializable");
     }
 
@@ -41,20 +41,28 @@ public class LeaseDaoGrenerator {
 
         userInfo.addStringProperty("hostname");
         userInfo.addStringProperty("imageUrl");
+        userInfo.addStringProperty("hostimageUrl");
         userInfo.addStringProperty("title");
-
+        userInfo.addStringProperty("actId");
 
         userInfo.addStringProperty("time");
         userInfo.addStringProperty("address");
         userInfo.addStringProperty("describe");
         userInfo.addStringProperty("hostId");
-
-
         userInfo.addIntProperty("lookTimes");
         userInfo.addIntProperty("collectTimes");
         userInfo.addIntProperty("totalpeopel");
         userInfo.addIntProperty("joinedpeopel");
 
+        Property iscollect=userInfo.addBooleanProperty("isCollect").getProperty();
+        userInfo.addBooleanProperty("isJoin");
+        userInfo.addBooleanProperty("isHost");
+
         userInfo.implementsInterface("java.io.Serializable");
+    }
+
+
+    public static void createMyTagActiDao(Schema schema){
+
     }
 }
