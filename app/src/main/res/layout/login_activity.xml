@@ -41,13 +41,14 @@
         android:layout_height="60dp">
 
         <ImageView
+            android:tint="?attr/colorPrimary"
             android:layout_marginLeft="15dp"
             android:id="@+id/iv_username"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_account"
+            android:src="@drawable/bottom4_select"
             />
 
         <android.support.design.widget.TextInputLayout
@@ -93,7 +94,7 @@
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_pwd"
+            android:src="@drawable/lock"
             />
 
 

@@ -2,6 +2,7 @@ package com.hdu.tx.aschool.net;
 
 import android.util.Log;
 
+import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.dao.UserInfo;
 
@@ -40,16 +41,21 @@ public class JSONHandler {
                 info.setHostimageUrl(infoObject.getString("host_head_pic"));
                 info.setActId(infoObject.getString("act_id"));
 
-                info.setIsCollect(false);
-                info.setIsJoin(false);
-                info.setIsHost(false);
+                info.setIsCollect(infoObject.getBoolean("is_collect"));
+                info.setIsJoin(infoObject.getBoolean("is_join"));
+
+//                info.setIsCollect(false);
+//                info.setIsJoin(true);
+                info.setIsHost(MyApplication.getInstance().getUserInfo().getUsername().equals(infoObject.getString("user_name"))
+                ?true:false);
                 actInfos.add(info);
             }
+            return actInfos;
         }catch (JSONException e){
             e.printStackTrace();
             Log.e(TAG+"1",e.toString());
         }
-        return  actInfos;
+        return  null;
     }
 
 

@@ -45,9 +45,13 @@ public class Urls {
     public final static String ACTIVITY_QUERY_BYID="activity_query"; //活动查询
     public final static String ACTIVITY_QUERY_MUTI="activity_query_mult_avtivity"; //多个活动查询
     public final static String ACTIVITY_QUERY_LUNBO="activity_query_mult_avtivity_lunbo"; //轮播活动查询
-    public final static String ACTIVITY_JOIN_IN="avtivity_join_in"; //参加活动
-    public final static String ACTIVITY_COLLECT_IN="avtivity_collect"; //参加活动
-    public final static String ACTIVITY_DYNAMIC="user_query_activity_join_&_release"; //参加活动
+    public final static String ACTIVITY_DYNAMIC="user_query_activity_join_&_release"; //查询个人活动资料
+    public final static String ACTIVITY_JOIN_IN="activity_join_in"; //参加活动
+    public final static String ACTIVITY_COLLECT="activity_collect"; //收藏活动
+
+    public final static String ACTIVITY_JOIN_IN_CANCLE="activity_join_in_cancel"; //取消参加活动
+    public final static String ACTIVITY_COLLECT_CANCLE="activity_collect_cancel"; //取消收藏活动
+
 
 
     //用户接口

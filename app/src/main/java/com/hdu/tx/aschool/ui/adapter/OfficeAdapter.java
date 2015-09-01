@@ -49,11 +49,16 @@ public class OfficeAdapter extends RecyclerView.Adapter<OfficeAdapter.ViewHolder
         String path=actInfo.getImageUrl();
         if(path!=null&&!"".equals(path))
         Picasso.with(mContext).load(actInfo.getImageUrl()).into(holder.actimg_iv);
-        String joined="<font color='blue'>"+actInfo.getJoinedpeopel()+"</font>  报名";
-        holder.joined_tv.setText(Html.fromHtml(joined));
+
+        holder.joined_tv.setSelected(actInfo.getIsJoin());
+        String joinandtotal=actInfo.getJoinedpeopel()+"/"+actInfo.getTotalpeopel();
+        holder.joined_tv.setText(actInfo.getIsJoin()?"已报名"+joinandtotal:"去报名"+joinandtotal);
+
         holder.collect_tv.setText(actInfo.getCollectTimes()+"");
         holder.hostname_tv.setText(actInfo.getHostname());
         holder.time_tv.setText(actInfo.getTime());
+        holder.look_tv.setText(actInfo.getLookTimes()+"");
+
         holder.address_tv.setText(actInfo.getAddress());
         holder.title_tv.setText(actInfo.getTitle());
         Log.v("Dynamic",actInfo.getTitle());
@@ -89,6 +94,7 @@ public class OfficeAdapter extends RecyclerView.Adapter<OfficeAdapter.ViewHolder
         public final TextView collect_tv;
         public final TextView joined_tv;
         public final ImageView actimg_iv;
+        public final TextView look_tv;
 
         public ViewHolder(View view) {
             super(view);
@@ -96,10 +102,11 @@ public class OfficeAdapter extends RecyclerView.Adapter<OfficeAdapter.ViewHolder
             title_tv= (TextView) view.findViewById(R.id.act_title_tv);
             time_tv= (TextView) view.findViewById(R.id.act_time_tv);
             hostname_tv= (TextView) view.findViewById(R.id.act_hostname_tv);
-            address_tv= (TextView) view.findViewById(R.id.act_address_tv);
-            collect_tv= (TextView) view.findViewById(R.id.act_collect_tv);
-            joined_tv= (TextView) view.findViewById(R.id.act_joined_tv);
+            address_tv= (TextView) view.findViewById(R.id.act_location_tv);
+            collect_tv= (TextView) view.findViewById(R.id.act_collected_tv);
+            joined_tv= (TextView) view.findViewById(R.id.act_join_tv);
             actimg_iv= (ImageView) view.findViewById(R.id.act_image_iv);
+            look_tv= (TextView) view.findViewById(R.id.act_look_tv);
         }
     }
 

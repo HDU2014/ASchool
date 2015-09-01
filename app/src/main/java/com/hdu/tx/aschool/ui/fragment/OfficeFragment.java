@@ -72,6 +72,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
     private boolean isSliding;
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,10 +89,6 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
         recyclerView.setLayoutManager(manager);
         recyclerView.setOnScrollListener(scrolllistener);
 
-        //adapter = new OfficeAdapter(getActivity(), MyApplication.getInstance().getDaoSession().getActInfoDao().loadAll());
-       // recyclerView.setAdapter(adapter);
-
-        //初始化上拉刷新组件
         swipeRefresh.setOnRefreshListener(this);
         swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -103,6 +100,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
         initGetAct();
     }
 
+    private boolean isInitComplect;
     RecyclerView.OnScrollListener scrolllistener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -113,7 +111,8 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
                 // 判断是否滚动到底部，并且是向右滚动
                 if (lastVisibleItem == (adapterData.size()-1) && isSliding) {
                     //加载更多功能的代码
-                    //getMoreAct();
+                    if(isInitComplect)
+                    getMoreAct();
                 }
             }
         }
@@ -255,9 +254,8 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
             public void success(JSONObject json) {
                     swipeRefresh.setRefreshing(false);
                     List<ActInfo> infos= JSONHandler.json2ListAct(json);
-                    adapterData=infos;
-                    adapter=new OfficeAdapter(OfficeFragment.this.getActivity(), adapterData);
-                    recyclerView.setAdapter(adapter);
+                    adapterData.addAll(infos);
+                    adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -268,8 +266,9 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
             @Override
             public Map<String, String> setParams() {
                 Map<String,String> map=new HashMap<>();
-                map.put("last_aid","-1");
+                map.put("last_aid",adapterData.get(adapterData.size()-1).getActId());
                 map.put("act_num", "15");
+                map.put("user_name",MyApplication.getInstance().getUserInfo().getUsername());
                 return map;
             }
         });
@@ -286,6 +285,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
                     adapterData=infos;
                     adapter=new OfficeAdapter(OfficeFragment.this.getActivity(), adapterData);
                     recyclerView.setAdapter(adapter);
+                    isInitComplect=true;
             }
 
             @Override

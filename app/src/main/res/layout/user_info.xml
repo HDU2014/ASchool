@@ -12,6 +12,7 @@
         android:background="@drawable/userinfo_bg"
         android:orientation="vertical">
         <LinearLayout
+            android:layout_marginTop="30dp"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:gravity="center"
@@ -48,11 +49,11 @@
 
                 <ImageView
                     android:id="@+id/other_head_sex"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="bottom"
-
-                    android:background="@color/grey" />
+                    android:background="@drawable/ridus_text_bg"
+                    android:src="@drawable/sex_man" />
 
             </LinearLayout>
 
