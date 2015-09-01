@@ -2,22 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="80dp">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:text="运动"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:background="@drawable/interest_bg"
+    android:background="@color/white"
+   >
 
-            />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/interest_card"
+        style="@style/interest_style"
 
+        android:text="@string/sport" />
 
 
 </LinearLayout>

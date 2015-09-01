@@ -1,5 +1,6 @@
 package com.hdu.tx.aschool.net;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -58,7 +59,10 @@ public class MyStringRequest {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                return listener.setParams();
+                Map<String,String> map=listener.setParams();
+                if(MyApplication.getInstance().getUserInfo()!=null&& TextUtils.isEmpty(map.get("user_name")))
+                    map.put("user_name",MyApplication.getInstance().getUserInfo().getUsername());
+                return map;
             }
         };
         MyApplication.getInstance().getVolleyQueue().add(stringRequest);

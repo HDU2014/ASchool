@@ -68,5 +68,12 @@
     <item name="android:background">@drawable/edit_no_stroke</item>
     <item name="android:layout_centerVertical">true</item>
     </style>
-
+<style name="interest_style">
+    <item name="android:layout_width">90dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="android:gravity">center</item>
+    <item name="android:textSize">25sp</item>
+    <item name="android:layout_margin">5dp</item>
+    <item name="android:background">@drawable/interest_bg</item>
+</style>
 </resources>

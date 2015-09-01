@@ -5,13 +5,15 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/my_info"
+            android:id="@+id/menu_interest"
             android:icon="@drawable/ic_forum"
             android:title="兴趣标签"/>
         <item
+            android:id="@+id/menu_settings"
             android:icon="@drawable/ic_dashboard"
             android:title="设置"/>
         <item
+            android:id="@+id/menu_about"
             android:icon="@drawable/ic_dashboard"
             android:title="关于"/>
         <item

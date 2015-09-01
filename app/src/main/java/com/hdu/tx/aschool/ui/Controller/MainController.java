@@ -9,6 +9,7 @@ import android.view.View;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.ui.View.MainView;
+import com.hdu.tx.aschool.ui.activity.InterestActivity;
 import com.hdu.tx.aschool.ui.activity.LoginActivity;
 import com.hdu.tx.aschool.ui.activity.MainActivity;
 import com.hdu.tx.aschool.ui.activity.MyInfoActivity;
@@ -103,10 +104,10 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
 //                Intent intent1=new Intent(mainActivity,UploadButtonDemoActivity.class);
 //                mainActivity.startActivity(intent1);
 //                break;
-//            case R.id.my_messages:
-//                Intent intent2=new Intent(mainActivity,LoginActivity.class);
-//                mainActivity.startActivity(intent2);
-//                break;
+            case R.id.menu_interest:
+                Intent intent2=new Intent(mainActivity,InterestActivity.class);
+                mainActivity.startActivity(intent2);
+                break;
             case R.id.exit:
                 mainView.showExitAppDialog();
                 break;
