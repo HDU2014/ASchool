@@ -22,6 +22,7 @@
 
         <activity android:name=".ui.activity.LoginActivity"></activity>
         <activity android:name=".ui.activity.MyActivity"></activity>
+        <activity android:name=".ui.activity.TypeActivity"></activity>
 
         <activity android:name=".ui.activity.RegistActivity"></activity>
         <activity android:name=".ui.activity.AdDetailActivity"></activity>

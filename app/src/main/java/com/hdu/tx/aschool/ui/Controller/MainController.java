@@ -108,7 +108,8 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
 //                mainActivity.startActivity(intent2);
 //                break;
             case R.id.exit:
-                mainView.showExitAppDialog();
+               // mainView.showExitAppDialog();
+                mainView.showChanggeAccountDialog();
                 break;
         }
         return true;

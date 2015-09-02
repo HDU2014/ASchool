@@ -51,6 +51,9 @@ public class Urls {
 
     public final static String ACTIVITY_JOIN_IN_CANCLE="activity_join_in_cancel"; //取消参加活动
     public final static String ACTIVITY_COLLECT_CANCLE="activity_collect_cancel"; //取消收藏活动
+    public final static String ACTIVITY_BROWSE="activity_browse"; //用户浏览决赛
+
+
 
 
 

@@ -21,26 +21,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/look_tv"
-            android:textColor="@color/colorAccent"
-            android:text="浏览了2001次"
-            android:layout_marginTop="5dp"
+        <ImageView
+            android:tint="@color/colorAccent"
+            android:id="@+id/look_iv"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/title"
+            android:src="@drawable/look_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/look_tv"
+            android:text="78"
+            android:layout_marginTop="5dp"
+          android:layout_toRightOf="@id/look_iv"
             android:layout_below="@id/title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="20dp" />
+
+
+        <ImageView
+            android:tint="@color/colorAccent"
+            android:id="@+id/collect_iv"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/look_tv"
+            android:layout_marginTop="5dp"
+            android:padding="2dp"
+            android:layout_below="@+id/title"
+            android:src="@drawable/collected"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/collect_tv"
-            android:text="收藏了2001次"
-            android:textColor="@color/colorAccent"
+            android:text="67"
+            android:gravity="center_vertical"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
             android:layout_below="@id/title"
-            android:layout_toRightOf="@id/look_tv"
+            android:layout_toRightOf="@id/collect_iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="20dp" />
 
         <ImageView
             android:layout_marginTop="10dp"

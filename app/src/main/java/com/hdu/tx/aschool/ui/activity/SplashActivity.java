@@ -9,6 +9,7 @@ import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.ui.View.MainView;
+import com.hdu.tx.aschool.ui.fragment.TypeFragment;
 
 public class SplashActivity extends BaseActivity
 {
@@ -38,6 +39,7 @@ public class SplashActivity extends BaseActivity
 						userInfo.setLevel(0);  //设置游客登录
 						userInfo.setId(1l);
 						userInfo.setLoadTimes(1);
+						userInfo.setUsername("youke");
 						MyApplication.getInstance().getDaoSession().insert(userInfo);
 					}else{
 						int times;

@@ -291,7 +291,6 @@ public class MyInfoActivity extends BaseActivity {
         bundle.putBoolean("isNumber", true);
         bundle.putString("param", "phone_num");
         intent.putExtras(bundle);
-        MyInfoActivity.this.startActivity(intent);
         MyInfoActivity.this.startActivityForResult(intent, 2);
     }
 

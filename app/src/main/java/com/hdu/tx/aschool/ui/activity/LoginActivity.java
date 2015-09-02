@@ -174,6 +174,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             case R.id.tv_regist:
                 Intent intent = new Intent(this, RegistActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

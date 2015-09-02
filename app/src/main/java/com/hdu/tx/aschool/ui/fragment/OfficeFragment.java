@@ -266,9 +266,8 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
             @Override
             public Map<String, String> setParams() {
                 Map<String,String> map=new HashMap<>();
-                map.put("last_aid",adapterData.get(adapterData.size()-1).getActId());
+                map.put("last_aid",adapterData.get(adapterData.size()-1).getAid());
                 map.put("act_num", "15");
-                map.put("user_name",MyApplication.getInstance().getUserInfo().getUsername());
                 return map;
             }
         });

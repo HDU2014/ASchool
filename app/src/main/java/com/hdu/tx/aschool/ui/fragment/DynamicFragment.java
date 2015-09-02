@@ -53,7 +53,6 @@ public class DynamicFragment extends BaseFragment {
         actInfosData = new ArrayList<>();
         manager=new LinearLayoutManager(recyclerView.getContext());
         recyclerView.setLayoutManager(manager);
-
 //        getActivtyData();
         initGetAct();
     }
@@ -75,8 +74,6 @@ public class DynamicFragment extends BaseFragment {
     }
 
     public void initGetAct() {
-        Map<String, String> map = new HashMap<>();
-        map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
         new MyStringRequest(Urls.ACTIVITY_DYNAMIC, new InternetListener() {
             @Override
             public void success(JSONObject json) {

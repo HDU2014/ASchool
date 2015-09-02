@@ -122,5 +122,8 @@
     <string name="jump">跳过此步</string>
     <string name="complect_info">完善资料</string>
     <string name="collect">收藏</string>
+    <string name="change_account">退出当前账号</string>
+    <string name="change_account_message">点击更换账号按钮将退出当前账号，退出后将删除您的本机上的个人信息及缓存内容。点击退出按钮程序会正常退出，不会删除你的本机信息，
+    点击取消按钮返回</string>
 
 </resources>
