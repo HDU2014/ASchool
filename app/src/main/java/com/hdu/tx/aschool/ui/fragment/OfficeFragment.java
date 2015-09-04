@@ -279,7 +279,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
             @Override
             public void success(JSONObject json) {
                     Log.i("TAG",json.toString());
-                    swipeRefresh.setRefreshing(false);
+                    if(swipeRefresh!=null)swipeRefresh.setRefreshing(false);
                     List<ActInfo> infos= JSONHandler.json2ListAct(json);
                     adapterData=infos;
                     adapter=new OfficeAdapter(OfficeFragment.this.getActivity(), adapterData);

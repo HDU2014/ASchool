@@ -35,6 +35,32 @@
 
         <activity android:name=".ui.activity.TestActivity"></activity>
         <activity android:name=".ui.activity.UploadButtonDemoActivity"></activity>
+        <activity android:name=".ui.activity.ChatActivity"></activity>
+        <activity android:name=".ui.activity.BaiduMapActivity"></activity>
+        <activity android:name=".ui.activity.CallActivity"></activity>
+        <activity android:name=".ui.activity.ForwardMessageActivity"></activity>
+        <activity android:name=".ui.activity.GroupDetailsActivity"></activity>
+        <activity android:name=".ui.activity.ContextMenu"
+            android:theme="@style/MyDialogStyle"></activity>
+        <activity android:name=".ui.activity.GroupPickContactsActivity"></activity>
+        <activity android:name=".ui.activity.PickContactNoCheckboxActivity"></activity>
+        <activity android:name=".ui.activity.VideoCallActivity"></activity>
+        <activity android:name=".ui.activity.GroupSimpleDetailActivity"></activity>
+        <activity android:name=".ui.activity.GroupsActivity"></activity>
+        <activity android:name=".ui.activity.NewGroupActivity"></activity>
+        <activity android:name=".ui.activity.PublicGroupsActivity"></activity>
+        <activity android:name=".ui.activity.PublicGroupsSeachActivity"></activity>
+        <activity android:name=".ui.activity.ShowBigImage"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"></activity>
+        <activity android:name=".ui.activity.ShowNormalFileActivity"></activity>
+        <activity android:name=".ui.activity.UserProfileActivity"></activity>
+        <activity android:name=".ui.activity.VoiceCallActivity"></activity>
+        <activity android:name=".ui.activity.RobotsActivity"></activity>
+        <activity android:name=".common.view.EditActivity"></activity>
+        <activity android:name=".common.view.ExitGroupDialog"></activity>
+        <activity android:name=".common.view.AlertDialog"
+            android:theme="@style/MyDialogStyle"></activity>
 
         <activity
             android:name=".ui.activity.MyInfoActivity"
@@ -45,6 +71,33 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
+
+
+        <!-- 声明sdk所需的service -->
+        <service android:name="com.easemob.chat.EMChatService"/>
+        <!-- 声明sdk所需的receiver -->
+        <receiver android:name="com.easemob.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+
+
+        <!-- 设置环信应用的appkey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="xtongtong#aschool" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="53912a3156240b01a7075ed1" >
+        </meta-data>
     </application>
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -55,5 +108,27 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
 </manifest>
