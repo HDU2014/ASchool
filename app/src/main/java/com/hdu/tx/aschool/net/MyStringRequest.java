@@ -13,6 +13,7 @@ import com.hdu.tx.aschool.base.MyApplication;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -59,9 +60,10 @@ public class MyStringRequest {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=listener.setParams();
-                if(MyApplication.getInstance().getUserInfo()!=null&& TextUtils.isEmpty(map.get("user_name")))
+                Map<String,String> map=listener.setParams()==null?new HashMap<String,String>():listener.setParams();
+                if(MyApplication.getInstance().getUserInfo().getUsername()!=null&& TextUtils.isEmpty(map.get("user_name")))
                     map.put("user_name",MyApplication.getInstance().getUserInfo().getUsername());
+
                 return map;
             }
         };

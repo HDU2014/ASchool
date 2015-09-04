@@ -359,7 +359,7 @@ public class MyInfoActivity extends BaseActivity {
 
 
     public void getQiniuToken(final String path) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.GET_QINIU_TOKEN, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.USER_GET_UPTOKEN, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 try {

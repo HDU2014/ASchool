@@ -50,4 +50,5 @@
     <color name="little_grey">#91dedede</color>
     <color name="deep_colorAccent">#ff1b56</color>
     <color name="textcolor">#545454</color>
+    <color name="grey_little" >#e6ecf0</color>
 </resources>

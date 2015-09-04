@@ -61,7 +61,10 @@ public class OtherDynamicAdapter extends RecyclerView.Adapter<OtherDynamicAdapte
         holder.time_tv.setText(actInfo.getTime());
         holder.address_tv.setText(actInfo.getAddress());
         holder.title_tv.setText(actInfo.getTitle());
-        holder.dynamic_type.setText("发起");
+       if(actInfo.getIsHost())
+           holder.dynamic_type.setText("发起");
+        else
+           holder.dynamic_type.setText("参与");
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -82,7 +82,7 @@ public class LunBoAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return actInfos.size();
+        return 5;
     }
 
     @Override
@@ -136,7 +136,7 @@ public class LunBoAdapter extends PagerAdapter {
     private void addDynamicView() {
         // 动态添加图片和下面指示的圆点
         // 初始化图片资源
-        for (int i = 0; i < actInfos.size(); i++) {
+        for (int i = 0; i < 5; i++) {
             ImageView imageView = new ImageView(activity);
             // 异步加载图片
             String url=actInfos.get(i).getImageUrl();

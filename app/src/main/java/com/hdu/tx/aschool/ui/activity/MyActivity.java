@@ -90,7 +90,7 @@ public class MyActivity extends BaseActivity {
     }
 
     public void initGetAct() {
-        new MyStringRequest("url", new InternetListener() {
+        new MyStringRequest(MyUrl, new InternetListener() {
             @Override
             public void success(JSONObject json) {
                 List<ActInfo> infos = JSONHandler.json2ListAct(json);

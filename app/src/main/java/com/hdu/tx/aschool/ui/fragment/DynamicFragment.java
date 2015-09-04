@@ -77,7 +77,7 @@ public class DynamicFragment extends BaseFragment {
     public void initGetAct() {
         Map<String, String> map = new HashMap<>();
         map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
-        new MyStringRequest(Urls.ACTIVITY_DYNAMIC, new InternetListener() {
+        new MyStringRequest(Urls.GET_DYNAMIC_ACTIVITY, new InternetListener() {
             @Override
             public void success(JSONObject json) {
                 List<ActInfo> infos = JSONHandler.json2ListAct(json);
@@ -93,9 +93,7 @@ public class DynamicFragment extends BaseFragment {
 
             @Override
             public Map<String, String> setParams() {
-                Map<String, String> map = new HashMap<>();
-                map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
-                return map;
+                return null;
             }
         });
     }

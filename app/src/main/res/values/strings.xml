@@ -123,5 +123,11 @@
     <string name="complect_info">完善资料</string>
     <string name="collect">收藏</string>
     <string name="sport">运动</string>
+    <string name="about_title" >V 3.09.2015</string>
+    <string name="version" >版本更新</string>
+    <string name="fuction" >功能介绍</string>
+    <string name="help">帮助</string>
+    <string name="callback">反馈</string>
+    <string name="Copyright" >Copyright©2015 LinTian.All Rights Reserved.</string>
 
 </resources>
