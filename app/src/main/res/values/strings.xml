@@ -41,9 +41,9 @@
     <string name="my_mingpian">我的名片</string>
     <string name="sys_setting">系统设置</string>
     <string name="activity_title_test">足球赛？约</string>
-    <string name="activity_time_test">8/17周五</string>
+    <string name="activity_time_test">8/17 周五</string>
     <string name="activity_address_test">杭电1教2081</string>
-    <string name="activity_havejoin_test">6 报名</string>
+    <string name="activity_havejoin_test">6</string>
     <string name="activity_goto_test">去报名</string>
     <string name="submit_ok">提交成功</string>
     <string name="submiting">正在提交...</string>

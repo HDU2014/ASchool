@@ -74,49 +74,6 @@ public class DynamicFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    //    public void getActivtyData() {
-//
-//
-//        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.GET_PUBLISH_ACTIVITY, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String s) {
-//                try {
-//                    JSONObject object=new JSONObject(s);
-//                    if(object.getInt("result")==200){
-//
-//
-//                        Picasso.with(superActiviyt).load(object.getString("act_img")).into(eventImage);
-//                        eventTitle.setText(object.getString("title"));
-//                        host.setText(object.getString("host_name"));
-//                        eventTime.setText(object.getString("start_time"));
-//                        eventAddress.setText(object.getString("act_place"));
-//                        eventCollect.setText(object.getString("collect_num"));
-//
-//
-//                    }else{
-////                           toast(toolbar,object.getString("desc"));
-//
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    // toast(toolbar,e.toString());
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError volleyError) {
-//
-//            }
-//        }){
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String,String> map=new HashMap<>();
-//                map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
-//                return map;
-//            }
-//        };
-//        superActiviyt.getVolleyQueue().add(stringRequest);
-//    }
     public void initGetAct() {
         Map<String, String> map = new HashMap<>();
         map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseFragment;
+import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.entity.MyTagEntity;
 import com.hdu.tx.aschool.net.InternetListener;
@@ -45,6 +46,7 @@ import butterknife.ButterKnife;
 public class MainFragment extends BaseFragment {
 
 
+    private static final String TAG ="MainFragment" ;
     @Bind(R.id.vp)
     ViewPager vp;
     @Bind(R.id.tv_title)
@@ -97,7 +99,6 @@ public class MainFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
 
         getLunBoAct();
-        getTagData();
         initGetAct();
     }
 
@@ -112,21 +113,10 @@ public class MainFragment extends BaseFragment {
             public void success(JSONObject json) {
                 List<ActInfo> infos = JSONHandler.json2ListAct(json);
 
-//                for (int i = 0; i <3 ; i++) {
-//                    tagViews[i].initView();
-//                    tagViews[i].setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            ((BaseActivity)getActivity()).toast(rootView,v.getId()+"");
-//                        }
-//                    });
-//                }
-//
-//
+                if(infos.size()!=15)return;
                 List<ActInfo> data1 = infos.subList(1, 4);
                 List<ActInfo> data2 = infos.subList(3, 6);
                 List<ActInfo> data3 = infos.subList(6, 9);
-                List<ActInfo> data4 = infos.subList(1, 4);
 
 
 
@@ -152,23 +142,6 @@ public class MainFragment extends BaseFragment {
                 tagViews[2].setActDate(tagEntitiy2);
                 tagViews[2].setOnClickListener(listener2);
 
-
-//
-//
-//                TagAdapter adapter = new TagAdapter(getActivity(), tags);
-                //OfficeAdapter adapter = new OfficeAdapter(getActivity(), infos);
-                //recyclerView.setAdapter(adapter);
-
-
-//
-//
-//                tagViews[0].setTag("猜你喜欢");
-//                tagViews[1].setTag("科技");
-//                tagViews[2].setTag("运动");
-//
-//                tagViews[0].setActDate(data1);
-//                tagViews[1].setActDate(data2);
-//                tagViews[2].setActDate(data3);
             }
 
             @Override
@@ -207,7 +180,9 @@ public class MainFragment extends BaseFragment {
 
             @Override
             public Map<String, String> setParams() {
-                return null;
+                Map<String,String> map=new HashMap<>();
+                map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+                return map;
             }
         });
     }

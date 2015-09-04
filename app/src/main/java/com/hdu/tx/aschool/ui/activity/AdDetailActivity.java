@@ -153,43 +153,114 @@ public class AdDetailActivity extends BaseActivity {
 
     @OnClick(R.id.join)
     void onclick() {
-        actInfo.setIsJoin(!actInfo.getIsJoin());
-        join.setSelected(actInfo.getIsJoin());
-        join.setText(actInfo.getIsJoin() ? "取消报名" : "去报名");
-        new MyStringRequest(Urls.ACTIVITY_JOIN_IN, new InternetListener() {
-            @Override
-            public void success(JSONObject json) {
+        if(actInfo.getIsJoin()){
+            new MyStringRequest(Urls.ACTIVITY_JOIN_IN_CANCLE, new InternetListener() {
+                @Override
+                public void success(JSONObject json) {
+                    refreshJoinTv(false);
 
-            }
+                }
 
-            @Override
-            public void error(String desc) {
+                @Override
+                public void error(String desc) {
+                    toast(toolbar,desc);
+                }
 
-            }
+                @Override
+                public Map<String, String> setParams() {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+                    map.put("act_id", actInfo.getActId());
+                    return map;
+                }
+            });
+        }else{
+            new MyStringRequest(Urls.ACTIVITY_JOIN_IN, new InternetListener() {
+                @Override
+                public void success(JSONObject json) {
+                    refreshJoinTv(true);
+                }
 
-            @Override
-            public Map<String, String> setParams() {
-                Map<String, String> map = new HashMap<>();
-                map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
-                map.put("act_id", actInfo.getActId());
-                return null;
-            }
-        });
+                @Override
+                public void error(String desc) {
+                    toast(toolbar,desc);
+                }
+
+                @Override
+                public Map<String, String> setParams() {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+                    map.put("act_id", actInfo.getActId());
+                    return map;
+                }
+            });
+        }
     }
 
 
     @OnClick(R.id.collect_ll)
     void onclick1() {
-        actInfo.setIsCollect(!actInfo.getIsCollect());
-        collect.setSelected(actInfo.getIsCollect());
-        if (actInfo.getIsCollect()) {
+
+        if(actInfo.getIsCollect()){
+            new MyStringRequest(Urls.ACTIVITY_COLLECT_CANCLE, new InternetListener() {
+                @Override
+                public void success(JSONObject json) {
+                    refreshCollectTv(false);
+                }
+
+                @Override
+                public void error(String desc) {
+                    toast(toolbar,desc);
+                }
+
+                @Override
+                public Map<String, String> setParams() {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+                    map.put("act_id", actInfo.getActId());
+                    return map;
+                }
+            });
+        }else{
+            new MyStringRequest(Urls.ACTIVITY_COLLECT, new InternetListener() {
+                @Override
+                public void success(JSONObject json) {
+                    refreshCollectTv(true);
+                }
+
+                @Override
+                public void error(String desc) {
+                    toast(toolbar,desc);
+                }
+
+                @Override
+                public Map<String, String> setParams() {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+                    map.put("act_id", actInfo.getActId());
+                    return map;
+                }
+            });
+        }
+    }
+
+
+    public void refreshJoinTv(boolean flag){
+        actInfo.setIsJoin(flag);
+        join.setSelected(flag);
+        join.setText(flag ? "取消报名" : "去报名");
+    }
+
+    public void refreshCollectTv(boolean flag){
+        actInfo.setIsCollect(flag);
+        collect.setSelected(flag);
+        if (flag) {
             myCollectTv.setText("已收藏");
             myCollectTv.setTextColor(getResources().getColor(R.color.colorAccent));
         } else {
             myCollectTv.setText("收藏");
             myCollectTv.setTextColor(getResources().getColor(R.color.textcolor));
         }
-
     }
 
 }
