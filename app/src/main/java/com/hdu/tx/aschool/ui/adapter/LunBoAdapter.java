@@ -55,7 +55,7 @@ public class LunBoAdapter extends PagerAdapter {
         this.actInfos=actInfos;
         this.activity=activity;
         imageViews = new ArrayList<>();
-         initView(view);
+         if(view!=null)initView(view);
     }
 
 

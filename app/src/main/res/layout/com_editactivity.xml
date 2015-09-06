@@ -30,7 +30,8 @@
         android:layout_height="wrap_content">
 
             <EditText
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="#440fb73d"
+                android:hint="lkjlsd"
                 android:id="@+id/et_username"
                 android:textCursorDrawable="@null"
                 android:layout_centerVertical="true"

@@ -52,6 +52,7 @@ import com.hdu.tx.aschool.easemod.db.InviteMessgeDao;
 import com.hdu.tx.aschool.easemod.db.UserDao;
 import com.hdu.tx.aschool.easemod.domain.Constant;
 import com.hdu.tx.aschool.easemod.domain.User;
+import com.hdu.tx.aschool.ui.Controller.ChatController;
 import com.hdu.tx.aschool.ui.activity.ChatActivity;
 import com.hdu.tx.aschool.ui.activity.GroupsActivity;
 import com.hdu.tx.aschool.ui.activity.MainActivity;
@@ -90,6 +91,7 @@ public class ContactlistFragment extends Fragment {
 	Handler handler = new Handler();
     private User toBeProcessUser;
     private String toBeProcessUsername;
+	private ChatController chatController;
 
 	class HXContactSyncListener implements HXSDKHelper.HXSyncListener {
 		@Override
@@ -369,7 +371,7 @@ public class ContactlistFragment extends Fragment {
 			public void run() {
 				try {
 					//加入到黑名单
-					EMContactManager.getInstance().addUserToBlackList(username,false);
+					EMContactManager.getInstance().addUserToBlackList(username, false);
 					getActivity().runOnUiThread(new Runnable() {
 						public void run() {
 							pd.dismiss();
@@ -491,5 +493,10 @@ public class ContactlistFragment extends Fragment {
 //	    	outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
 //	    }
 	    
+	}
+	
+	
+	public void setChatController(ChatController chatController){
+		this.chatController=chatController;
 	}
 }

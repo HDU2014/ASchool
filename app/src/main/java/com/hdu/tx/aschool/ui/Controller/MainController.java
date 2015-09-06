@@ -42,9 +42,10 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
         this.mainView=mainView;
         mainView.setListener(this);
         mainView.setNavigationMenuSelectedListener(this);
+        initFragment();
+    }
 
-
-
+    private void initFragment() {
         List<String> titles = new ArrayList<>();
         titles.add("推荐");
         titles.add("活动");
@@ -62,6 +63,13 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
         mainView.setViewPage(fragments, titles);
         mainView.setBottomIvSelect(0);
     }
+
+
+    public void setChatController(ChatController chatController){
+        ((ChatAllHistoryFragment)fragments.get(3)).setChatController(chatController);
+        ((ContactlistFragment)fragments.get(4)).setChatController(chatController);
+    }
+
 
 
     @Override
