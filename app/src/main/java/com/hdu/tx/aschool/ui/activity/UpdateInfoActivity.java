@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,13 +21,19 @@ import com.dd.processbutton.iml.ActionProcessButton;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
+import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.JSONHandler;
+import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
+import com.hdu.tx.aschool.ui.adapter.OfficeAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -116,11 +123,10 @@ public class UpdateInfoActivity extends BaseActivity {
 
     @OnClick(R.id.btn_submit)void submit(){
 
-        if(etUsername.getText().toString().equals("")){
-            Snackbar.make(toolbar,R.string.input_format_error,Snackbar.LENGTH_LONG).show();
+        if(etUsername.getText().toString().equals("")) {
+            Snackbar.make(toolbar, R.string.input_format_error, Snackbar.LENGTH_LONG).show();
             return;
         }
-
         StringRequest stringRequest=new StringRequest(Request.Method.POST,Urls.API_URL+ Urls.USER_UPDATE_INFO
                 +Urls.PHP, new Response.Listener<String>() {
             @Override
@@ -129,6 +135,7 @@ public class UpdateInfoActivity extends BaseActivity {
                     JSONObject object=new JSONObject(s);
                     if(object.getInt("result")==200){
                         btnSubmit.setProgress(100);
+                        Log.v("MSG","插入成功！！！！！！！！！！");
                         UserInfo userInfo=MyApplication.getInstance().getUserInfo();
                         String value=etUsername.getText().toString().trim();
                         if(param.equals("nick_name")){
