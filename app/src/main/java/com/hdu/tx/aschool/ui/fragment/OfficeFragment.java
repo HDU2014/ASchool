@@ -283,7 +283,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
                     List<ActInfo> infos= JSONHandler.json2ListAct(json);
                     adapterData=infos;
                     adapter=new OfficeAdapter(OfficeFragment.this.getActivity(), adapterData);
-                    recyclerView.setAdapter(adapter);
+                    if(recyclerView!=null)recyclerView.setAdapter(adapter);
                     isInitComplect=true;
             }
 

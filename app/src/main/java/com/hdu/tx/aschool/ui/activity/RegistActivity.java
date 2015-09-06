@@ -22,12 +22,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.easemob.EMCallBack;
+import com.easemob.chat.EMChatManager;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.common.utils.MySecurity;
 import com.hdu.tx.aschool.common.utils.ThirdKey;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.easemod.utils.CommonUtils;
 import com.hdu.tx.aschool.net.InternetListener;
 import com.hdu.tx.aschool.net.JSONHandler;
 import com.hdu.tx.aschool.net.MyStringRequest;
@@ -204,11 +207,12 @@ public class RegistActivity extends BaseActivity {
                     } else {
                         ((Throwable) data).printStackTrace();
                         btRegist.setProgress(-1);
-
+                        Snackbar.make(toolbar,R.string.getyzm_error,Snackbar.LENGTH_LONG).show();
                     }
 
                 }catch (Exception e){
-                    Snackbar.make(toolbar,e.toString(),Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(toolbar,e.toString(),Snackbar.LENGTH_LONG).show();
+                    btRegist.setProgress(-1);
                 }
 
 
@@ -307,9 +311,7 @@ public class RegistActivity extends BaseActivity {
                 MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
                 MyApplication.getInstance().getDaoSession().insert(userInfo);
                 MyApplication.getInstance().setUserInfo(userInfo);
-                Intent intent=new Intent(RegistActivity.this,MyInfoActivity.class);
-                RegistActivity.this.startActivity(intent);
-                RegistActivity.this.finish();
+               loginEMChat(etPhone.getText().toString(),new MySecurity().encodyByMD5(etPass.getText().toString()));
             }
 
             @Override
@@ -338,5 +340,34 @@ public class RegistActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+
+
+    public void loginEMChat(final String user, final String pass){
+        if (!CommonUtils.isNetWorkConnected(this)) {
+            Snackbar.make(toolbar, R.string.network_isnot_available, Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
+        EMChatManager.getInstance().login(user, pass, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                MyApplication.getInstance().login(user, pass);
+                Intent intent=new Intent(RegistActivity.this,MyInfoActivity.class);
+                RegistActivity.this.startActivity(intent);
+                RegistActivity.this.finish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
     }
 }

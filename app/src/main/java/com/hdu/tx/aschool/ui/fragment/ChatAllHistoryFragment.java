@@ -283,8 +283,6 @@ public class ChatAllHistoryFragment extends Fragment implements OnClickListener 
 	@Override
 	public void onResume() {
 		super.onResume();
-
-
 		if (!hidden && chatController!=null&&! chatController.isConflict) {
 			refresh();
 		}

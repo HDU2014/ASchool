@@ -24,10 +24,10 @@ public class MainActivity extends BaseActivity {
             mainView.refreshMyInfo();
         }
         mainController = new MainController(this, mainView);
-
         chatController=new ChatController(this,savedInstanceState);
-
-
+        mainController.setChatController(chatController);
     }
+
+
 
 }
