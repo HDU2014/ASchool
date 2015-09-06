@@ -40,6 +40,7 @@ public class JSONHandler {
                 info.setImageUrl(infoObject.getString("act_img"));
                 info.setHostimageUrl(infoObject.getString("host_head_pic"));
                 info.setActId(infoObject.getString("act_id"));
+                info.setAid(infoObject.getString("aid"));
 
                 info.setIsCollect(infoObject.getBoolean("is_collect"));
                 info.setIsJoin(infoObject.getBoolean("is_join"));

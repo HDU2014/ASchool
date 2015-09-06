@@ -21,6 +21,7 @@ import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.ui.activity.AdDetailActivity;
+import com.hdu.tx.aschool.ui.activity.OtherInfoActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -34,10 +35,12 @@ public class OtherDynamicAdapter extends RecyclerView.Adapter<OtherDynamicAdapte
 
     private Context mContext;
     private List<ActInfo> actInfos;
+    private String nickName;
 
-    public OtherDynamicAdapter(Context context, List<ActInfo> listdata) {
+    public OtherDynamicAdapter(Context context, List<ActInfo> listdata,String str) {
         this.mContext = context;
         this.actInfos = listdata;
+        nickName=str;
 
     }
 
@@ -61,7 +64,7 @@ public class OtherDynamicAdapter extends RecyclerView.Adapter<OtherDynamicAdapte
         holder.time_tv.setText(actInfo.getTime());
         holder.address_tv.setText(actInfo.getAddress());
         holder.title_tv.setText(actInfo.getTitle());
-       if(actInfo.getIsHost())
+       if(actInfo.getHostname().equals(nickName))
            holder.dynamic_type.setText("发起");
         else
            holder.dynamic_type.setText("参与");

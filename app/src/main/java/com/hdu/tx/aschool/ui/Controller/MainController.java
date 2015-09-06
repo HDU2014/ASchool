@@ -16,7 +16,9 @@ import com.hdu.tx.aschool.ui.activity.MainActivity;
 import com.hdu.tx.aschool.ui.activity.MyInfoActivity;
 import com.hdu.tx.aschool.ui.activity.PublishActivity;
 import com.hdu.tx.aschool.ui.activity.UploadButtonDemoActivity;
+import com.hdu.tx.aschool.ui.fragment.ChatAllHistoryFragment;
 import com.hdu.tx.aschool.ui.fragment.ConstractFragment;
+import com.hdu.tx.aschool.ui.fragment.ContactlistFragment;
 import com.hdu.tx.aschool.ui.fragment.ConversationFragment;
 import com.hdu.tx.aschool.ui.fragment.MainFragment;
 import com.hdu.tx.aschool.ui.fragment.MeFragment;
@@ -54,8 +56,8 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
         fragments.add(new MainFragment());
         fragments.add(new OfficeFragment());
         fragments.add(new PersonalFragment());
-        fragments.add(new ConversationFragment());
-        fragments.add(new ConstractFragment());
+        fragments.add(new ChatAllHistoryFragment());
+        fragments.add(new ContactlistFragment());
         fragments.add(new MeFragment());
         mainView.setViewPage(fragments, titles);
         mainView.setBottomIvSelect(0);
@@ -110,7 +112,8 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
                 mainActivity.startActivity(intent1);
                 break;
             case R.id.exit:
-                mainView.showExitAppDialog();
+               // mainView.showExitAppDialog();
+                mainView.showChanggeAccountDialog();
                 break;
             case R.id.menu_about:
                 Intent intent2=new Intent(mainActivity,AboutActivity.class);

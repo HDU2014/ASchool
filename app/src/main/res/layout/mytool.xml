@@ -14,6 +14,7 @@
         android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/back_img"
         android:background="@drawable/userinfo_bg"
         android:layout_width="match_parent"
         android:layout_height="200dp">
@@ -28,14 +29,14 @@
             <com.hdu.tx.aschool.ui.widget.image.CircleImageView
                 android:id="@+id/head_iv"
                 android:src="@drawable/ic_user"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
 
             <TextView
                 android:id="@+id/nickname_tv"
                 android:gravity="center_horizontal"
                 android:text="幸福的小鱼"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textColor="@color/red"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -154,7 +155,7 @@
                 android:padding="5dp"
                 android:layout_margin="3dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/my_collect"
+                android:src="@drawable/my_follow"
                 android:layout_width="40dp"
                 android:layout_height="40dp" />
 
@@ -199,7 +200,7 @@
                 android:padding="5dp"
                 android:layout_margin="3dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/my_follow"
+                android:src="@drawable/my_collect"
                 android:layout_width="40dp"
                 android:layout_height="40dp" />
 
@@ -289,7 +290,7 @@
             android:padding="5dp"
             android:layout_margin="3dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/my_info"
+            android:src="@drawable/my_suggestion"
             android:layout_width="40dp"
             android:layout_height="40dp" />
 

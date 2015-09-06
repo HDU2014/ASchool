@@ -6,7 +6,7 @@
 
         <item
             android:id="@+id/menu_interest"
-            android:icon="@drawable/ic_forum"
+            android:icon="@drawable/my_info"
             android:title="兴趣标签"/>
         <item
             android:id="@+id/menu_settings"
@@ -19,7 +19,7 @@
         <item
             android:id="@+id/exit"
             android:icon="@drawable/ic_dashboard"
-            android:title="退出"/>
+            android:title="更换账户"/>
 
     </group>
 

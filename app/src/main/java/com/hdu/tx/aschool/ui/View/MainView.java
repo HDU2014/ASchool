@@ -1,6 +1,7 @@
 package com.hdu.tx.aschool.ui.View;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.support.v4.view.ViewPager;
 
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -23,6 +25,7 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.ui.activity.LoginActivity;
 import com.hdu.tx.aschool.ui.activity.MainActivity;
 import com.hdu.tx.aschool.ui.activity.RegistActivity;
 import com.hdu.tx.aschool.ui.adapter.FragmentAdapter;
@@ -221,7 +224,7 @@ public class MainView extends DrawerLayout {
                 .withTitle("退出")
                 .withTitleColor("#ffffffff")
                 .withDividerColor("#11000000")
-                .withMessage("确定退出程序？")
+                .withMessage("确定退出当前账户，您的本地信息将会丢失")
                 .withMessageColor("#FFFFFFFF")
                 .withDialogColor(mainActivity.getResources().getColor(R.color.colorPrimary))
                 .withIcon(mainActivity.getResources().getDrawable(R.mipmap.ic_launcher))
@@ -245,6 +248,32 @@ public class MainView extends DrawerLayout {
                 .show();
     }
 
+
+
+    public void showChanggeAccountDialog(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(mainActivity);
+        builder.setTitle(R.string.change_account).setMessage(R.string.change_account_message)
+                .setNegativeButton("取消",null).setNeutralButton("退出", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mainActivity.onBackPressed();
+            }
+        }).setPositiveButton("更换账号", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                UserInfo userInfo=new UserInfo();
+                userInfo.setId(1l);
+                userInfo.setLevel(0);
+                userInfo.setLoadTimes(0);
+                userInfo.setUsername("游客");
+                MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
+                MyApplication.getInstance().getDaoSession().insert(userInfo);
+                MyApplication.getInstance().setUserInfo(userInfo);
+                mainActivity.startActivity(new Intent(mainActivity, LoginActivity.class));
+                mainActivity.finish();
+            }
+        }).create().show();
+    }
 
     public void refreshMyInfo(){
         UserInfo info=MyApplication.getInstance().getUserInfo();

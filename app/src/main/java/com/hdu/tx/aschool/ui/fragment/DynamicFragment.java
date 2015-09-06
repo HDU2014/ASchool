@@ -14,10 +14,12 @@ import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.BaseFragment;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.ActInfo;
+import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.net.InternetListener;
 import com.hdu.tx.aschool.net.JSONHandler;
 import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
+import com.hdu.tx.aschool.ui.activity.OtherInfoActivity;
 import com.hdu.tx.aschool.ui.adapter.OtherDynamicAdapter;
 
 import org.json.JSONArray;
@@ -44,6 +46,7 @@ public class DynamicFragment extends BaseFragment {
     private List<ActInfo> actInfosData;
     public OtherDynamicAdapter adapter;
     private LinearLayoutManager manager;
+    public OtherInfoActivity otherInfoActivity;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class DynamicFragment extends BaseFragment {
         actInfosData = new ArrayList<>();
         manager=new LinearLayoutManager(recyclerView.getContext());
         recyclerView.setLayoutManager(manager);
-
+        otherInfoActivity=(OtherInfoActivity)getActivity();
 //        getActivtyData();
         initGetAct();
     }
@@ -75,14 +78,12 @@ public class DynamicFragment extends BaseFragment {
     }
 
     public void initGetAct() {
-        Map<String, String> map = new HashMap<>();
-        map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
-        new MyStringRequest(Urls.GET_DYNAMIC_ACTIVITY, new InternetListener() {
+        new MyStringRequest(Urls.ACTIVITY_DYNAMIC, new InternetListener() {
             @Override
             public void success(JSONObject json) {
                 List<ActInfo> infos = JSONHandler.json2ListAct(json);
                 actInfosData = infos;
-                adapter = new OtherDynamicAdapter(DynamicFragment.this.getActivity(), actInfosData);
+                adapter = new OtherDynamicAdapter(DynamicFragment.this.getActivity(), actInfosData,otherInfoActivity.getUserInfo().getNickname());
                 recyclerView.setAdapter(adapter);
             }
 
@@ -93,7 +94,9 @@ public class DynamicFragment extends BaseFragment {
 
             @Override
             public Map<String, String> setParams() {
-                return null;
+                Map<String, String> map = new HashMap<>();
+                map.put("user_name",otherInfoActivity.getUserInfo().getUsername());
+                return map;
             }
         });
     }

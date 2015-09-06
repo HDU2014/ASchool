@@ -291,7 +291,7 @@ public class ForgetPassActivity extends BaseActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SMSSDK.getVoiceVerifyCode(passEt.getText().toString().trim(), "86");
+                        SMSSDK.getVoiceVerifyCode(phoneTv.getText().toString().trim(), "86");
                     }
                 }).setNegativeButton("取消", null).create().show();
     }

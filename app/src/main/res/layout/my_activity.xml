@@ -20,8 +20,9 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/red"
             app:layout_collapseMode="pin"
+            app:titleMarginStart="80dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="我的发起"></android.support.v7.widget.Toolbar>
+           ></android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
 
@@ -29,7 +30,7 @@
                 android:id="@+id/recycler_view"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
 
                 />
 

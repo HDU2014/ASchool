@@ -69,6 +69,9 @@ public class OtherInfoActivity extends BaseActivity {
     @Bind(R.id.other_head_sex)
     ImageView otherHeadSex;
 
+    private UserInfo userInfo;
+    String hostid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,14 +90,11 @@ public class OtherInfoActivity extends BaseActivity {
         });
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-
-        initView();
-        String hostid = getIntent().getStringExtra("host_id");
-
+        hostid = getIntent().getStringExtra("host_id");
         getUserInfo(hostid);
     }
 
-    public void initView() {
+    public void initFragment() {
 
         List<String> title = new ArrayList<>();
         title.add("信息");
@@ -102,8 +102,6 @@ public class OtherInfoActivity extends BaseActivity {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new OtherFragment());
         fragments.add(new DynamicFragment());
-//        fragments.add(new OfficeFragment());
-//        fragments.add(new MainFragment());
 
 
         FragmentAdapter adapter = new FragmentAdapter(this.getSupportFragmentManager(), fragments, title);
@@ -114,9 +112,6 @@ public class OtherInfoActivity extends BaseActivity {
         userTablayout.setupWithViewPager(viewpager);
         userTablayout.setTabsFromPagerAdapter(adapter);
         viewpager.setCurrentItem(0);
-        //获取用户名称
-//        Intent intent = this.getIntent();
-//        searchIndex=(String) intent.getSerializableExtra("HostName");
 
     }
 
@@ -125,12 +120,12 @@ public class OtherInfoActivity extends BaseActivity {
         new MyStringRequest(Urls.USER_QUERY_BYID, new InternetListener() {
             @Override
             public void success(JSONObject json) {
-                UserInfo userInfo = JSONHandler.json2UserInfo(json);
+                userInfo = JSONHandler.json2UserInfo(json);
                 otherUserid.setText(userInfo.getNickname());
                 Picasso.with(OtherInfoActivity.this).load(userInfo.getHeadimg_url()).into(otherHeadUser);
                 otherHeadSex.setImageDrawable(userInfo.getSex()==null||userInfo.equals("男")?getResources().getDrawable(R.drawable.sex_man):
                 getResources().getDrawable(R.drawable.sex_women));
-
+                initFragment();
             }
 
             @Override
@@ -145,7 +140,10 @@ public class OtherInfoActivity extends BaseActivity {
                 return map;
             }
         });
+    }
 
+    public UserInfo getUserInfo(){
+        return this.userInfo;
     }
 
 }

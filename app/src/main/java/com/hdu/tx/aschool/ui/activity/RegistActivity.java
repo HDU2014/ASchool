@@ -51,7 +51,7 @@ import info.hoang8f.widget.FButton;
 /**
  * Created by Administrator on 2015/8/12.
  */
-public class RegistActivity extends BaseActivity {
+public class  RegistActivity extends BaseActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.iv_username)

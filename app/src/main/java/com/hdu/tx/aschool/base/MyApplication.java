@@ -7,10 +7,12 @@ import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.easemob.EMCallBack;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.dao.DaoMaster;
 import com.hdu.tx.aschool.dao.DaoSession;
 import com.hdu.tx.aschool.dao.UserInfo;
+import com.hdu.tx.aschool.easemod.applib.DemoHXSDKHelper;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -34,11 +36,13 @@ public class MyApplication extends Application {
     private RequestQueue queue;
     private DisplayImageOptions options;
 
+    public static DemoHXSDKHelper hxSDKHelper = new DemoHXSDKHelper();
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance=this;
-        initImageLoader();
+        hxSDKHelper.onInit(this);
     }
 
     public static MyApplication getInstance() {
@@ -114,5 +118,19 @@ public class MyApplication extends Application {
     public  void loadImage(String url,ImageView view){
         ImageLoader.getInstance().displayImage(url, view,
                 options);
+    }
+
+
+    /**
+     * 退出登录,清空数据
+     */
+    public void logout(final boolean isGCM,final EMCallBack emCallBack) {
+        // 先调用sdk logout，在清理app中自己的数据
+        hxSDKHelper.logout(isGCM, emCallBack);
+    }
+
+    public void login(String user,String pass){
+        hxSDKHelper.setHXId(user);
+        hxSDKHelper.setPassword(pass);
     }
 }

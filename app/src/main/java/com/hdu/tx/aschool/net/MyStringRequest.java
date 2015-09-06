@@ -61,9 +61,8 @@ public class MyStringRequest {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map=listener.setParams()==null?new HashMap<String,String>():listener.setParams();
-                if(MyApplication.getInstance().getUserInfo().getUsername()!=null&& TextUtils.isEmpty(map.get("user_name")))
+                if(MyApplication.getInstance().getUserInfo()!=null&& !map.containsKey("user_name"))
                     map.put("user_name",MyApplication.getInstance().getUserInfo().getUsername());
-
                 return map;
             }
         };

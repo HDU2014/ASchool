@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
@@ -15,8 +16,8 @@ import com.hdu.tx.aschool.base.BaseFragment;
 import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.ui.activity.LoginActivity;
-import com.hdu.tx.aschool.ui.activity.MyInfoActivity;
 import com.hdu.tx.aschool.ui.activity.MyActivity;
+import com.hdu.tx.aschool.ui.activity.MyInfoActivity;
 import com.hdu.tx.aschool.ui.widget.image.CircleImageView;
 import com.squareup.picasso.Picasso;
 
@@ -62,6 +63,8 @@ public class MeFragment extends BaseFragment {
     TextView myInfomation;
     @Bind(R.id.my_tuchao)
     TextView myTuchao;
+    @Bind(R.id.back_img)
+    RelativeLayout backImg;
     private UserInfo info;
     BaseActivity superActivity;
 
@@ -70,7 +73,8 @@ public class MeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.mytool, container, false);
         ButterKnife.bind(this, view);
-        this.superActivity=(BaseActivity)getActivity();
+        backImg.getBackground().setAlpha(100);
+        this.superActivity = (BaseActivity) getActivity();
         return view;
     }
 
@@ -102,32 +106,34 @@ public class MeFragment extends BaseFragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
     @OnClick(R.id.my_start)
-    void myStart()
-    {
-        Intent intent = new Intent(superActivity,MyActivity.class);
-        intent.putExtra("name","MyStart");
+    void myStart() {
+        Intent intent = new Intent(superActivity, MyActivity.class);
+        intent.putExtra("name", "MyStart");
         startActivity(intent);
     }
+
     @OnClick(R.id.my_enroll)
-    public void myEnroll(){
-        Intent intent = new Intent(superActivity,MyActivity.class);
+    public void myEnroll() {
+        Intent intent = new Intent(superActivity, MyActivity.class);
         intent.putExtra("name", "MyEnroll");
         startActivity(intent);
     }
-    @OnClick(R.id.my_collect)
-    public void setMyCollect(){
 
-        Intent intent = new Intent(superActivity,MyActivity.class);
-        intent.putExtra("name","MyCollect");
+    @OnClick(R.id.my_collect)
+    public void setMyCollect() {
+
+        Intent intent = new Intent(superActivity, MyActivity.class);
+        intent.putExtra("name", "MyCollect");
         startActivity(intent);
     }
+
     @OnClick(R.id.my_infomation)
-            public void setMyInfomation()
-    {
-        Intent intent=MyApplication.getInstance().getUserInfo().getLevel()==0?
-                new Intent(superActivity,LoginActivity.class):
-                new Intent(superActivity,MyInfoActivity.class);
+    public void setMyInfomation() {
+        Intent intent = MyApplication.getInstance().getUserInfo().getLevel() == 0 ?
+                new Intent(superActivity, LoginActivity.class) :
+                new Intent(superActivity, MyInfoActivity.class);
         superActivity.startActivity(intent);
     }
 }

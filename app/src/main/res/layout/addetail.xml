@@ -21,26 +21,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/look_tv"
-            android:textColor="@color/colorAccent"
-            android:text="浏览了2001次"
-            android:layout_marginTop="5dp"
+        <ImageView
+            android:tint="@color/colorAccent"
+            android:id="@+id/look_iv"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/title"
+            android:src="@drawable/look_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/look_tv"
+            android:text="78"
+            android:layout_marginTop="5dp"
+          android:layout_toRightOf="@id/look_iv"
             android:layout_below="@id/title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="20dp" />
+
+
+        <ImageView
+            android:tint="@color/colorAccent"
+            android:id="@+id/collect_iv"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/look_tv"
+            android:layout_marginTop="5dp"
+            android:padding="2dp"
+            android:layout_below="@+id/title"
+            android:src="@drawable/collected"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/collect_tv"
-            android:text="收藏了2001次"
-            android:textColor="@color/colorAccent"
+            android:text="67"
+            android:gravity="center_vertical"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
             android:layout_below="@id/title"
-            android:layout_toRightOf="@id/look_tv"
+            android:layout_toRightOf="@id/collect_iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="20dp" />
 
         <ImageView
             android:layout_marginTop="10dp"
@@ -63,17 +86,24 @@
             android:background="@color/white"
             android:orientation="horizontal"
             android:padding="3dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/adetail_time"
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:padding="@dimen/addetail_item"
-                android:text="@string/time"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp"/>
+
+                />
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="left"-->
+                <!--android:padding="@dimen/addetail_item"-->
+                <!--android:text="@string/time"-->
+                <!--android:textColor="@color/colorPrimaryDark"-->
+                <!--android:textSize="15sp"/>-->
 
 
             <TextView
@@ -82,7 +112,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="left"
+                android:paddingLeft="10dp"
                 android:textColor="@color/black"
                 android:text="2015-8-20 18:00"
                 android:textSize="15sp"/>
@@ -110,17 +141,21 @@
             android:orientation="horizontal"
             android:padding="3dp">
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="left"
-                android:padding="@dimen/addetail_item"
-                android:text="@string/address"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp"/>
+            <!--<TextView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:gravity="left"-->
+                <!--android:padding="@dimen/addetail_item"-->
+                <!--android:text="@string/address"-->
+                <!--android:textColor="@color/colorPrimaryDark"-->
+                <!--android:textSize="15sp"/>-->
 
-
+            <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/adetail_address"
+                />
             <TextView
                 android:id="@+id/address_tv"
                 android:maxLines="2"
@@ -128,7 +163,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="left"
+                android:paddingLeft="10dp"
                 android:textColor="@color/black"
                 android:text="@string/activity_address_test"
                 android:textSize="15sp"/>
@@ -155,17 +191,20 @@
             android:background="@color/white"
             android:orientation="horizontal"
             android:padding="3dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/bottom4_select"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:padding="@dimen/addetail_item"
-                android:text="@string/person_number"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp"/>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:gravity="left"-->
+                <!--android:padding="@dimen/addetail_item"-->
+                <!--android:text="@string/person_number"-->
+                <!--android:textColor="@color/colorPrimaryDark"-->
+                <!--android:textSize="15sp"/>-->
 
 
 
@@ -175,7 +214,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="left"
+                android:paddingLeft="10dp"
                 android:textColor="@color/black"
                 android:text="20/100"
                 android:textSize="15sp"/>
@@ -204,28 +244,32 @@
             android:background="@color/white"
             android:orientation="horizontal"
             android:padding="3dp">
-
-            <com.hdu.tx.aschool.ui.widget.image.CircleImageView
-                android:id="@+id/host_head_pic"
-                android:src="@drawable/ic_user"
-                android:layout_gravity="center"
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/adetail_host"
+                />
 
             <TextView
                 android:id="@+id/hostname_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:text="杭州电子科技大学学生会"
                 android:textSize="15sp"/>
-
+            <com.hdu.tx.aschool.ui.widget.image.CircleImageView
+                android:id="@+id/host_head_pic"
+                android:src="@drawable/ic_user"
+                android:layout_gravity="center"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
             <ImageView
                 style="@style/Right_arrow_image"
                 android:layout_width="20dp"
+                android:layout_marginRight="5dp"
                 android:layout_height="20dp" />
         </LinearLayout>
         <ImageView
@@ -270,12 +314,28 @@
 
     </LinearLayout>
 
+<LinearLayout
+    android:layout_marginTop="5dp"
+    android:layout_width="fill_parent"
+    android:layout_height="40dp"
+    android:background="@color/white"
+    android:gravity="center"
+    >
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:text="@string/qunliao"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/white"
+        android:background="@drawable/qunliao_bg"
+        />
 
+</LinearLayout>
 
 
 
     <LinearLayout
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

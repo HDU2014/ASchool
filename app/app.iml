@@ -76,7 +76,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/design/22.2.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.bartoszlipinski.recyclerviewheader/library/1.2.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.dmytrodanylyk.android-process-button/library/1.0.4/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.sd6352051.niftydialogeffects/niftydialogeffects/1.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.oguzdev/CircularFloatingActionMenu/1.0.2/jars" />
@@ -102,22 +101,26 @@
     <orderEntry type="library" exported="" name="design-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="library-1.0.4" level="project" />
     <orderEntry type="library" exported="" name="butterknife-7.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Parse-1.9.4" level="project" />
     <orderEntry type="library" exported="" name="niftydialogeffects-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="greendao-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="CircularFloatingActionMenu-1.0.2" level="project" />
-    <orderEntry type="library" exported="" name="library-1.2.0" level="project" />
+    <orderEntry type="library" exported="" name="bolts-android-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.8" level="project" />
+    <orderEntry type="library" exported="" name="umeng-analytics-v5.2.4" level="project" />
+    <orderEntry type="library" exported="" name="locSDK_3.3" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="qiniu-android-sdk-7.0.7.2" level="project" />
-    <orderEntry type="library" exported="" name="easemobchat_2.2.2" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.8.6-with-sources" level="project" />
+    <orderEntry type="library" exported="" name="easemobchat_2.2.2" level="project" />
     <orderEntry type="library" exported="" name="happy-dns-0.2.3.2" level="project" />
-    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="volley" level="project" />
+    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="baidumapapi_v3_2_0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.2.1" level="project" />
     <orderEntry type="module" module-name="mylibrary" exported="" />
   </component>
