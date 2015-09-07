@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
+import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.easemod.applib.DemoHXSDKHelper;
 import com.hdu.tx.aschool.easemod.applib.HXSDKHelper;
 import com.hdu.tx.aschool.easemod.domain.User;
@@ -48,11 +49,14 @@ public class UserUtils {
      * 设置当前用户头像
      */
 	public static void setCurrentUserAvatar(Context context, ImageView imageView) {
-		User user = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().getCurrentUserInfo();
-		if (user != null && user.getAvatar() != null) {
-			Picasso.with(context).load(user.getAvatar()).placeholder(R.drawable.default_avatar).into(imageView);
-		} else {
-			Picasso.with(context).load(R.drawable.default_avatar).into(imageView);
+//		User user = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().getCurrentUserInfo();
+//		if (user != null && user.getAvatar() != null) {
+//			Picasso.with(context).load(user.getAvatar()).placeholder(R.drawable.default_avatar).into(imageView);
+//		} else {
+//			Picasso.with(context).load(R.drawable.default_avatar).into(imageView);
+//		}
+		if(MyApplication.getInstance().getUserInfo()!=null&&!"".equals(MyApplication.getInstance().getUserInfo().getHeadimg_url())){
+			Picasso.with(context).load(MyApplication.getInstance().getUserInfo().getHeadimg_url()).into(imageView);
 		}
 	}
     
@@ -72,9 +76,10 @@ public class UserUtils {
      * 设置当前用户昵称
      */
     public static void setCurrentUserNick(TextView textView){
-    	User user = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().getCurrentUserInfo();
+    	//User user = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().getCurrentUserInfo();
     	if(textView != null){
-    		textView.setText(user.getNick());
+    		//textView.setText(user.getNick());
+			textView.setText(MyApplication.getInstance().getUserInfo().getNickname());
     	}
     }
     

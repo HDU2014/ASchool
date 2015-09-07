@@ -440,7 +440,6 @@ public class ContactlistFragment extends Fragment {
 	 */
 	private void getContactList() {
 		contactList.clear();
-		//获取本地好友列表
 		Map<String, User> users = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getContactList();
 		Iterator<Entry<String, User>> iterator = users.entrySet().iterator();
 		while (iterator.hasNext()) {

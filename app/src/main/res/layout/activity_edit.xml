@@ -6,8 +6,8 @@
     android:orientation="vertical" >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_top_bar"
-        android:background="@color/common_top_bar_blue"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
         android:gravity="center_vertical" >
 
         <LinearLayout

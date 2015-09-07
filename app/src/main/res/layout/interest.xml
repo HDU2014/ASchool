@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/red"
+            android:paddingLeft="130dp"
             app:layout_collapseMode="pin"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="兴趣标签"></android.support.v7.widget.Toolbar>
@@ -50,7 +51,8 @@
             android:text="@string/finish"
             android:textSize="20sp"
             android:padding="5dp"
-            android:background="@drawable/interest_finish_bg"
+            android:background="@color/green"
+            android:src="@drawable/interest_finish_bg"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

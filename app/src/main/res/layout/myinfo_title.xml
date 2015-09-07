@@ -7,9 +7,10 @@
     >
 
     <LinearLayout
+        android:id="@+id/back_img"
         android:layout_width="fill_parent"
         android:layout_height="250dp"
-        android:background="@drawable/user_bg2"
+        android:background="@drawable/userinfo_bg"
         android:orientation="vertical">
         <LinearLayout
             android:layout_marginTop="30dp"
@@ -46,10 +47,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="80dp"
                 android:layout_gravity="center_vertical"
-               >
+                >
 
                 <com.hdu.tx.aschool.ui.widget.image.CircleImageView
-                    android:id="@+id/other_head_user"
+                    android:id="@+id/head_iv"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:paddingTop="20dp"
@@ -61,7 +62,6 @@
                     android:layout_width="20dp"
                     android:layout_height="25dp"
                     android:layout_gravity="bottom"
-                    android:background="@drawable/ridus_text_bg"
                     android:src="@drawable/sex_man" />
 
             </LinearLayout>

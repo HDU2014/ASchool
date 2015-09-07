@@ -16,17 +16,24 @@ import android.widget.TextView;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
+import com.hdu.tx.aschool.common.utils.MyStrings;
 import com.hdu.tx.aschool.dao.ActInfo;
+import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.JSONHandler;
 import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
+import com.hdu.tx.aschool.ui.View.HeadImageView;
 import com.hdu.tx.aschool.ui.widget.image.CircleImageView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,18 +45,22 @@ import butterknife.OnClick;
 public class AdDetailActivity extends BaseActivity {
 
 
+    @Bind(R.id.act_img)
+    ImageView actImg;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-    @Bind(R.id.act_img)
-    ImageView actImg;
     @Bind(R.id.appbar)
     AppBarLayout appbar;
     @Bind(R.id.title)
     TextView title;
+    @Bind(R.id.look_iv)
+    ImageView lookIv;
     @Bind(R.id.look_tv)
     TextView lookTv;
+    @Bind(R.id.collect_iv)
+    ImageView collectIv;
     @Bind(R.id.collect_tv)
     TextView collectTv;
     @Bind(R.id.time_tv)
@@ -58,14 +69,16 @@ public class AdDetailActivity extends BaseActivity {
     TextView addressTv;
     @Bind(R.id.person_num)
     TextView personNum;
-    @Bind(R.id.head_img)
-    CircleImageView headImg;
-    @Bind(R.id.nickname)
-    TextView nickname;
     @Bind(R.id.hostname_tv)
     TextView hostnameTv;
+    @Bind(R.id.host_head_pic)
+    CircleImageView hostHeadPic;
     @Bind(R.id.nickname_ll)
     LinearLayout nicknameLl;
+    @Bind(R.id.headimages)
+    HeadImageView headimages;
+    @Bind(R.id.group_chat)
+    Button groupChat;
     @Bind(R.id.describe_tv)
     TextView describeTv;
     @Bind(R.id.lunboll)
@@ -74,25 +87,16 @@ public class AdDetailActivity extends BaseActivity {
     NestedScrollView nsv;
     @Bind(R.id.collect)
     ImageView collect;
-    @Bind(R.id.bt)
-    LinearLayout bt;
-    @Bind(R.id.main_content)
-    CoordinatorLayout mainContent;
-    @Bind(R.id.host_head_pic)
-    CircleImageView hostHeadPic;
+    @Bind(R.id.my_collect_tv)
+    TextView myCollectTv;
     @Bind(R.id.collect_ll)
     LinearLayout collectLl;
     @Bind(R.id.join)
     TextView join;
-    @Bind(R.id.my_collect_tv)
-    TextView myCollectTv;
-    @Bind(R.id.look_iv)
-    ImageView lookIv;
-    @Bind(R.id.collect_iv)
-    ImageView collectIv;
-    @Bind(R.id.qunliao)
-    Button qunliao;
-
+    @Bind(R.id.bt)
+    LinearLayout bt;
+    @Bind(R.id.main_content)
+    CoordinatorLayout mainContent;
     private ActInfo actInfo;
 
 
@@ -112,6 +116,8 @@ public class AdDetailActivity extends BaseActivity {
         collapsingToolbar.setTitle("活动详情");
         actInfo = (ActInfo) getIntent().getSerializableExtra("activity");
         browse();
+        //headimages.setDate(getDate());
+        setGroupMembers();
         init(actInfo);
     }
 
@@ -146,11 +152,6 @@ public class AdDetailActivity extends BaseActivity {
         } else {
             join.setText("去报名");
         }
-
-        // ActInfo localAct=MyApplication.getInstance().getDaoSession().getActInfoDao().queryRaw("act_id",actInfo.getActId()).get(0);
-
-        // MyApplication.getInstance().getDaoSession().insert(actInfo);
-        // Snackbar.make(toolbar,"数据库插入成功",Snackbar.LENGTH_LONG).show();
     }
 
 
@@ -266,12 +267,7 @@ public class AdDetailActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.qunliao)
-    public void qunLiao()
-    {
-        Intent intent = new Intent(AdDetailActivity.this,ChatActivity.class);
-        this.startActivity(intent);
-    }
+
     public void refreshJoinTv(boolean flag) {
         actInfo.setIsJoin(flag);
         join.setSelected(flag);
@@ -316,4 +312,47 @@ public class AdDetailActivity extends BaseActivity {
     }
 
 
+    @OnClick(R.id.group_chat)
+    void onclick2() {
+        String username = actInfo.getGroup_id();
+        // 进入聊天页面
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra("chatType", ChatActivity.CHATTYPE_GROUP);
+        intent.putExtra("groupId", username);
+        startActivity(intent);
+    }
+
+
+    public void setGroupMembers() {
+        new MyStringRequest(Urls.USER_GROUP_MEMBERS, new InternetListener() {
+            @Override
+            public void success(JSONObject json) {
+                List<UserInfo> userInfos = JSONHandler.json2ListUser(json);
+                headimages.setDate(userInfos);
+            }
+
+            @Override
+            public void error(String desc) {
+
+            }
+
+            @Override
+            public Map<String, String> setParams() {
+                Map<String, String> map = new HashMap<>();
+                map.put("group_id", actInfo.getGroup_id());
+                return map;
+            }
+        });
+    }
+
+
+    public List<UserInfo> getDate() {
+        List<UserInfo> userInfos=new ArrayList<>();
+        for (int i = 0; i <20 ; i++) {
+            UserInfo user=new UserInfo();
+            user.setHeadimg_url(MyStrings.AVATARS[new Random().nextInt(MyStrings.AVATARS.length-1)]);
+            userInfos.add(user);
+        }
+        return userInfos;
+    }
 }
