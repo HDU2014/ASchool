@@ -322,6 +322,7 @@
     android:gravity="center"
     >
     <Button
+        android:id="@+id/qunliao"
         android:layout_width="60dp"
         android:layout_height="30dp"
         android:text="@string/qunliao"

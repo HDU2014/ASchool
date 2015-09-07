@@ -99,7 +99,12 @@ public class MyInfoActivity extends BaseActivity {
     LinearLayout ageLl;
     @Bind(R.id.jump_tv)
     TextView jumpTv;
-    @OnClick(R.id.jump_tv)void onclick(){startMainActivity();}
+
+    @OnClick(R.id.jump_tv)
+    void onclick() {
+        startMainActivity();
+    }
+
     @Bind(R.id.head_img_ll)
     LinearLayout headImgLl;
 
@@ -122,13 +127,13 @@ public class MyInfoActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if(isFrist)toolbar.setTitle( R.string.complect_info);
-        else toolbar.setTitle( R.string.my_info);
-        jumpTv.setVisibility(isFrist?View.VISIBLE:View.GONE);
+        if (isFrist) toolbar.setTitle(R.string.complect_info);
+        else toolbar.setTitle(R.string.my_info);
+        jumpTv.setVisibility(isFrist ? View.VISIBLE : View.GONE);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              if(isFrist)startMainActivity();
+                if (isFrist) startMainActivity();
                 else onBackPressed();
             }
         });
@@ -338,8 +343,8 @@ public class MyInfoActivity extends BaseActivity {
 
     void submit(final String params, final String value, Response.Listener<String> listener) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.API_URL+Urls.USER_UPDATE_INFO
-                +Urls.PHP, listener, new Response.ErrorListener() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.API_URL + Urls.USER_UPDATE_INFO
+                + Urls.PHP, listener, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 Snackbar.make(toolbar, volleyError.toString(), Snackbar.LENGTH_LONG).show();
@@ -358,41 +363,71 @@ public class MyInfoActivity extends BaseActivity {
 
 
     public void getQiniuToken(final String path) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.USER_GET_UPTOKEN, new Response.Listener<String>() {
+        MyStringRequest myStringRequest = new MyStringRequest(Urls.USER_GET_UPTOKEN, new InternetListener() {
             @Override
-            public void onResponse(String s) {
+            public void success(JSONObject json) {
                 try {
-                    JSONObject object = new JSONObject(s);
-                    if (object.getInt("result") == 200) {
-                        String up_token = object.getString("up_token");
-                        String img_key = object.getString("img_key");
-                        Log.i(TAG, "upToken--->" + up_token + "Key--->" + img_key);
-                        updateImage(path, up_token, img_key);
-                    } else {
-                        toast(toolbar, object.getString("desc"));
-
-                    }
+                    String up_token = json.getString("up_token");
+                    String img_key = json.getString("img_key");
+                    Log.i(TAG, "upToken--->" + up_token + "Key--->" + img_key);
+                    updateImage(path, up_token, img_key);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.i(TAG, e.toString());
-
                 }
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Log.i(TAG, volleyError.toString());
+            public void error(String desc) {
+                Log.i("TAG", desc.toString());
+                toast(toolbar, desc);
             }
-        }) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            public Map<String, String> setParams() {
                 Map<String, String> map = new HashMap<>();
                 map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
                 return map;
             }
-        };
-        getVolleyQueue().add(stringRequest);
+        });
+
     }
+
+
+    //        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.USER_GET_UPTOKEN, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String s) {
+//                try {
+//                    JSONObject object = new JSONObject(s);
+//                    if (object.getInt("result") == 200) {
+//                        String up_token = object.getString("up_token");
+//                        String img_key = object.getString("img_key");
+//                        Log.i(TAG, "upToken--->" + up_token + "Key--->" + img_key);
+//                        updateImage(path, up_token, img_key);
+//                    } else {
+//                        toast(toolbar, object.getString("desc"));
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Log.i(TAG, e.toString());
+//
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError volleyError) {
+//                Log.i(TAG, volleyError.toString());
+//            }
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> map = new HashMap<>();
+//                map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
+//                return map;
+//            }
+//        };
+//        getVolleyQueue().add(stringRequest);
+
 
     public void updateImage(final String img_path, final String upToken, final String img_key) {
         UploadManager uploadManager = new UploadManager();
@@ -436,10 +471,10 @@ public class MyInfoActivity extends BaseActivity {
     }
 
 
-    public void startMainActivity(){
-        Intent intent=new Intent(MyInfoActivity.this,MainActivity.class);
+    public void startMainActivity() {
+        Intent intent = new Intent(MyInfoActivity.this, MainActivity.class);
         startActivity(intent);
-        if(isFrist){
+        if (isFrist) {
             userInfo.setLoadTimes(2);
             MyApplication.getInstance().getDaoSession().update(userInfo);
         }

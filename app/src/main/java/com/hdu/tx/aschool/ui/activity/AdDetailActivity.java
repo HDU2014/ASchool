@@ -7,8 +7,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
-import android.util.ArrayMap;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -86,6 +86,12 @@ public class AdDetailActivity extends BaseActivity {
     TextView join;
     @Bind(R.id.my_collect_tv)
     TextView myCollectTv;
+    @Bind(R.id.look_iv)
+    ImageView lookIv;
+    @Bind(R.id.collect_iv)
+    ImageView collectIv;
+    @Bind(R.id.qunliao)
+    Button qunliao;
 
     private ActInfo actInfo;
 
@@ -119,8 +125,8 @@ public class AdDetailActivity extends BaseActivity {
             Picasso.with(this).load(actInfo.getImageUrl()).into(hostHeadPic);
         title.setText(actInfo.getTitle());
         timeTv.setText(actInfo.getTime());
-        collectTv.setText(actInfo.getCollectTimes()+"");
-        lookTv.setText(actInfo.getLookTimes()+"");
+        collectTv.setText(actInfo.getCollectTimes() + "");
+        lookTv.setText(actInfo.getLookTimes() + "");
         addressTv.setText(actInfo.getAddress());
         personNum.setText(actInfo.getJoinedpeopel() + "/" + actInfo.getTotalpeopel());
         hostnameTv.setText(actInfo.getHostname());
@@ -141,7 +147,7 @@ public class AdDetailActivity extends BaseActivity {
             join.setText("去报名");
         }
 
-       // ActInfo localAct=MyApplication.getInstance().getDaoSession().getActInfoDao().queryRaw("act_id",actInfo.getActId()).get(0);
+        // ActInfo localAct=MyApplication.getInstance().getDaoSession().getActInfoDao().queryRaw("act_id",actInfo.getActId()).get(0);
 
         // MyApplication.getInstance().getDaoSession().insert(actInfo);
         // Snackbar.make(toolbar,"数据库插入成功",Snackbar.LENGTH_LONG).show();
@@ -157,20 +163,20 @@ public class AdDetailActivity extends BaseActivity {
 
     @OnClick(R.id.join)
     void onclick() {
-        if(actInfo.getIsJoin()){
+        if (actInfo.getIsJoin()) {
             new MyStringRequest(Urls.ACTIVITY_JOIN_IN_CANCLE, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
                     //refreshJoinTv(false);
                     actInfo.setIsJoin(false);
-                    actInfo.setJoinedpeopel(actInfo.getJoinedpeopel()-1);
+                    actInfo.setJoinedpeopel(actInfo.getJoinedpeopel() - 1);
                     init(actInfo);
 
                 }
 
                 @Override
                 public void error(String desc) {
-                    toast(toolbar,desc);
+                    toast(toolbar, desc);
                 }
 
                 @Override
@@ -181,19 +187,19 @@ public class AdDetailActivity extends BaseActivity {
                     return map;
                 }
             });
-        }else{
+        } else {
             new MyStringRequest(Urls.ACTIVITY_JOIN_IN, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
                     //refreshJoinTv(true);
                     actInfo.setIsJoin(true);
-                    actInfo.setJoinedpeopel(actInfo.getJoinedpeopel()+1);
+                    actInfo.setJoinedpeopel(actInfo.getJoinedpeopel() + 1);
                     init(actInfo);
                 }
 
                 @Override
                 public void error(String desc) {
-                    toast(toolbar,desc);
+                    toast(toolbar, desc);
                 }
 
                 @Override
@@ -211,19 +217,19 @@ public class AdDetailActivity extends BaseActivity {
     @OnClick(R.id.collect_ll)
     void onclick1() {
 
-        if(actInfo.getIsCollect()){
+        if (actInfo.getIsCollect()) {
             new MyStringRequest(Urls.ACTIVITY_COLLECT_CANCLE, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
-                   // refreshCollectTv(false);
+                    // refreshCollectTv(false);
                     actInfo.setIsCollect(false);
-                    actInfo.setCollectTimes(actInfo.getCollectTimes()-1);
+                    actInfo.setCollectTimes(actInfo.getCollectTimes() - 1);
                     init(actInfo);
                 }
 
                 @Override
                 public void error(String desc) {
-                    toast(toolbar,desc);
+                    toast(toolbar, desc);
                 }
 
                 @Override
@@ -234,19 +240,19 @@ public class AdDetailActivity extends BaseActivity {
                     return map;
                 }
             });
-        }else{
+        } else {
             new MyStringRequest(Urls.ACTIVITY_COLLECT, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
-                   // refreshCollectTv(true);
+                    // refreshCollectTv(true);
                     actInfo.setIsCollect(true);
-                    actInfo.setCollectTimes(actInfo.getCollectTimes()+1);
+                    actInfo.setCollectTimes(actInfo.getCollectTimes() + 1);
                     init(actInfo);
                 }
 
                 @Override
                 public void error(String desc) {
-                    toast(toolbar,desc);
+                    toast(toolbar, desc);
                 }
 
                 @Override
@@ -260,21 +266,26 @@ public class AdDetailActivity extends BaseActivity {
         }
     }
 
-
-    public void refreshJoinTv(boolean flag){
+    @OnClick(R.id.qunliao)
+    public void qunLiao()
+    {
+        Intent intent = new Intent(AdDetailActivity.this,ChatActivity.class);
+        this.startActivity(intent);
+    }
+    public void refreshJoinTv(boolean flag) {
         actInfo.setIsJoin(flag);
         join.setSelected(flag);
         join.setText(flag ? "取消报名" : "去报名");
 
     }
 
-    public void refreshCollectTv(boolean flag){
+    public void refreshCollectTv(boolean flag) {
         actInfo.setIsCollect(flag);
         collect.setSelected(flag);
         if (flag) {
             myCollectTv.setText("已收藏");
             myCollectTv.setTextColor(getResources().getColor(R.color.colorAccent));
-            collectTv.setText(actInfo.getCollectTimes()+1+"");
+            collectTv.setText(actInfo.getCollectTimes() + 1 + "");
         } else {
             myCollectTv.setText("收藏");
             myCollectTv.setTextColor(getResources().getColor(R.color.textcolor));
@@ -282,11 +293,11 @@ public class AdDetailActivity extends BaseActivity {
     }
 
 
-    public void browse(){
+    public void browse() {
         new MyStringRequest(Urls.ACTIVITY_BROWSE, new InternetListener() {
             @Override
             public void success(JSONObject json) {
-                actInfo.setLookTimes(actInfo.getLookTimes()+1);
+                actInfo.setLookTimes(actInfo.getLookTimes() + 1);
                 init(actInfo);
             }
 
@@ -297,14 +308,12 @@ public class AdDetailActivity extends BaseActivity {
 
             @Override
             public Map<String, String> setParams() {
-                Map<String,String> map=new HashMap<>();
-                map.put("act_id",actInfo.getActId());
+                Map<String, String> map = new HashMap<>();
+                map.put("act_id", actInfo.getActId());
                 return map;
             }
         });
     }
-
-
 
 
 }

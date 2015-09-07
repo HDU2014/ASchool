@@ -1,12 +1,10 @@
 package com.hdu.tx.aschool.ui.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseFragment;
-import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.entity.MyTagEntity;
 import com.hdu.tx.aschool.net.InternetListener;
@@ -28,11 +25,9 @@ import com.hdu.tx.aschool.ui.View.TagView;
 import com.hdu.tx.aschool.ui.activity.AdDetailActivity;
 import com.hdu.tx.aschool.ui.activity.MainActivity;
 import com.hdu.tx.aschool.ui.adapter.LunBoAdapter;
-import com.hdu.tx.aschool.ui.adapter.TagAdapter;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,11 +68,14 @@ public class MainFragment extends BaseFragment {
     NestedScrollView nsv;
     private View rootView;
 
+
     private TagView[] tagViews=new TagView[3];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Nullable
@@ -112,6 +110,7 @@ public class MainFragment extends BaseFragment {
             @Override
             public void success(JSONObject json) {
                 List<ActInfo> infos = JSONHandler.json2ListAct(json);
+
 
                 if(infos.size()!=15)return;
                 List<ActInfo> data1 = infos.subList(1, 4);
@@ -158,7 +157,6 @@ public class MainFragment extends BaseFragment {
             }
         });
     }
-
 
     @Override
     public void onDestroyView() {
