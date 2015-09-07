@@ -21,7 +21,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:titleMarginStart="90dp"
-            app:title="@string/tuijie"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <RelativeLayout
                 android:id="@+id/fragment1"

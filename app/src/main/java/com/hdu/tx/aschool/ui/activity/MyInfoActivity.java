@@ -358,11 +358,10 @@ public class MyInfoActivity extends BaseActivity {
 
 
     public void getQiniuToken(final String path) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.USER_GET_UPTOKEN, new Response.Listener<String>() {
+        new MyStringRequest(Urls.USER_GET_UPTOKEN, new InternetListener() {
             @Override
-            public void onResponse(String s) {
+            public void success(JSONObject object) {
                 try {
-                    JSONObject object = new JSONObject(s);
                     if (object.getInt("result") == 200) {
                         String up_token = object.getString("up_token");
                         String img_key = object.getString("img_key");
@@ -378,20 +377,20 @@ public class MyInfoActivity extends BaseActivity {
 
                 }
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Log.i(TAG, volleyError.toString());
+            public void error(String desc) {
+
             }
-        }) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            public Map<String, String> setParams() {
                 Map<String, String> map = new HashMap<>();
                 map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
                 return map;
             }
-        };
-        getVolleyQueue().add(stringRequest);
+        });
+
     }
 
     public void updateImage(final String img_path, final String upToken, final String img_key) {
@@ -404,6 +403,7 @@ public class MyInfoActivity extends BaseActivity {
                     public void success(JSONObject desc) {
                         try {
                             toast(toolbar, desc.getString("desc"));
+
                             Log.i("TAG", desc.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();

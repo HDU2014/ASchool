@@ -13,6 +13,7 @@ public class ActInfo implements java.io.Serializable {
     private String title;
     private String actId;
     private String aid;
+    private String group_id;
     private String time;
     private String address;
     private String describe;
@@ -32,7 +33,7 @@ public class ActInfo implements java.io.Serializable {
         this.id = id;
     }
 
-    public ActInfo(Long id, String hostname, String imageUrl, String hostimageUrl, String title, String actId, String aid, String time, String address, String describe, String hostId, Integer lookTimes, Integer collectTimes, Integer totalpeopel, Integer joinedpeopel, Boolean isCollect, Boolean isJoin, Boolean isHost) {
+    public ActInfo(Long id, String hostname, String imageUrl, String hostimageUrl, String title, String actId, String aid, String group_id, String time, String address, String describe, String hostId, Integer lookTimes, Integer collectTimes, Integer totalpeopel, Integer joinedpeopel, Boolean isCollect, Boolean isJoin, Boolean isHost) {
         this.id = id;
         this.hostname = hostname;
         this.imageUrl = imageUrl;
@@ -40,6 +41,7 @@ public class ActInfo implements java.io.Serializable {
         this.title = title;
         this.actId = actId;
         this.aid = aid;
+        this.group_id = group_id;
         this.time = time;
         this.address = address;
         this.describe = describe;
@@ -107,6 +109,14 @@ public class ActInfo implements java.io.Serializable {
 
     public void setAid(String aid) {
         this.aid = aid;
+    }
+
+    public String getGroup_id() {
+        return group_id;
+    }
+
+    public void setGroup_id(String group_id) {
+        this.group_id = group_id;
     }
 
     public String getTime() {

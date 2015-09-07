@@ -35,6 +35,7 @@ import com.hdu.tx.aschool.easemod.db.UserDao;
 import com.hdu.tx.aschool.easemod.domain.Constant;
 import com.hdu.tx.aschool.easemod.domain.InviteMessage;
 import com.hdu.tx.aschool.easemod.domain.User;
+import com.hdu.tx.aschool.ui.activity.ChatActivity;
 import com.hdu.tx.aschool.ui.activity.LoginActivity;
 import com.hdu.tx.aschool.ui.activity.MainActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -149,14 +150,14 @@ public class ChatController {
                 public void run() {
                     // 如果正在与此用户的聊天页面
                     String st10 = mainActivity.getResources().getString(R.string.have_you_removed);
-//                    if (ChatActivity.activityInstance != null
-//                            && usernameList.contains(ChatActivity.activityInstance.getToChatUsername())) {
-//                        Toast.makeText(MainActivity.this, ChatActivity.activityInstance.getToChatUsername() + st10, 1)
-//                                .show();
-//                        ChatActivity.activityInstance.finish();
-//                    }
-//                    updateUnreadLabel();
-                    // 刷新ui
+                    if (ChatActivity.activityInstance != null
+                            && usernameList.contains(ChatActivity.activityInstance.getToChatUsername())) {
+                        Toast.makeText(mainActivity, ChatActivity.activityInstance.getToChatUsername() + st10, Toast.LENGTH_SHORT)
+                                .show();
+                        ChatActivity.activityInstance.finish();
+                    }
+                    updateUnreadLabel();
+//                    // 刷新ui
 //                    contactListFragment.refresh();
 //                    chatHistoryFragment.refresh();
                 }
@@ -471,13 +472,6 @@ public class ChatController {
                 groupUser.setHeader("");
                 userlist.put(Constant.GROUP_USERNAME, groupUser);
 
-                // 添加"聊天室"
-                User chatRoomItem = new User();
-                String strChatRoom = context.getString(R.string.chat_room);
-                chatRoomItem.setUsername(Constant.CHAT_ROOM);
-                chatRoomItem.setNick(strChatRoom);
-                chatRoomItem.setHeader("");
-                userlist.put(Constant.CHAT_ROOM, chatRoomItem);
 
                 // 添加"Robot"
                 User robotUser = new User();

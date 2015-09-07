@@ -41,12 +41,9 @@ public class JSONHandler {
                 info.setHostimageUrl(infoObject.getString("host_head_pic"));
                 info.setActId(infoObject.getString("act_id"));
                 info.setAid(infoObject.getString("aid"));
-
+                info.setGroup_id(infoObject.getString("group_id"));
                 info.setIsCollect(infoObject.getBoolean("is_collect"));
                 info.setIsJoin(infoObject.getBoolean("is_join"));
-
-//                info.setIsCollect(false);
-//                info.setIsJoin(true);
                 info.setIsHost(MyApplication.getInstance().getUserInfo().getUsername().equals(infoObject.getString("user_name"))
                 ?true:false);
                 actInfos.add(info);
@@ -55,6 +52,34 @@ public class JSONHandler {
         }catch (JSONException e){
             e.printStackTrace();
             Log.e(TAG+"1",e.toString());
+        }
+        return  null;
+    }
+
+
+    public static List<UserInfo> json2ListUser(JSONObject json) {
+        List<UserInfo> infos=new ArrayList<>();
+        try {
+            JSONArray array = json.getJSONArray("members");
+            for (int i = 0; i <array.length() ; i++) {
+                JSONObject object=array.getJSONObject(i);
+                UserInfo userInfo=new UserInfo();
+                userInfo.setNickname(object.getString("nick_name"));
+                userInfo.setUsername(object.getString("user_name"));
+                userInfo.setHeadimg_url(object.getString("head_pic"));
+                userInfo.setSex(object.getString("gender"));
+                userInfo.setSchool(object.getString("user_school"));
+                userInfo.setGrade(object.getString("user_grade"));
+                userInfo.setInstitute(object.getString("user_xueyuan"));
+                userInfo.setPhoneNumber(object.getString("phone_num"));
+                userInfo.setAge(object.getString("user_age"));
+                userInfo.setCity(object.getString("user_city"));
+                infos.add(userInfo);
+            }
+            return infos;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e(TAG+"2",e.toString());
         }
         return  null;
     }

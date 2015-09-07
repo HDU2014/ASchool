@@ -10,6 +10,8 @@ import com.easemob.util.EMLog;
 import com.easemob.util.HanziToPinyin;
 import com.hdu.tx.aschool.easemod.domain.User;
 import com.hdu.tx.aschool.easemod.utils.UserUtils;
+import com.hdu.tx.aschool.net.InternetListener;
+import com.hdu.tx.aschool.net.MyStringRequest;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
@@ -19,8 +21,11 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ParseManager {
 
@@ -111,6 +116,35 @@ public class ParseManager {
 			}
 		});
 	}
+
+	public void getContactInfos(List<String> usernames,final EMValueCallBack<List<User>> callback,int i) {
+
+		ParseQuery<ParseObject> pQuery = ParseQuery.getQuery(CONFIG_TABLE_NAME);
+		pQuery.whereContainedIn(CONFIG_USERNAME, usernames);
+		pQuery.findInBackground(new FindCallback<ParseObject>() {
+			@Override
+			public void done(List<ParseObject> arg0, ParseException arg1) {
+				if (arg0 != null) {
+					List<User> mList = new ArrayList<User>();
+					for (ParseObject pObject : arg0) {
+						User user = new User();
+						ParseFile parseFile = pObject.getParseFile(CONFIG_AVATAR);
+						if (parseFile != null) {
+							user.setAvatar(parseFile.getUrl());
+						}
+						user.setNick(pObject.getString(CONFIG_NICK));
+						user.setUsername(pObject.getString(CONFIG_USERNAME));
+						setUserHearder(user);
+						mList.add(user);
+					}
+					callback.onSuccess(mList);
+				} else {
+					callback.onError(arg1.getCode(), arg1.getMessage());
+				}
+			}
+		});
+	}
+
 
 	/**
      * 设置hearder属性，方便通讯中对联系人按header分类显示，以及通过右侧ABCD...字母栏快速定位联系人

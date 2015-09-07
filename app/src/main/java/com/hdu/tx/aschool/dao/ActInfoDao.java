@@ -30,17 +30,18 @@ public class ActInfoDao extends AbstractDao<ActInfo, Long> {
         public final static Property Title = new Property(4, String.class, "title", false, "TITLE");
         public final static Property ActId = new Property(5, String.class, "actId", false, "ACT_ID");
         public final static Property Aid = new Property(6, String.class, "aid", false, "AID");
-        public final static Property Time = new Property(7, String.class, "time", false, "TIME");
-        public final static Property Address = new Property(8, String.class, "address", false, "ADDRESS");
-        public final static Property Describe = new Property(9, String.class, "describe", false, "DESCRIBE");
-        public final static Property HostId = new Property(10, String.class, "hostId", false, "HOST_ID");
-        public final static Property LookTimes = new Property(11, Integer.class, "lookTimes", false, "LOOK_TIMES");
-        public final static Property CollectTimes = new Property(12, Integer.class, "collectTimes", false, "COLLECT_TIMES");
-        public final static Property Totalpeopel = new Property(13, Integer.class, "totalpeopel", false, "TOTALPEOPEL");
-        public final static Property Joinedpeopel = new Property(14, Integer.class, "joinedpeopel", false, "JOINEDPEOPEL");
-        public final static Property IsCollect = new Property(15, Boolean.class, "isCollect", false, "IS_COLLECT");
-        public final static Property IsJoin = new Property(16, Boolean.class, "isJoin", false, "IS_JOIN");
-        public final static Property IsHost = new Property(17, Boolean.class, "isHost", false, "IS_HOST");
+        public final static Property Group_id = new Property(7, String.class, "group_id", false, "GROUP_ID");
+        public final static Property Time = new Property(8, String.class, "time", false, "TIME");
+        public final static Property Address = new Property(9, String.class, "address", false, "ADDRESS");
+        public final static Property Describe = new Property(10, String.class, "describe", false, "DESCRIBE");
+        public final static Property HostId = new Property(11, String.class, "hostId", false, "HOST_ID");
+        public final static Property LookTimes = new Property(12, Integer.class, "lookTimes", false, "LOOK_TIMES");
+        public final static Property CollectTimes = new Property(13, Integer.class, "collectTimes", false, "COLLECT_TIMES");
+        public final static Property Totalpeopel = new Property(14, Integer.class, "totalpeopel", false, "TOTALPEOPEL");
+        public final static Property Joinedpeopel = new Property(15, Integer.class, "joinedpeopel", false, "JOINEDPEOPEL");
+        public final static Property IsCollect = new Property(16, Boolean.class, "isCollect", false, "IS_COLLECT");
+        public final static Property IsJoin = new Property(17, Boolean.class, "isJoin", false, "IS_JOIN");
+        public final static Property IsHost = new Property(18, Boolean.class, "isHost", false, "IS_HOST");
     };
 
 
@@ -63,17 +64,18 @@ public class ActInfoDao extends AbstractDao<ActInfo, Long> {
                 "\"TITLE\" TEXT," + // 4: title
                 "\"ACT_ID\" TEXT," + // 5: actId
                 "\"AID\" TEXT," + // 6: aid
-                "\"TIME\" TEXT," + // 7: time
-                "\"ADDRESS\" TEXT," + // 8: address
-                "\"DESCRIBE\" TEXT," + // 9: describe
-                "\"HOST_ID\" TEXT," + // 10: hostId
-                "\"LOOK_TIMES\" INTEGER," + // 11: lookTimes
-                "\"COLLECT_TIMES\" INTEGER," + // 12: collectTimes
-                "\"TOTALPEOPEL\" INTEGER," + // 13: totalpeopel
-                "\"JOINEDPEOPEL\" INTEGER," + // 14: joinedpeopel
-                "\"IS_COLLECT\" INTEGER," + // 15: isCollect
-                "\"IS_JOIN\" INTEGER," + // 16: isJoin
-                "\"IS_HOST\" INTEGER);"); // 17: isHost
+                "\"GROUP_ID\" TEXT," + // 7: group_id
+                "\"TIME\" TEXT," + // 8: time
+                "\"ADDRESS\" TEXT," + // 9: address
+                "\"DESCRIBE\" TEXT," + // 10: describe
+                "\"HOST_ID\" TEXT," + // 11: hostId
+                "\"LOOK_TIMES\" INTEGER," + // 12: lookTimes
+                "\"COLLECT_TIMES\" INTEGER," + // 13: collectTimes
+                "\"TOTALPEOPEL\" INTEGER," + // 14: totalpeopel
+                "\"JOINEDPEOPEL\" INTEGER," + // 15: joinedpeopel
+                "\"IS_COLLECT\" INTEGER," + // 16: isCollect
+                "\"IS_JOIN\" INTEGER," + // 17: isJoin
+                "\"IS_HOST\" INTEGER);"); // 18: isHost
     }
 
     /** Drops the underlying database table. */
@@ -122,59 +124,64 @@ public class ActInfoDao extends AbstractDao<ActInfo, Long> {
             stmt.bindString(7, aid);
         }
  
+        String group_id = entity.getGroup_id();
+        if (group_id != null) {
+            stmt.bindString(8, group_id);
+        }
+ 
         String time = entity.getTime();
         if (time != null) {
-            stmt.bindString(8, time);
+            stmt.bindString(9, time);
         }
  
         String address = entity.getAddress();
         if (address != null) {
-            stmt.bindString(9, address);
+            stmt.bindString(10, address);
         }
  
         String describe = entity.getDescribe();
         if (describe != null) {
-            stmt.bindString(10, describe);
+            stmt.bindString(11, describe);
         }
  
         String hostId = entity.getHostId();
         if (hostId != null) {
-            stmt.bindString(11, hostId);
+            stmt.bindString(12, hostId);
         }
  
         Integer lookTimes = entity.getLookTimes();
         if (lookTimes != null) {
-            stmt.bindLong(12, lookTimes);
+            stmt.bindLong(13, lookTimes);
         }
  
         Integer collectTimes = entity.getCollectTimes();
         if (collectTimes != null) {
-            stmt.bindLong(13, collectTimes);
+            stmt.bindLong(14, collectTimes);
         }
  
         Integer totalpeopel = entity.getTotalpeopel();
         if (totalpeopel != null) {
-            stmt.bindLong(14, totalpeopel);
+            stmt.bindLong(15, totalpeopel);
         }
  
         Integer joinedpeopel = entity.getJoinedpeopel();
         if (joinedpeopel != null) {
-            stmt.bindLong(15, joinedpeopel);
+            stmt.bindLong(16, joinedpeopel);
         }
  
         Boolean isCollect = entity.getIsCollect();
         if (isCollect != null) {
-            stmt.bindLong(16, isCollect ? 1L: 0L);
+            stmt.bindLong(17, isCollect ? 1L: 0L);
         }
  
         Boolean isJoin = entity.getIsJoin();
         if (isJoin != null) {
-            stmt.bindLong(17, isJoin ? 1L: 0L);
+            stmt.bindLong(18, isJoin ? 1L: 0L);
         }
  
         Boolean isHost = entity.getIsHost();
         if (isHost != null) {
-            stmt.bindLong(18, isHost ? 1L: 0L);
+            stmt.bindLong(19, isHost ? 1L: 0L);
         }
     }
 
@@ -195,17 +202,18 @@ public class ActInfoDao extends AbstractDao<ActInfo, Long> {
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // title
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // actId
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // aid
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // time
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // address
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // describe
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // hostId
-            cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11), // lookTimes
-            cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12), // collectTimes
-            cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13), // totalpeopel
-            cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14), // joinedpeopel
-            cursor.isNull(offset + 15) ? null : cursor.getShort(offset + 15) != 0, // isCollect
-            cursor.isNull(offset + 16) ? null : cursor.getShort(offset + 16) != 0, // isJoin
-            cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0 // isHost
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // group_id
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // time
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // address
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // describe
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // hostId
+            cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12), // lookTimes
+            cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13), // collectTimes
+            cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14), // totalpeopel
+            cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15), // joinedpeopel
+            cursor.isNull(offset + 16) ? null : cursor.getShort(offset + 16) != 0, // isCollect
+            cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0, // isJoin
+            cursor.isNull(offset + 18) ? null : cursor.getShort(offset + 18) != 0 // isHost
         );
         return entity;
     }
@@ -220,17 +228,18 @@ public class ActInfoDao extends AbstractDao<ActInfo, Long> {
         entity.setTitle(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setActId(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setAid(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setTime(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setAddress(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setDescribe(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setHostId(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setLookTimes(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
-        entity.setCollectTimes(cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12));
-        entity.setTotalpeopel(cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13));
-        entity.setJoinedpeopel(cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14));
-        entity.setIsCollect(cursor.isNull(offset + 15) ? null : cursor.getShort(offset + 15) != 0);
-        entity.setIsJoin(cursor.isNull(offset + 16) ? null : cursor.getShort(offset + 16) != 0);
-        entity.setIsHost(cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0);
+        entity.setGroup_id(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setTime(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setAddress(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setDescribe(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setHostId(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setLookTimes(cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12));
+        entity.setCollectTimes(cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13));
+        entity.setTotalpeopel(cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14));
+        entity.setJoinedpeopel(cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15));
+        entity.setIsCollect(cursor.isNull(offset + 16) ? null : cursor.getShort(offset + 16) != 0);
+        entity.setIsJoin(cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0);
+        entity.setIsHost(cursor.isNull(offset + 18) ? null : cursor.getShort(offset + 18) != 0);
      }
     
     /** @inheritdoc */

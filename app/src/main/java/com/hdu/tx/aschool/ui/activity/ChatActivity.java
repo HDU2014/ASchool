@@ -13,6 +13,7 @@
  */
 package com.hdu.tx.aschool.ui.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -113,7 +114,7 @@ import java.util.Map;
  * 聊天页面
  * 
  */
-public class ChatActivity extends BaseActivity implements OnClickListener, EMEventListener {
+public class ChatActivity extends Activity implements OnClickListener, EMEventListener {
 	private static final String TAG = "ChatActivity";
 	private static final int REQUEST_CODE_EMPTY_HISTORY = 2;
 	public static final int REQUEST_CODE_CONTEXT_MENU = 3;

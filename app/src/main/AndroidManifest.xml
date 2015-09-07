@@ -34,12 +34,13 @@
         <activity android:name=".ui.activity.PublishActivity"></activity>
         <activity android:name=".ui.activity.PartyIntrodue"></activity>
         <activity android:name=".ui.activity.OtherInfoActivity"></activity>
+        <activity android:name=".ui.activity.NewFriendsMsgActivity"></activity>
 
-        <activity android:name=".ui.activity.TestActivity"></activity>
-        <activity android:name=".ui.activity.UploadButtonDemoActivity"></activity>
-        <activity android:name=".ui.activity.ChatActivity"></activity>
-        <activity android:name=".ui.activity.BaiduMapActivity"></activity>
-        <activity android:name=".ui.activity.CallActivity"></activity>
+    <activity android:name=".ui.activity.TestActivity"></activity>
+    <activity android:name=".ui.activity.UploadButtonDemoActivity"></activity>
+    <activity android:name=".ui.activity.ChatActivity"></activity>
+    <activity android:name=".ui.activity.BaiduMapActivity"></activity>
+    <activity android:name=".ui.activity.CallActivity"></activity>
         <activity android:name=".ui.activity.ForwardMessageActivity"></activity>
         <activity android:name=".ui.activity.GroupDetailsActivity"></activity>
         <activity android:name=".ui.activity.ContextMenu"
