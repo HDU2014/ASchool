@@ -154,7 +154,7 @@
             <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:background="@drawable/adetail_address"
+                    android:src="@drawable/adetail_place"
                 />
             <TextView
                 android:id="@+id/address_tv"
@@ -180,85 +180,10 @@
             android:background="@color/line" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:padding="6dp">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/bottom4_select"/>
-
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center_vertical"-->
-                <!--android:gravity="left"-->
-                <!--android:padding="@dimen/addetail_item"-->
-                <!--android:text="@string/person_number"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:textSize="15sp"/>-->
-
-
-
-            <TextView
-                android:id="@+id/person_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black"
-                android:text="20/100"
-                android:textSize="15sp"/>
-
-            <Button
-                android:id="@+id/group_chat"
-                android:layout_width="60dp"
-                android:layout_height="20dp"
-                android:text="@string/qunliao"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/white"
-                android:background="@drawable/qunliao_bg"
-                />
-
-            <ImageView
-                style="@style/Right_arrow_image"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
-        </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/line" />
-    </LinearLayout>
-
-    <HorizontalScrollView
-        android:background="@color/white"
-        android:scrollbars="none"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.hdu.tx.aschool.ui.View.HeadImageView
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:id="@+id/headimages"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.hdu.tx.aschool.ui.View.HeadImageView>
-    </HorizontalScrollView>
 
 
     <LinearLayout
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -298,6 +223,83 @@
                 android:layout_marginRight="5dp"
                 android:layout_height="20dp" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="1dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="6dp">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bottom4_select"/>
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:gravity="left"-->
+                <!--android:padding="@dimen/addetail_item"-->
+                <!--android:text="@string/person_number"-->
+                <!--android:textColor="@color/colorPrimaryDark"-->
+                <!--android:textSize="15sp"/>-->
+
+
+
+                <TextView
+                    android:id="@+id/person_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+                    android:text="20/100"
+                    android:textSize="15sp"/>
+
+                <Button
+                    android:id="@+id/group_chat"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:text="@string/qunliao"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:background="@drawable/qunliao_bg"
+                    />
+
+                <ImageView
+                    style="@style/Right_arrow_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:background="@color/white"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.hdu.tx.aschool.ui.View.HeadImageView
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/headimages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.hdu.tx.aschool.ui.View.HeadImageView>
+        </HorizontalScrollView>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1px"

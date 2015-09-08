@@ -10,15 +10,15 @@
             android:title="兴趣标签"/>
         <item
             android:id="@+id/menu_settings"
-            android:icon="@drawable/ic_dashboard"
+            android:icon="@drawable/setting"
             android:title="设置"/>
         <item
             android:id="@+id/menu_about"
-            android:icon="@drawable/ic_dashboard"
+            android:icon="@drawable/about"
             android:title="关于"/>
         <item
             android:id="@+id/exit"
-            android:icon="@drawable/ic_dashboard"
+            android:icon="@drawable/exit"
             android:title="更换账户"/>
 
     </group>
