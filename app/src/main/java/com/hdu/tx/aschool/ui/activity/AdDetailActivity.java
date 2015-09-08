@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -155,20 +156,28 @@ public class AdDetailActivity extends BaseActivity {
     }
 
 
+    /**
+     * 进入主办方详细介绍
+     */
     @OnClick(R.id.hostname_tv)
     void getDetail() {
-        Intent intent = new Intent(AdDetailActivity.this, OtherInfoActivity.class).putExtra("host_id", actInfo.getHostId());
+        Intent intent = new Intent(AdDetailActivity.this, OtherInfoActivity.class).putExtra("host_username", actInfo.getHost_username());
         AdDetailActivity.this.startActivity(intent);
     }
 
 
+    /**
+     * 参加活动点击事件
+     */
     @OnClick(R.id.join)
     void onclick() {
         if (actInfo.getIsJoin()) {
+            showProgressDialog(this,R.string.canceling);
             new MyStringRequest(Urls.ACTIVITY_JOIN_IN_CANCLE, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
                     //refreshJoinTv(false);
+                    dismissProgressDialog();
                     actInfo.setIsJoin(false);
                     actInfo.setJoinedpeopel(actInfo.getJoinedpeopel() - 1);
                     init(actInfo);
@@ -177,6 +186,7 @@ public class AdDetailActivity extends BaseActivity {
 
                 @Override
                 public void error(String desc) {
+                    dismissProgressDialog();
                     toast(toolbar, desc);
                 }
 
@@ -189,10 +199,12 @@ public class AdDetailActivity extends BaseActivity {
                 }
             });
         } else {
+            showProgressDialog(this,R.string.joining_activity);
             new MyStringRequest(Urls.ACTIVITY_JOIN_IN, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
                     //refreshJoinTv(true);
+                    dismissProgressDialog();
                     actInfo.setIsJoin(true);
                     actInfo.setJoinedpeopel(actInfo.getJoinedpeopel() + 1);
                     init(actInfo);
@@ -200,6 +212,7 @@ public class AdDetailActivity extends BaseActivity {
 
                 @Override
                 public void error(String desc) {
+                    dismissProgressDialog();
                     toast(toolbar, desc);
                 }
 
@@ -215,14 +228,16 @@ public class AdDetailActivity extends BaseActivity {
     }
 
 
+    //收藏活动点击事件
     @OnClick(R.id.collect_ll)
     void onclick1() {
-
         if (actInfo.getIsCollect()) {
+            showProgressDialog(this,R.string.canceling);
             new MyStringRequest(Urls.ACTIVITY_COLLECT_CANCLE, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
                     // refreshCollectTv(false);
+                    dismissProgressDialog();
                     actInfo.setIsCollect(false);
                     actInfo.setCollectTimes(actInfo.getCollectTimes() - 1);
                     init(actInfo);
@@ -230,6 +245,7 @@ public class AdDetailActivity extends BaseActivity {
 
                 @Override
                 public void error(String desc) {
+                    dismissProgressDialog();
                     toast(toolbar, desc);
                 }
 
@@ -242,10 +258,12 @@ public class AdDetailActivity extends BaseActivity {
                 }
             });
         } else {
+            showProgressDialog(this,R.string.submiting);
             new MyStringRequest(Urls.ACTIVITY_COLLECT, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
                     // refreshCollectTv(true);
+                    dismissProgressDialog();
                     actInfo.setIsCollect(true);
                     actInfo.setCollectTimes(actInfo.getCollectTimes() + 1);
                     init(actInfo);
@@ -253,6 +271,7 @@ public class AdDetailActivity extends BaseActivity {
 
                 @Override
                 public void error(String desc) {
+                    dismissProgressDialog();
                     toast(toolbar, desc);
                 }
 
@@ -268,27 +287,12 @@ public class AdDetailActivity extends BaseActivity {
     }
 
 
-    public void refreshJoinTv(boolean flag) {
-        actInfo.setIsJoin(flag);
-        join.setSelected(flag);
-        join.setText(flag ? "取消报名" : "去报名");
-
-    }
-
-    public void refreshCollectTv(boolean flag) {
-        actInfo.setIsCollect(flag);
-        collect.setSelected(flag);
-        if (flag) {
-            myCollectTv.setText("已收藏");
-            myCollectTv.setTextColor(getResources().getColor(R.color.colorAccent));
-            collectTv.setText(actInfo.getCollectTimes() + 1 + "");
-        } else {
-            myCollectTv.setText("收藏");
-            myCollectTv.setTextColor(getResources().getColor(R.color.textcolor));
-        }
-    }
 
 
+
+    /**
+     * 浏览活动的网络请求
+     */
     public void browse() {
         new MyStringRequest(Urls.ACTIVITY_BROWSE, new InternetListener() {
             @Override
@@ -312,8 +316,21 @@ public class AdDetailActivity extends BaseActivity {
     }
 
 
+    /**
+     * 群聊点击事件
+     */
     @OnClick(R.id.group_chat)
     void onclick2() {
+        if(!actInfo.getIsJoin()){
+            Snackbar.make(toolbar,R.string.sorry_you_not_join,Snackbar.LENGTH_LONG).setAction(R.string.goto_join,
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onclick();
+                        }
+                    }).show();
+            return;
+        }
         String username = actInfo.getGroup_id();
         // 进入聊天页面
         Intent intent = new Intent(this, ChatActivity.class);
@@ -323,6 +340,9 @@ public class AdDetailActivity extends BaseActivity {
     }
 
 
+    /**
+     * 设置群聊成员的图像
+     */
     public void setGroupMembers() {
         new MyStringRequest(Urls.USER_GROUP_MEMBERS, new InternetListener() {
             @Override
@@ -346,13 +366,4 @@ public class AdDetailActivity extends BaseActivity {
     }
 
 
-    public List<UserInfo> getDate() {
-        List<UserInfo> userInfos=new ArrayList<>();
-        for (int i = 0; i <20 ; i++) {
-            UserInfo user=new UserInfo();
-            user.setHeadimg_url(MyStrings.AVATARS[new Random().nextInt(MyStrings.AVATARS.length-1)]);
-            userInfos.add(user);
-        }
-        return userInfos;
-    }
 }

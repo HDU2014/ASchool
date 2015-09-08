@@ -8,11 +8,13 @@ import de.greenrobot.daogenerator.ToMany;
 
 public class LeaseDaoGrenerator {
     public static void main(String args[]) throws Exception {
-        Schema schema = new Schema(11,"com.hdu.tx.aschool.dao");
+        Schema schema = new Schema(12,"com.hdu.tx.aschool.dao");
         createUserDao(schema);
         createActiDao(schema);
-       // new DaoGenerator().generateAll(schema, "D://andorid/hdu2014/ASchool/app/src/main/java");
-        new DaoGenerator().generateAll(schema, "F://APP/androidApp/ASchool-master/app/src/main/java");
+        //new DaoGenerator().generateAll(schema, "D://andorid/hdu2014/ASchool/app/src/main/java");
+       // new DaoGenerator().generateAll(schema, "F://APP/androidApp/ASchool-master/app/src/main/java");
+        new DaoGenerator().generateAll(schema, "C://Users/Administrator.USER-20150411XJ/Desktop/app/ASchool-dev/app/src/main/java");
+
     }
 
     public static void  createUserDao(Schema schema){
@@ -46,6 +48,7 @@ public class LeaseDaoGrenerator {
         userInfo.addStringProperty("actId");
         userInfo.addStringProperty("aid");
         userInfo.addStringProperty("group_id");
+        userInfo.addStringProperty("host_username");
 
         userInfo.addStringProperty("time");
         userInfo.addStringProperty("address");
@@ -59,7 +62,6 @@ public class LeaseDaoGrenerator {
         Property iscollect=userInfo.addBooleanProperty("isCollect").getProperty();
         userInfo.addBooleanProperty("isJoin");
         userInfo.addBooleanProperty("isHost");
-
         userInfo.implementsInterface("java.io.Serializable");
     }
 

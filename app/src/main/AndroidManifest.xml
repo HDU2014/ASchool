@@ -8,9 +8,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.DesignDemo">
-        <activity
-            android:name=".ui.activity.SplashActivity"
-           >
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,14 +34,15 @@
         <activity android:name=".ui.activity.OtherInfoActivity"></activity>
         <activity android:name=".ui.activity.NewFriendsMsgActivity"></activity>
 
-    <activity android:name=".ui.activity.TestActivity"></activity>
-    <activity android:name=".ui.activity.UploadButtonDemoActivity"></activity>
-    <activity android:name=".ui.activity.ChatActivity"></activity>
-    <activity android:name=".ui.activity.BaiduMapActivity"></activity>
-    <activity android:name=".ui.activity.CallActivity"></activity>
+        <activity android:name=".ui.activity.TestActivity"></activity>
+        <activity android:name=".ui.activity.UploadButtonDemoActivity"></activity>
+        <activity android:name=".ui.activity.ChatActivity"></activity>
+        <activity android:name=".ui.activity.BaiduMapActivity"></activity>
+        <activity android:name=".ui.activity.CallActivity"></activity>
         <activity android:name=".ui.activity.ForwardMessageActivity"></activity>
         <activity android:name=".ui.activity.GroupDetailsActivity"></activity>
-        <activity android:name=".ui.activity.ContextMenu"
+        <activity
+            android:name=".ui.activity.ContextMenu"
             android:theme="@style/MyDialogStyle"></activity>
         <activity android:name=".ui.activity.GroupPickContactsActivity"></activity>
         <activity android:name=".ui.activity.PickContactNoCheckboxActivity"></activity>
@@ -53,7 +52,8 @@
         <activity android:name=".ui.activity.NewGroupActivity"></activity>
         <activity android:name=".ui.activity.PublicGroupsActivity"></activity>
         <activity android:name=".ui.activity.PublicGroupsSeachActivity"></activity>
-        <activity android:name=".ui.activity.ShowBigImage"
+        <activity
+            android:name=".ui.activity.ShowBigImage"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"></activity>
         <activity android:name=".ui.activity.ShowNormalFileActivity"></activity>
@@ -62,7 +62,8 @@
         <activity android:name=".ui.activity.RobotsActivity"></activity>
         <activity android:name=".common.view.EditActivity"></activity>
         <activity android:name=".common.view.ExitGroupDialog"></activity>
-        <activity android:name=".common.view.AlertDialog"
+        <activity
+            android:name=".common.view.AlertDialog"
             android:theme="@style/MyDialogStyle"></activity>
 
         <activity
@@ -75,22 +76,130 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
 
-
         <!-- 声明sdk所需的service -->
-        <service android:name="com.easemob.chat.EMChatService"/>
+        <service android:name="com.easemob.chat.EMChatService" />
         <!-- 声明sdk所需的receiver -->
         <receiver android:name="com.easemob.chat.EMMonitorReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <data android:scheme="package"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
 
 
+        <receiver
+            android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
+            android:exported="false"></receiver>
+
+        <receiver
+            android:name="com.umeng.message.SystemReceiver"
+            android:process=":push">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.umeng.message.MessageReceiver"
+            android:process=":push">
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- 监听宿主选举的广播 -->
+        <receiver
+            android:name="com.umeng.message.ElectionReceiver"
+            android:process=":push">
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.ELECTION_RESULT_V4" />
+                <category android:name="umeng" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 监听注册的广播 -->
+        <!-- 【应用包名】字符串需要替换成本应用的应用包名 -->
+        <receiver
+            android:name="com.umeng.message.RegistrationReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.hdu.tx.aschool.intent.action.COMMAND" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.umeng.message.UmengMessageBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- Umeng的长连服务，用来建立推送的长连接的 -->
+        <!-- 【应用包名】字符串需要替换成本应用的应用包名 -->
+        <service
+            android:name="com.umeng.message.UmengService"
+            android:exported="true"
+            android:label="PushService"
+            android:process=":push">
+            <intent-filter>
+                <action android:name=".intent.action.START" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name=".intent.action.COCKROACH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.PING_V4" />
+                <category android:name="umeng" />
+            </intent-filter>
+        </service>
+        <!-- Umeng的消息接收服务 -->
+        <service
+            android:name="com.umeng.message.UmengIntentService"
+            android:process=":push" />
+        <!-- Umeng的消息路由服务 -->
+        <service
+            android:name="com.umeng.message.UmengMessageIntentReceiverService"
+            android:exported="true"
+            android:process=":push">
+            <intent-filter>
+                <action android:name="org.android.agoo.client.MessageReceiverService" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.android.agoo.client.ElectionReceiverService" />
+            </intent-filter>
+        </service>
+
+        <!-- v2.4.1添加的Service，Umeng的消息接收后的处理服务 -->
+        <service
+            android:name="com.umeng.message.UmengMessageCallbackHandlerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.umeng.messge.registercallback.action" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.unregistercallback.action" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.message.handler.action" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.autoupdate.handler.action" />
+            </intent-filter>
+        </service>
+
+        <!-- V1.3.0添加的service，负责下载通知的资源 -->
+        <service android:name="com.umeng.message.UmengDownloadResourceService" />
 
         <!-- 设置环信应用的appkey -->
         <meta-data
@@ -99,8 +208,25 @@
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="53912a3156240b01a7075ed1" >
+            android:value="55ee93f9e0f55a3c9900023d"></meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="neice" />
+
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="810782d3116c72959b105b76e0bdaacb" >
         </meta-data>
+
+        <!--友盟自动更新设置-->
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -133,5 +259,16 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 </manifest>

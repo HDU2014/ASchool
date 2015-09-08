@@ -1,12 +1,10 @@
 package com.hdu.tx.aschool.ui.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +14,13 @@ import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseFragment;
-import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.ActInfo;
-import com.hdu.tx.aschool.entity.MyTagEntity;
 import com.hdu.tx.aschool.net.InternetListener;
 import com.hdu.tx.aschool.net.JSONHandler;
 import com.hdu.tx.aschool.net.MyStringRequest;
 import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.ui.IEvent.LunBoOnClickListener;
-import com.hdu.tx.aschool.ui.View.TagView;
+import com.hdu.tx.aschool.ui.View.TagsView;
 import com.hdu.tx.aschool.ui.activity.AdDetailActivity;
 import com.hdu.tx.aschool.ui.activity.MainActivity;
 import com.hdu.tx.aschool.ui.adapter.LunBoAdapter;
@@ -32,7 +28,6 @@ import com.hdu.tx.aschool.ui.adapter.TagAdapter;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +41,7 @@ import butterknife.ButterKnife;
 public class MainFragment extends BaseFragment {
 
 
-    private static final String TAG ="MainFragment" ;
+    private static final String TAG = "MainFragment";
     @Bind(R.id.vp)
     ViewPager vp;
     @Bind(R.id.tv_title)
@@ -71,9 +66,12 @@ public class MainFragment extends BaseFragment {
     LinearLayout linearLayout;
     @Bind(R.id.nsv)
     NestedScrollView nsv;
+    @Bind(R.id.tags_view)
+    TagsView tagsView;
+
     private View rootView;
 
-    private TagView[] tagViews=new TagView[3];
+    private TagAdapter tagAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,26 +82,16 @@ public class MainFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        tagViews[0]= (TagView) rootView.findViewById(R.id.tag1);
-        tagViews[1]= (TagView) rootView.findViewById(R.id.tag2);
-        tagViews[2]= (TagView) rootView.findViewById(R.id.tag3);
-        for (int i = 0; i <3 ; i++) {
-            tagViews[i].initView();
-        }
         ButterKnife.bind(this, rootView);
+        tagsView.initView();
         return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         getLunBoAct();
         initGetAct();
-    }
-
-    private void getTagData() {
-
     }
 
     public void initGetAct() {
@@ -112,36 +100,8 @@ public class MainFragment extends BaseFragment {
             @Override
             public void success(JSONObject json) {
                 List<ActInfo> infos = JSONHandler.json2ListAct(json);
-
-                if(infos.size()!=15)return;
-                List<ActInfo> data1 = infos.subList(1, 4);
-                List<ActInfo> data2 = infos.subList(3, 6);
-                List<ActInfo> data3 = infos.subList(6, 9);
-
-
-
-                MyTagEntity tagEntitiy = new MyTagEntity();
-                tagEntitiy.setActInfos(data1);
-                MyItemOnClickListener listener=new MyItemOnClickListener(tagEntitiy);
-                tagViews[0].setTag("猜你喜欢");
-                tagViews[0].setActDate(tagEntitiy);
-                tagViews[0].setListener(listener);
-
-
-                MyTagEntity tagEntitiy1 = new MyTagEntity();
-                tagEntitiy1.setActInfos(data2);
-                MyItemOnClickListener listener1=new MyItemOnClickListener(tagEntitiy1);
-                tagViews[1].setTag("运动");
-                tagViews[1].setActDate(tagEntitiy1);
-                tagViews[1].setOnClickListener(listener1);
-
-                MyTagEntity tagEntitiy2 = new MyTagEntity();
-                tagEntitiy2.setActInfos(data3);
-                MyItemOnClickListener listener2=new MyItemOnClickListener(tagEntitiy2);
-                tagViews[2].setTag("学习");
-                tagViews[2].setActDate(tagEntitiy2);
-                tagViews[2].setOnClickListener(listener2);
-
+                if(tagsView==null)return;
+               tagsView.setDate(infos);
             }
 
             @Override
@@ -159,6 +119,12 @@ public class MainFragment extends BaseFragment {
         });
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
 
     @Override
     public void onDestroyView() {
@@ -180,7 +146,7 @@ public class MainFragment extends BaseFragment {
 
             @Override
             public Map<String, String> setParams() {
-                Map<String,String> map=new HashMap<>();
+                Map<String, String> map = new HashMap<>();
                 return map;
             }
         });
@@ -196,33 +162,4 @@ public class MainFragment extends BaseFragment {
         });
     }
 
-
-    public class MyItemOnClickListener implements View.OnClickListener{
-
-        private MyTagEntity tag;
-        public MyItemOnClickListener(MyTagEntity tag) {
-            this.tag=tag;
-        }
-
-        @Override
-        public void onClick(View v) {
-            Intent intent=new Intent(getActivity(),AdDetailActivity.class);
-            switch (v.getId()){
-                case R.id.act_img1:
-                    intent.putExtra("activity",tag.getActInfos().get(0));
-                    startActivity(intent);
-                    break;
-                case R.id.act_img2:
-                    intent.putExtra("activity",tag.getActInfos().get(1));
-                    startActivity(intent);
-                    break;
-                case R.id.act_img3:
-                    intent.putExtra("activity",tag.getActInfos().get(2));
-                    startActivity(intent);
-                    break;
-                case R.id.more_tv:
-                    break;
-            }
-        }
-    }
 }

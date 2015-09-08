@@ -36,6 +36,7 @@
             
             <include 
                 android:id="@+id/search_bar_view"
+
                 layout="@layout/search_bar_with_padding"/>
 
 
@@ -60,8 +61,8 @@
  			
             <TextView
                 android:id="@+id/floating_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/show_head_toast_bg"
                 android:gravity="center"

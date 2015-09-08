@@ -44,6 +44,7 @@ public class JSONHandler {
                 info.setGroup_id(infoObject.getString("group_id"));
                 info.setIsCollect(infoObject.getBoolean("is_collect"));
                 info.setIsJoin(infoObject.getBoolean("is_join"));
+                info.setHost_username(infoObject.getString("user_name"));
                 info.setIsHost(MyApplication.getInstance().getUserInfo().getUsername().equals(infoObject.getString("user_name"))
                 ?true:false);
                 actInfos.add(info);

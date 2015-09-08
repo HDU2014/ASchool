@@ -6,8 +6,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_top_bar"
-        android:background="@color/top_bar_normal_bg"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
         android:gravity="center_vertical" >
 
         <LinearLayout
@@ -145,6 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:layout_marginTop="6dp"
+                android:visibility="gone"
                 android:background="@drawable/btn_bottom_selector" >
 
                 <TextView
@@ -217,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/open_icon"
+                    android:src="@drawable/open_icon"
                     android:visibility="invisible" />
 
                 <ImageView

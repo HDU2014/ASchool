@@ -14,6 +14,7 @@ import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.entity.MyTagEntity;
 import com.hdu.tx.aschool.ui.activity.AdDetailActivity;
+import com.hdu.tx.aschool.ui.adapter.TagAdapter;
 import com.hdu.tx.aschool.ui.fragment.MainFragment;
 import com.squareup.picasso.Picasso;
 
@@ -74,27 +75,27 @@ public class TagView extends CardView {
         }
     }
 
-    public void setActDate(MyTagEntity tagEntity){
-        this.tagEntity=tagEntity;
+    public void setActDate(List<ActInfo> tagEntity){
+        if(tagEntity.size()<3)return;
         for (int i = 0; i <3 ; i++) {
-            String url=tagEntity.getActInfos().get(i).getImageUrl();
+            String url=tagEntity.get(i).getImageUrl();
             if(url!=null&&!url.equals("")){
                 try {
-                    Picasso.with(context).load(tagEntity.getActInfos().get(i).getImageUrl()).into(imageViews[i]);
+                    Picasso.with(context).load(tagEntity.get(i).getImageUrl()).into(imageViews[i]);
                 }catch (IllegalArgumentException e){
                     Log.e(TAG,e.toString());
                 }
             }
-            title[i].setText(tagEntity.getActInfos().get(i).getTitle());
-
+            title[i].setText(tagEntity.get(i).getTitle());
         }
     }
 
 
-    public void setListener(MainFragment.MyItemOnClickListener listener){
+    public void setListener(TagsView.MyItemOnClickListener listener){
         for (int i = 0; i <3 ; i++) {
             imageViews[i].setOnClickListener(listener);
         }
+        more_tv.setOnClickListener(listener);
     }
 
 }

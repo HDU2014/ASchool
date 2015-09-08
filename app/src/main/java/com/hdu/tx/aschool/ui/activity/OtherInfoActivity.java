@@ -82,6 +82,7 @@ public class OtherInfoActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +91,7 @@ public class OtherInfoActivity extends BaseActivity {
         });
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        hostid = getIntent().getStringExtra("host_id");
+        hostid = getIntent().getStringExtra("host_username");
         getUserInfo(hostid);
     }
 
@@ -117,7 +118,7 @@ public class OtherInfoActivity extends BaseActivity {
 
     public void getUserInfo(final String hostid) {
 
-        new MyStringRequest(Urls.USER_QUERY_BYID, new InternetListener() {
+        new MyStringRequest(Urls.USER_QUERY_BYUSERNAME, new InternetListener() {
             @Override
             public void success(JSONObject json) {
                 userInfo = JSONHandler.json2UserInfo(json);
@@ -136,7 +137,7 @@ public class OtherInfoActivity extends BaseActivity {
             @Override
             public Map<String, String> setParams() {
                 Map<String, String> map = new HashMap<>();
-                map.put("user_id", hostid);
+                map.put("user_name", hostid);
                 return map;
             }
         });

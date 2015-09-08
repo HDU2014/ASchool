@@ -536,9 +536,7 @@ public abstract class HXSDKHelper {
         if(isSyncingContactsWithServer){
             return;
         }
-        
         isSyncingContactsWithServer = true;
-        
         new Thread(){
             @Override
             public void run(){

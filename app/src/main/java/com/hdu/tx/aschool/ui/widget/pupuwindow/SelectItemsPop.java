@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class SelectItemsPop extends PopupWindow{
     private ListView listView;
 
-    public SelectItemsPop(Context context,ArrayList<String> data,View superview) {
+    public SelectItemsPop(Context context,String[] data,View superview) {
         super(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.selectitem, null);

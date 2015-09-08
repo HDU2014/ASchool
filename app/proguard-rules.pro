@@ -16,3 +16,4 @@
 #   public *;
 #}
 -keep class com.hdu.tx.aschool.easemod.utils.SmileUtils{*;}
+-keepclassmembers class * {   public <init>(org.json.JSONObject);}

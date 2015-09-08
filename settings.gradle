@@ -1,1 +1,1 @@
-include ':app',':mylibrary', ':leasedaogenerator'
+include ':app', ':leasedaogenerator', ':mylibrary'

@@ -15,15 +15,12 @@
 
         <include layout="@layout/banner"></include>
 
-        <include layout="@layout/cardview_tag"
-            android:id="@+id/tag1"></include>
-
-        <include layout="@layout/cardview_tag"
-            android:id="@+id/tag2"></include>
-
-        <include layout="@layout/cardview_tag"
-            android:id="@+id/tag3"></include>
-
+        <com.hdu.tx.aschool.ui.View.TagsView
+            android:id="@+id/tags_view"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.hdu.tx.aschool.ui.View.TagsView>
 
     </LinearLayout>
 

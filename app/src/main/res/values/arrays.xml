@@ -13,16 +13,26 @@
 
     <string-array name="activity_type">
         <item>不限类型</item>
-        <item>运动</item>
-        <item>讲座</item>
-        <item>节日</item>
-        <item>创业</item>
-        <item>旅行</item>
-        <item>文艺</item>
-        <item>棋牌</item>
-        <item>骑行</item>
         <item>招聘</item>
-        <item>沙龙</item>
+        <item>讲座</item>
+        <item>晚会</item>
+        <item>科技竞赛</item>
+        <item>文体竞赛</item>
+        <item>社团招新</item>
+        <item>招志愿者</item>
+        <item>其他</item>
+    </string-array>
+
+
+    <string-array name="personal_type">
+        <item>不限类型</item>
+        <item>运动</item>
+        <item>旅行</item>
+        <item>学术</item>
+        <item>派对</item>
+        <item>桌游</item>
+        <item>吃货</item>
+        <item>找队友</item>
         <item>其他</item>
     </string-array>
 
@@ -45,6 +55,4 @@
         <item>博士</item>
         <item>保密</item>
     </string-array>
-
-
 </resources>

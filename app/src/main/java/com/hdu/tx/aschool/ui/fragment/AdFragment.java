@@ -85,21 +85,13 @@ public class AdFragment extends BaseFragment {
 
     @OnClick(R.id.schools)
     void onclick1() {
-        final ArrayList<String> schoolsData = new ArrayList<>();
-        schoolsData.add("不限学校");
-        schoolsData.add("杭州电子科技大学");
-        schoolsData.add("浙江理工大学");
-        schoolsData.add("浙江传媒学院");
-        schoolsData.add("中国计量学院");
-        schoolsData.add("浙江水利水电学院");
-        schoolsData.add("杭州师范大学");
-        schoolsData.add("浙江工商大学");
+        final String[] schoolsData = getResources().getStringArray(R.array.activity_schools);
         final SelectItemsPop pop = new SelectItemsPop(getActivity(), schoolsData, schools);
 
         pop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                schools.setText(schoolsData.get(position));
+                schools.setText(schoolsData[position]);
                 pop.dismiss();
             }
         });
@@ -108,25 +100,13 @@ public class AdFragment extends BaseFragment {
 
     @OnClick(R.id.types)
     void onclick2() {
-        final ArrayList<String> schoolsData = new ArrayList<>();
-        schoolsData.add("不限类型");
-        schoolsData.add("运动");
-        schoolsData.add("讲座");
-        schoolsData.add("节日");
-        schoolsData.add("创业");
-        schoolsData.add("旅行");
-        schoolsData.add("文艺");
-        schoolsData.add("棋牌");
-        schoolsData.add("骑行");
-        schoolsData.add("招聘");
-        schoolsData.add("沙龙");
-        schoolsData.add("其他");
+        final String[] schoolsData = getResources().getStringArray(R.array.activity_type);
         final SelectItemsPop pop = new SelectItemsPop(getActivity(), schoolsData, types);
 
         pop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                types.setText(schoolsData.get(position));
+                types.setText(schoolsData[position]);
                 pop.dismiss();
             }
         });
@@ -134,19 +114,13 @@ public class AdFragment extends BaseFragment {
 
     @OnClick(R.id.time)
     void onclick3() {
-        final ArrayList<String> schoolsData = new ArrayList<>();
-        schoolsData.add("不限时间");
-        schoolsData.add("3小时内");
-        schoolsData.add("1天内");
-        schoolsData.add("1周内");
-        schoolsData.add("1个月内");
-        schoolsData.add("其他");
+        final String[] schoolsData = getResources().getStringArray(R.array.activity_time);
         final SelectItemsPop pop = new SelectItemsPop(getActivity(), schoolsData, time);
 
         pop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                time.setText(schoolsData.get(position));
+                time.setText(schoolsData[position]);
                 pop.dismiss();
             }
         });

@@ -289,4 +289,8 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 		bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
 		return baos.toByteArray();
 	}
+
+	public void back(){
+		onBackPressed();
+	}
 }

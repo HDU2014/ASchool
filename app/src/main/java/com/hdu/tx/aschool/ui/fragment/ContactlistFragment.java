@@ -82,7 +82,7 @@ public class ContactlistFragment extends Fragment {
 	private Sidebar sidebar;
 	private InputMethodManager inputMethodManager;
 	private List<String> blackList;
-	ImageButton clearSearch;
+	ImageView clearSearch;
 	EditText query;
 	HXContactSyncListener contactSyncListener;
 	HXBlackListSyncListener blackListSyncListener;
@@ -180,7 +180,7 @@ public class ContactlistFragment extends Fragment {
 		//搜索框
 		query = (EditText) getView().findViewById(R.id.query);
 		query.setHint(R.string.search);
-		clearSearch = (ImageButton) getView().findViewById(R.id.search_clear);
+		clearSearch = (ImageView) getView().findViewById(R.id.search_clear);
 		query.addTextChangedListener(new TextWatcher() {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				adapter.getFilter().filter(s);
@@ -441,6 +441,22 @@ public class ContactlistFragment extends Fragment {
 	private void getContactList() {
 		contactList.clear();
 		Map<String, User> users = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getContactList();
+		if(users.size()==0){
+			// 添加user"申请与通知"
+			User newFriends = new User();
+			newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
+			String strChat = getActivity().getString(R.string.Application_and_notify);
+			newFriends.setNick(strChat);
+
+			users.put(Constant.NEW_FRIENDS_USERNAME, newFriends);
+			// 添加"群聊"
+			User groupUser = new User();
+			String strGroup = getActivity().getString(R.string.group_chat);
+			groupUser.setUsername(Constant.GROUP_USERNAME);
+			groupUser.setNick(strGroup);
+			groupUser.setHeader("");
+			users.put(Constant.GROUP_USERNAME, groupUser);
+		}
 		Iterator<Entry<String, User>> iterator = users.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<String, User> entry = iterator.next();
@@ -486,11 +502,12 @@ public class ContactlistFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-//	    if(((MainActivity)getActivity()).isConflict){
-//	    	outState.putBoolean("isConflict", true);
-//	    }else if(((MainActivity)getActivity()).getCurrentAccountRemoved()){
-//	    	outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
-//	    }
+		if(chatController==null)return;
+	    if(chatController.isConflict){
+	    	outState.putBoolean("isConflict", true);
+	    }else if(chatController.getCurrentAccountRemoved()){
+	    	outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
+	    }
 	    
 	}
 	

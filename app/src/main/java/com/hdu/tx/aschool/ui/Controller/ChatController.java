@@ -272,10 +272,10 @@ public class ChatController {
                     asyncFetchGroupsFromServer();
                 }
 
-                if(!contactSynced){
-                    asyncFetchContactsFromServer();
-                }
-
+//                if(!contactSynced){
+//                    asyncFetchContactsFromServer();
+//                }
+                asyncFetchContactsFromServer();
                 if(!HXSDKHelper.getInstance().isBlackListSyncedWithServer()){
                     asyncFetchBlackListFromServer();
                 }

@@ -74,6 +74,7 @@ import com.hdu.tx.aschool.easemod.utils.UserUtils;
 import com.hdu.tx.aschool.ui.activity.BaiduMapActivity;
 import com.hdu.tx.aschool.ui.activity.ChatActivity;
 import com.hdu.tx.aschool.ui.activity.ContextMenu;
+import com.hdu.tx.aschool.ui.activity.OtherInfoActivity;
 import com.hdu.tx.aschool.ui.activity.ShowBigImage;
 import com.hdu.tx.aschool.ui.activity.ShowNormalFileActivity;
 import com.hdu.tx.aschool.ui.activity.UserProfileActivity;
@@ -577,9 +578,7 @@ public class MessageAdapter extends BaseAdapter{
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setClass(context, UserProfileActivity.class);
-				intent.putExtra("username", message.getFrom());
+				Intent intent = new Intent(context, OtherInfoActivity.class).putExtra("host_username", message.getFrom());
 				context.startActivity(intent);
 			}
 		});

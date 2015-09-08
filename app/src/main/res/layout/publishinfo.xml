@@ -16,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/addimg" />
-
+            android:src="@drawable/public_bg" />
         >
     </LinearLayout>
 

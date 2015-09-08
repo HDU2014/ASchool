@@ -23,6 +23,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -57,7 +58,7 @@ public class ChatAllHistoryFragment extends Fragment implements OnClickListener 
 	private ListView listView;
 	private ChatAllHistoryAdapter adapter;
 	private EditText query;
-	private ImageButton clearSearch;
+	private ImageView clearSearch;
 	public RelativeLayout errorItem;
 
 	private ChatController chatController;
@@ -136,7 +137,7 @@ public class ChatAllHistoryFragment extends Fragment implements OnClickListener 
 		String strSearch = getResources().getString(R.string.search);
 		query.setHint(strSearch);
 		// 搜索框中清除button
-		clearSearch = (ImageButton) getView().findViewById(R.id.search_clear);
+		clearSearch = (ImageView) getView().findViewById(R.id.search_clear);
 		query.addTextChangedListener(new TextWatcher() {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				adapter.getFilter().filter(s);

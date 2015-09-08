@@ -110,7 +110,7 @@ public class RobotsActivity extends BaseActivity {
 		});
 	}
 
-	private void getRobotNamesFromServer() {
+	private void getRobotNamesFromServer()  {
 		asyncGetRobotNamesFromServer(new EMValueCallBack<List<EMContact>>() {
 
 			@Override
