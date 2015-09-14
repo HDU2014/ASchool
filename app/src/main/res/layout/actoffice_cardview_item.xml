@@ -71,7 +71,7 @@
             android:layout_toRightOf="@id/act_image_iv"
             android:layout_below="@id/time_iv"
             android:layout_width="15dp"
-            android:src="@drawable/location"
+            android:src="@drawable/adetail_place"
             android:layout_height="15dp" />
 
         <ImageView

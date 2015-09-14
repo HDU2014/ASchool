@@ -3,6 +3,7 @@ package com.hdu.tx.aschool.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
@@ -186,7 +187,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @OnClick(R.id.bt_login)
     void login() {
-        if(isRightPhoneNumber&&isRightPassword){
+        if (isRightPhoneNumber && isRightPassword) {
             btLogin.setProgress(30);
             new MyStringRequest(Urls.USER_LOGIN, new InternetListener() {
                 @Override

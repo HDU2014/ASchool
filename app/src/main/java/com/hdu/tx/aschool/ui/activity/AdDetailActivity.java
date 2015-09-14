@@ -8,6 +8,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -129,7 +130,7 @@ public class AdDetailActivity extends BaseActivity {
             Picasso.with(this).load(actInfo.getImageUrl()).into(actImg);
         String path1 = actInfo.getHostimageUrl();
         if (path != null && !"".equals(path))
-            Picasso.with(this).load(actInfo.getImageUrl()).into(hostHeadPic);
+            Picasso.with(this).load(actInfo.getHostimageUrl()).into(hostHeadPic);
         title.setText(actInfo.getTitle());
         timeTv.setText(actInfo.getTime());
         collectTv.setText(actInfo.getCollectTimes() + "");
@@ -348,6 +349,11 @@ public class AdDetailActivity extends BaseActivity {
             @Override
             public void success(JSONObject json) {
                 List<UserInfo> userInfos = JSONHandler.json2ListUser(json);
+              for (int i = 0; i <userInfos.size() ; i++)
+                  if(userInfos.get(i).getNickname().equals(actInfo.getHost_username())) {
+                      userInfos.remove(i);
+                      Log.v("msg",userInfos.get(i).getNickname());
+                  }
                 headimages.setDate(userInfos);
             }
 
