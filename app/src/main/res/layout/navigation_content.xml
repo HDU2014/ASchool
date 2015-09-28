@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:title="@string/tuijie"
             app:titleMarginStart="90dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <RelativeLayout
@@ -37,7 +38,7 @@
                     android:textSize="20sp"
                     android:layout_margin="5dp"
                     android:textColor="@color/white"
-                    android:text="@string/office"
+                    android:text="@string/person"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content" />
 
@@ -57,7 +58,7 @@
                     android:layout_toRightOf="@id/office1"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/white"
-                    android:text="@string/person"
+                    android:text="@string/office"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -79,7 +80,7 @@
                     android:textSize="20sp"
                     android:layout_margin="5dp"
                     android:textColor="@color/white"
-                    android:text="@string/office"
+                    android:text="@string/person"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content" />
 
@@ -90,7 +91,7 @@
                     android:layout_toRightOf="@id/office2"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/white"
-                    android:text="@string/person"
+                    android:text="@string/office"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

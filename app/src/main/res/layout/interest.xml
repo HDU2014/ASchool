@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/red"
-            android:paddingLeft="130dp"
+            app:titleMarginStart="80dp"
             app:layout_collapseMode="pin"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="兴趣标签"></android.support.v7.widget.Toolbar>

@@ -106,6 +106,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
         dialog=new ProgressDialog(getActivity());
         dialog.setMessage("正在加载...");
         initGetAct();
+        onRefresh();
     }
 
     private boolean isInitComplect;
@@ -262,6 +263,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
                 if(dialog.isShowing())dialog.dismiss();
                 swipeRefresh.setRefreshing(false);
                 List<ActInfo> infos= JSONHandler.json2ListAct(json);
+                Log.v("msg","多个活动查询");
                 adapterData.clear();
                 adapterData.addAll(infos);
                 adapter.notifyDataSetChanged();

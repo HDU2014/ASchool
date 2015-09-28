@@ -14,6 +14,8 @@ import com.hdu.tx.aschool.easemod.applib.DemoHXSDKHelper;
 import com.hdu.tx.aschool.ui.View.MainView;
 import com.hdu.tx.aschool.ui.fragment.TypeFragment;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class SplashActivity extends BaseActivity
 {
 	private static final String SYSTEMCACHE = "SplashActivity";

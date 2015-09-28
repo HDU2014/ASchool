@@ -32,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,11 +120,12 @@ public class AdDetailActivity extends BaseActivity {
         actInfo = (ActInfo) getIntent().getSerializableExtra("activity");
         browse();
         //headimages.setDate(getDate());
-        setGroupMembers();
+       setGroupMembers();
         init(actInfo);
     }
 
     public void init(ActInfo actInfo) {
+
         if (actInfo == null) return;
         String path = actInfo.getImageUrl();
         if (path != null && !"".equals(path))
@@ -154,6 +156,7 @@ public class AdDetailActivity extends BaseActivity {
         } else {
             join.setText("去报名");
         }
+
     }
 
 
@@ -170,9 +173,19 @@ public class AdDetailActivity extends BaseActivity {
     /**
      * 参加活动点击事件
      */
+    String  currentTime(){
+        String strTime;
+        Calendar calendar = Calendar.getInstance();
+        strTime = calendar.get(Calendar.MONTH) + "-"+calendar.get(Calendar.DAY_OF_MONTH)+"  "+ calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE);
+        Log.v("时间",strTime);
+
+        return strTime;
+    }
     @OnClick(R.id.join)
     void onclick() {
-        if (actInfo.getIsJoin()) {
+//        if(actInfo.getTime().compareTo(currentTime())<0)
+//            toast(toolbar, "活动已过期！");
+         if (actInfo.getIsJoin()) {
             showProgressDialog(this,R.string.canceling);
             new MyStringRequest(Urls.ACTIVITY_JOIN_IN_CANCLE, new InternetListener() {
                 @Override
@@ -349,11 +362,12 @@ public class AdDetailActivity extends BaseActivity {
             @Override
             public void success(JSONObject json) {
                 List<UserInfo> userInfos = JSONHandler.json2ListUser(json);
-              for (int i = 0; i <userInfos.size() ; i++)
-                  if(userInfos.get(i).getNickname().equals(actInfo.getHost_username())) {
-                      userInfos.remove(i);
-                      Log.v("msg",userInfos.get(i).getNickname());
-                  }
+                if(userInfos.size()>1) {
+                    for (int i = 0; i < userInfos.size(); i++)
+                        if (userInfos.get(i).getNickname().equals(actInfo.getHostname())) {
+                            userInfos.remove(i);
+                        }
+                }
                 headimages.setDate(userInfos);
             }
 

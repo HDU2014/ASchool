@@ -44,7 +44,11 @@ public class TagsView extends LinearLayout{
     public void initView(){
             ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             types=context.getResources().getStringArray(R.array.activity_type);
-            size=types.length;
+            size=types.length-1;
+            for(int i = 0; i<types.length-1; i++)
+            {
+                types[i]=types[i+1];
+            }
             tagViews=new TagView[size];
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             for (int i = 0; i <size ; i++) {

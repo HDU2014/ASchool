@@ -8,7 +8,6 @@
     <TextView
         android:id="@+id/interest_card"
         style="@style/interest_style"
-
         android:text="@string/sport" />
 
 

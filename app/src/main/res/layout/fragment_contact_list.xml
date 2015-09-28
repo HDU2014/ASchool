@@ -37,7 +37,7 @@
             <include 
                 android:id="@+id/search_bar_view"
 
-                layout="@layout/search_bar_with_padding"/>
+                layout="@layout/search_bar"/>
 
 
             <ListView

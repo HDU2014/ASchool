@@ -7,8 +7,8 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -32,6 +32,8 @@ import com.hdu.tx.aschool.ui.adapter.FragmentAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2015/8/21.
@@ -128,6 +130,7 @@ public class MainView extends DrawerLayout {
         }
     }
 
+
     public void setBottomIvSelect(int index){
         viewPage.setCurrentItem(index);
         fragment_ll1.setVisibility(GONE);
@@ -141,15 +144,15 @@ public class MainView extends DrawerLayout {
                 setSelectIv(0);
                 break;
             case 1:
-                toolbar.setTitle(R.string.office);
-                toolbar.setSubtitle(R.string.person);
+                toolbar.setTitle(R.string.person);
+                toolbar.setSubtitle(R.string.office);
                 setSelectIv(1);
                 fragment_ll1.setVisibility(VISIBLE);
 
                 break;
             case 2:
-                toolbar.setTitle(R.string.person);
-                toolbar.setSubtitle(R.string.office);
+                toolbar.setTitle(R.string.office);
+                toolbar.setSubtitle(R.string.person);
                 setSelectIv(1);
                 fragment_ll2.setVisibility(VISIBLE);
                 break;
@@ -215,6 +218,7 @@ public class MainView extends DrawerLayout {
             public void onPageScrollStateChanged(int state) {
 
             }
+
         });
     }
 
