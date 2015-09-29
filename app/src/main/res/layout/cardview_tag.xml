@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hdu.tx.aschool.ui.View.TagView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="0dp"
+    card_view:cardElevation="0dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="6dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/colorAccent"
+                android:layout_height="30dp" />
+
+            <TextView
+            android:id="@+id/act_type"
+            android:text="运动"
+            android:textSize="20sp"
+                android:layout_weight="1"
+            android:textColor="@color/colorAccent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/more_tv"
+                android:text="更多"
+                android:textSize="15sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="right|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="110dp">
+
+                <ImageView
+                    android:id="@+id/act_img1"
+                    android:src="@drawable/shadow_article"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:layout_margin="3dp"
+                    android:layout_width="100dp"
+                    android:layout_height="75dp" />
+
+                <TextView
+                    android:singleLine="true"
+                    android:id="@+id/act_title1"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textSize="15sp"
+                    android:text="标题"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="110dp">
+
+                <ImageView
+                    android:id="@+id/act_img2"
+                    android:src="@drawable/shadow_article"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:layout_margin="3dp"
+                    android:layout_width="100dp"
+                    android:layout_height="75dp" />
+
+                <TextView
+                    android:id="@+id/act_title2"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:text="标题"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="110dp">
+
+                <ImageView
+                    android:id="@+id/act_img3"
+                    android:src="@drawable/shadow_article"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:layout_margin="3dp"
+                    android:layout_width="100dp"
+                    android:layout_height="75dp" />
+
+                <TextView
+                    android:id="@+id/act_title3"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:padding="4dp"
+                    android:textSize="15sp"
+                    android:text="标题"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.hdu.tx.aschool.ui.View.TagView>
