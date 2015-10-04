@@ -69,7 +69,7 @@ public class GroupAdapter extends ArrayAdapter<EMGroup> {
 				convertView = inflater.inflate(R.layout.search_bar_with_padding, null);
 			}
 			final EditText query = (EditText) convertView.findViewById(R.id.query);
-			final ImageButton clearSearch = (ImageButton) convertView.findViewById(R.id.search_clear);
+			final ImageView clearSearch = (ImageView) convertView.findViewById(R.id.search_clear);
 			query.addTextChangedListener(new TextWatcher() {
 				public void onTextChanged(CharSequence s, int start, int before, int count) {
 					getFilter().filter(s);

@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -100,7 +102,11 @@ public class AdDetailActivity extends BaseActivity {
     LinearLayout bt;
     @Bind(R.id.main_content)
     CoordinatorLayout mainContent;
+    @OnClick(R.id.friends_hsv)void onClick(){
+        startActivity(new Intent(this,MoreFriendsActivity.class).putExtra("userInfos", (Serializable) userInfos));
+    }
     private ActInfo actInfo;
+    private List<UserInfo> userInfos;
 
 
     @Override
@@ -120,7 +126,7 @@ public class AdDetailActivity extends BaseActivity {
         actInfo = (ActInfo) getIntent().getSerializableExtra("activity");
         browse();
         //headimages.setDate(getDate());
-       setGroupMembers();
+        setGroupMembers();
         init(actInfo);
     }
 
@@ -361,7 +367,7 @@ public class AdDetailActivity extends BaseActivity {
         new MyStringRequest(Urls.USER_GROUP_MEMBERS, new InternetListener() {
             @Override
             public void success(JSONObject json) {
-                List<UserInfo> userInfos = JSONHandler.json2ListUser(json);
+               userInfos = JSONHandler.json2ListUser(json);
                 if(userInfos.size()>1) {
                     for (int i = 0; i < userInfos.size(); i++)
                         if (userInfos.get(i).getNickname().equals(actInfo.getHostname())) {

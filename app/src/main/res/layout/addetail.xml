@@ -229,6 +229,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/friends_hsv"
                 android:layout_width="match_parent"
                 android:layout_marginTop="1dp"
                 android:layout_height="wrap_content"
@@ -286,12 +287,14 @@
         </LinearLayout>
 
         <HorizontalScrollView
+
             android:background="@color/white"
             android:scrollbars="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.hdu.tx.aschool.ui.View.HeadImageView
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:id="@+id/headimages"
