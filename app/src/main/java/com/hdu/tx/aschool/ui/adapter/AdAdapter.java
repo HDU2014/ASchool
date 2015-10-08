@@ -26,8 +26,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.ViewHolder> {
 
     @Override
     public AdAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view =
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.addetail_cardview_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.addetail_cardview_item, parent, false);
         return new ViewHolder(view);
     }
 

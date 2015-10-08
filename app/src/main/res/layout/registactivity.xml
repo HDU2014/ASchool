@@ -61,7 +61,7 @@
             android:id="@+id/bt_getYZM"
             android:layout_below="@+id/btnWithIcons2"
             app:buttonColor="@color/fbutton_normal"
-            app:shadowColor="?attr/colorPrimaryDark"
+            app:shadowColor="@color/colorPrimaryDark"
             app:shadowEnabled="true"
             app:shadowHeight="3dp"
             android:layout_alignParentRight="true"

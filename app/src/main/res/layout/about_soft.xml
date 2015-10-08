@@ -11,7 +11,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:paddingLeft="140dp"
             android:background="?attr/colorPrimary"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:title="关于">
@@ -19,8 +18,7 @@
         </android.support.v7.widget.Toolbar>
 
 
-        <include layout="@layout/about_sub"
-            />
+        <include layout="@layout/about_sub" />
 
 
 </LinearLayout>

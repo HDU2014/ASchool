@@ -16,9 +16,10 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/about"
+            android:src="@drawable/act_logo"
         />
         <TextView
+            android:id="@+id/version_tv"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,6 +33,8 @@
         android:background="@color/grey_little"
         android:orientation="vertical"
         >
+
+
        <LinearLayout
            android:layout_width="fill_parent"
            android:layout_height="40dp"
@@ -40,19 +43,30 @@
            android:layout_marginTop="1dp"
            >
         <TextView
-            android:layout_width="330dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
-
+            android:layout_weight="1"
             android:background="@color/white"
             android:paddingLeft="10dp"
             android:text="@string/version"
             android:gravity="center_vertical"
             />
+           <TextView
+               android:id="@+id/version_message_tv"
+               android:layout_width="wrap_content"
+               android:layout_height="40dp"
+               android:layout_weight="1"
+               android:background="@color/white"
+               android:paddingLeft="10dp"
+               android:text="@string/have_newest_version"
+               android:gravity="right|center_vertical"
+               />
            <ImageView
                android:layout_width="20dp"
                android:layout_height="40dp"
                android:background="@color/white"
                android:src="@drawable/right_arrow1"
+               android:layout_marginRight="5dp"
                />
        </LinearLayout>
         <LinearLayout
@@ -63,7 +77,8 @@
             android:background="@color/white"
             >
             <TextView
-                android:layout_width="330dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="1dp"
                 android:paddingLeft="10dp"
@@ -72,6 +87,7 @@
                 android:gravity="center_vertical"
                 />
             <ImageView
+                android:layout_marginRight="5dp"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -86,7 +102,8 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="330dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="1dp"
                 android:paddingLeft="10dp"
@@ -95,6 +112,7 @@
                 android:gravity="center_vertical"
                 />
             <ImageView
+                android:layout_marginRight="5dp"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -109,7 +127,8 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="330dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="1dp"
                 android:paddingLeft="10dp"
@@ -118,6 +137,7 @@
                 android:gravity="center_vertical"
                 />
             <ImageView
+                android:layout_marginRight="5dp"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:background="@color/white"

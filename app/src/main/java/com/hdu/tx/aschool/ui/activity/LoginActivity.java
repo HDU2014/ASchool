@@ -84,7 +84,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         selectThirdAccount(imageView);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +94,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         editTextWatch();
     }
 
+    /**
+     * 输入监听
+     */
     private void editTextWatch() {
         EditText editText = textinput.getEditText();
         editText.addTextChangedListener(new TextWatcher() {
@@ -173,6 +175,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         });
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -192,7 +195,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             new MyStringRequest(Urls.USER_LOGIN, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
-                    btLogin.setProgress(100);
+                    btLogin.setProgress(99);
                     UserInfo userInfo= JSONHandler.json2UserInfo(json);
                     userInfo.setId(1l);
                     userInfo.setLevel(1);
@@ -201,9 +204,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     MyApplication.getInstance().getDaoSession().insert(userInfo);
                     MyApplication.getInstance().setUserInfo(userInfo);
                     loginEMChat(etUsername.getText().toString().trim(), new MySecurity().encodyByMD5(etPassword.getText().toString()));
-                 //  loginEMChat(etUsername.getText().toString().trim(),etPassword.getText().toString());
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
                 }
                 @Override
                 public void error(String desc) {
@@ -214,8 +214,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 public Map<String, String> setParams() {
                     Map<String,String> map=new HashMap<>();
                     map.put("user_name",etUsername.getText().toString().trim());
-                  String pwd_md5 = new MySecurity().encodyByMD5(etPassword.getText().toString());
-                //    String pwd_md5 = etPassword.getText().toString();
+                    String pwd_md5 = new MySecurity().encodyByMD5(etPassword.getText().toString());
                     map.put("password",pwd_md5);
                     return map;
                 }
@@ -248,7 +247,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
 
-
+    /**
+     * 登录环信服务器
+     * @param user  用户名
+     * @param pass  密码(MD5加密)
+     */
     public void loginEMChat(final String user, final String pass){
         if (!CommonUtils.isNetWorkConnected(this)) {
             Snackbar.make(toolbar, R.string.network_isnot_available, Snackbar.LENGTH_SHORT).show();
@@ -265,12 +268,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
             @Override
             public void onError(int i, String s) {
-
+                btLogin.setProgress(-1);
             }
 
             @Override
             public void onProgress(int i, String s) {
-
+                btLogin.setProgress(100);
             }
         });
     }

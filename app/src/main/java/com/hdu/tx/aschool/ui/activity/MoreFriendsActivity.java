@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
 
+import com.easemob.chat.EMContactManager;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.dao.UserInfo;
@@ -44,6 +45,8 @@ public class MoreFriendsActivity extends BaseActivity {
         List<UserInfo> userInfos= (List<UserInfo>) getIntent().getSerializableExtra("userInfos");
         FriendsAdapter adapter=new FriendsAdapter(this,userInfos);
         listview.setAdapter(adapter);
+
+       // EMContactManager.getInstance().addContact(toAddUsername, reason);
     }
 
 

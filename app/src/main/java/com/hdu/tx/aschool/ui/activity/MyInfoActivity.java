@@ -59,12 +59,8 @@ public class MyInfoActivity extends BaseActivity {
     private static final String TAG = "MyInfoActivity";
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.appbar)
-    AppBarLayout appbar;
     @Bind(R.id.head_img)
     CircleImageView headImg;
-    @Bind(R.id.main_content)
-    CoordinatorLayout mainContent;
     @Bind(R.id.nickname_ll)
     LinearLayout nicknameLl;
     @Bind(R.id.sex_ll)

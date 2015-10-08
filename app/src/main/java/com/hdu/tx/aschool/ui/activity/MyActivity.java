@@ -45,10 +45,6 @@ public class MyActivity extends BaseActivity {
     RecyclerView recyclerView;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.appbar)
-    AppBarLayout appbar;
-    @Bind(R.id.main_content)
-    CoordinatorLayout mainContent;
     private LinearLayoutManager manager;
     public OfficeAdapter adapter;
     private List<ActInfo> adapterData;
