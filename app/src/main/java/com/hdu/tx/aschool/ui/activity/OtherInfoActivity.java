@@ -91,6 +91,8 @@ public class OtherInfoActivity extends BaseActivity {
         });
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitleEnabled(false);
+        toolbar.setTitle("");
         hostid = getIntent().getStringExtra("host_username");
         getUserInfo(hostid);
     }

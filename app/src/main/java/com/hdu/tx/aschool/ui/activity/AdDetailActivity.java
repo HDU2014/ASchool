@@ -27,6 +27,11 @@ import com.hdu.tx.aschool.net.Urls;
 import com.hdu.tx.aschool.ui.View.HeadImageView;
 import com.hdu.tx.aschool.ui.widget.image.CircleImageView;
 import com.squareup.picasso.Picasso;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.QZoneSsoHandler;
+import com.umeng.socialize.sso.UMQQSsoHandler;
 
 import org.json.JSONObject;
 
@@ -135,7 +140,10 @@ public class AdDetailActivity extends BaseActivity {
         //headimages.setDate(getDate());
         setGroupMembers();
         init(actInfo);
+        initShare();
     }
+
+
 
     public void init(ActInfo actInfo) {
 
@@ -405,5 +413,24 @@ public class AdDetailActivity extends BaseActivity {
         intent.putExtra("index",index);
         this.setResult(ConstantValue.RESULT_OK,intent);
         finish();
+    }
+
+    final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+    @OnClick(R.id.my_share_tv)void onclick3(){
+        mController.openShare(this, false);
+    }
+
+    private void initShare() {
+        String shareContext="活动："+actInfo.getTitle()+" 主办方："+actInfo.getHostname()+" 时间："+actInfo.getTime()+
+                "地点:"+actInfo.getAddress();
+        mController.setShareContent(shareContext);
+        mController.setShareMedia(new UMImage(this,
+                actInfo.getImageUrl()));
+        UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, "1104899656","UiS3uQHezVho3X6D");
+        qqSsoHandler.addToSocialSDK();
+        QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(this, "1104899656",
+                "UiS3uQHezVho3X6D");
+        qZoneSsoHandler.addToSocialSDK();
+
     }
 }

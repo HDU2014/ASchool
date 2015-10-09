@@ -74,8 +74,8 @@ public class  RegistActivity extends BaseActivity {
     void click2() {
         if(isCompleteInput[0]&&isCompleteInput[1]&&isCompleteInput[2]){
             btRegist.setProgress(20);
-            //submit(etPhone.getText().toString().trim(), etYZM.getText().toString().trim());
-            registFromServer();
+            submit(etPhone.getText().toString().trim(), etYZM.getText().toString().trim());
+           // registFromServer();
         }else{
             Snackbar.make(toolbar,R.string.input_format_error,Snackbar.LENGTH_SHORT).show();
         }
@@ -93,6 +93,7 @@ public class  RegistActivity extends BaseActivity {
     @OnClick(R.id.bt_getYZM)
     void click1() {
         getYanZhengMa(etPhone.getText().toString().trim());
+        //requestGetYanzhengma(etPhone.getText().toString().trim());
     }
 
     @Bind(R.id.iv_password)
@@ -326,6 +327,7 @@ public class  RegistActivity extends BaseActivity {
                 map.put("user_name",etPhone.getText().toString());
                 String pwd_md5 = new MySecurity().encodyByMD5(etPass.getText().toString());
                 map.put("password",pwd_md5);
+                map.put("v_code",etYZM.getText().toString().trim());
                 return map;
             }
         });
@@ -343,7 +345,6 @@ public class  RegistActivity extends BaseActivity {
     }
 
 
-
     public void loginEMChat(final String user, final String pass){
         if (!CommonUtils.isNetWorkConnected(this)) {
             Snackbar.make(toolbar, R.string.network_isnot_available, Snackbar.LENGTH_SHORT).show();
@@ -354,7 +355,7 @@ public class  RegistActivity extends BaseActivity {
             @Override
             public void onSuccess() {
                 MyApplication.getInstance().login(user, pass);
-                Intent intent=new Intent(RegistActivity.this,MyInfoActivity.class);
+                Intent intent = new Intent(RegistActivity.this, MyInfoActivity.class);
                 RegistActivity.this.startActivity(intent);
                 RegistActivity.this.finish();
             }
@@ -367,6 +368,32 @@ public class  RegistActivity extends BaseActivity {
             @Override
             public void onProgress(int i, String s) {
 
+            }
+        });
+    }
+
+
+    public void requestGetYanzhengma(final String phone_num){
+        if (!phone_num.matches("[1][3-8][\\d]{9}")) {
+            toast(toolbar, "请输入正确的手机号");
+            return;
+        }
+        new MyStringRequest(Urls.USER_GET_VCODE, new InternetListener() {
+            @Override
+            public void success(JSONObject json) {
+                toast(toolbar,"验证码已发送，请注意查收");
+            }
+
+            @Override
+            public void error(String desc) {
+                toast(toolbar,desc);
+            }
+
+            @Override
+            public Map<String, String> setParams() {
+                Map<String,String> map=new HashMap<>();
+                map.put("phone_num",phone_num);
+                return map;
             }
         });
     }

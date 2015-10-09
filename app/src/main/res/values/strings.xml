@@ -446,5 +446,6 @@
     <string name="canceling">正在取消...</string>
     <string name="have_newest_version">当前已是最新版本</string>
     <string name="has_joined">已报名</string>
+    <string name="share">分享</string>
 
 </resources>

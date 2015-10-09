@@ -65,7 +65,7 @@
                 android:layout_centerVertical="true"
                 android:hint="@string/phoneNumber"
                 android:inputType="phone"
-                android:background="@drawable/edit_no_stroke"
+                android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.design.widget.TextInputLayout>
@@ -112,7 +112,7 @@
                 android:textCursorDrawable="@null"
                 android:layout_centerVertical="true"
                 android:hint="@string/password"
-                android:background="@drawable/edit_no_stroke"
+                android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.design.widget.TextInputLayout>

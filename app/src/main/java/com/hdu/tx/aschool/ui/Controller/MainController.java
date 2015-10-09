@@ -26,6 +26,10 @@ import com.hdu.tx.aschool.ui.fragment.MainFragment;
 import com.hdu.tx.aschool.ui.fragment.MeFragment;
 import com.hdu.tx.aschool.ui.fragment.OfficeFragment;
 import com.hdu.tx.aschool.ui.fragment.PersonalFragment;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.UMQQSsoHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,6 +141,9 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
             case R.id.exit:
                // mainView.showExitAppDialog();
                 mainView.showChanggeAccountDialog();
+                break;
+            case R.id.menu_settings:
+
                 break;
             case R.id.menu_about:
                 Intent intent2=new Intent(mainActivity,AboutActivity.class);

@@ -263,6 +263,7 @@ public class MainView extends DrawerLayout {
                 MyApplication.getInstance().getDaoSession().deleteAll(UserInfo.class);
                 MyApplication.getInstance().getDaoSession().insert(userInfo);
                 MyApplication.getInstance().setUserInfo(userInfo);
+
                 mainActivity.startActivity(new Intent(mainActivity, LoginActivity.class));
                 mainActivity.finish();
             }

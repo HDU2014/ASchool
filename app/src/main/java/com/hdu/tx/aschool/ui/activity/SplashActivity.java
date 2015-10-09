@@ -1,8 +1,11 @@
 package com.hdu.tx.aschool.ui.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
@@ -14,12 +17,16 @@ import com.hdu.tx.aschool.easemod.applib.DemoHXSDKHelper;
 import com.hdu.tx.aschool.ui.View.MainView;
 import com.hdu.tx.aschool.ui.fragment.TypeFragment;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import cn.jpush.android.api.JPushInterface;
 
 public class SplashActivity extends BaseActivity
 {
-	private static final String SYSTEMCACHE = "SplashActivity";
 
+	private static final String SYSTEMCACHE = "SplashActivity";
+	@Bind(R.id.sp_tv)
+	TextView spTv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -27,7 +34,17 @@ public class SplashActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
 		setContentView(R.layout.splash);
+		ButterKnife.bind(this);
+		PackageManager manager=this.getPackageManager();
+		PackageInfo info = null;
+		try {
+			info = manager.getPackageInfo(this.getPackageName(), 0);
+			spTv.setText(getResources().getString(R.string.app_name)+"V"+info.versionName);
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
+
 
 
 	private static final int sleepTime = 2000;
@@ -76,8 +93,9 @@ public class SplashActivity extends BaseActivity
 						try {
 							Thread.sleep(sleepTime);
 						} catch (InterruptedException e) {
+
 						}
-						startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+						startActivity(new Intent(SplashActivity.this, MainActivity.class));
 						finish();
 					}
 				}

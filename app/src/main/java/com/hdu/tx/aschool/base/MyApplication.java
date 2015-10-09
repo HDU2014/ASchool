@@ -43,6 +43,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance=this;
         hxSDKHelper.onInit(this);
+        com.umeng.socialize.utils.Log.LOG = true;
     }
 
     public static MyApplication getInstance() {

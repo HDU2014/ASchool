@@ -46,7 +46,6 @@ public class Urls {
 
 
 
-
     //用户接口
     public final static String USER_REGIST="user_registered"; //用户注册
     public final static String USER_LOGIN="user_sign_in"; //用户登录
@@ -58,6 +57,7 @@ public class Urls {
     public final static String USER_UPLOAD_PHOTO="user_get_up_token_success"; //用户上传图片获取upToken
     public final static String USER_DELETE="user_delete"; //用户注销
     public final static String USER_GROUP_MEMBERS="user_query_group_member_info"; //用户注销
+    public final static String USER_GET_VCODE="yuntongxun/sms"; //用户注销
 
 
 
