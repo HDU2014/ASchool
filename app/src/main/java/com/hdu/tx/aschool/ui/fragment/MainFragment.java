@@ -100,7 +100,7 @@ public class MainFragment extends BaseFragment {
             @Override
             public void success(JSONObject json) {
                 List<ActInfo> infos = JSONHandler.json2ListAct(json);
-                if(tagsView==null)return;
+                if(tagsView==null||infos.size()<5)return;
                tagsView.setDate(infos);
             }
 
@@ -153,6 +153,7 @@ public class MainFragment extends BaseFragment {
     }
 
     public void initLunBoView(List<ActInfo> actInfos) {
+        if(actInfos.size()<5)return;
         LunBoAdapter adapter = new LunBoAdapter((MainActivity) getActivity(), lunboll, actInfos);
         adapter.setLunBoOnClickListener(new LunBoOnClickListener() {
             @Override

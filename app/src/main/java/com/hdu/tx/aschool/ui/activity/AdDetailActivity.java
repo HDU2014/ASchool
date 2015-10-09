@@ -10,8 +10,6 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +17,7 @@ import android.widget.TextView;
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.BaseActivity;
 import com.hdu.tx.aschool.base.MyApplication;
-import com.hdu.tx.aschool.common.utils.MyStrings;
+import com.hdu.tx.aschool.common.utils.ConstantValue;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.dao.UserInfo;
 import com.hdu.tx.aschool.net.InternetListener;
@@ -33,12 +31,10 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -72,18 +68,20 @@ public class AdDetailActivity extends BaseActivity {
     TextView timeTv;
     @Bind(R.id.address_tv)
     TextView addressTv;
-    @Bind(R.id.person_num)
-    TextView personNum;
     @Bind(R.id.hostname_tv)
     TextView hostnameTv;
     @Bind(R.id.host_head_pic)
     CircleImageView hostHeadPic;
-    @Bind(R.id.nickname_ll)
-    LinearLayout nicknameLl;
+    @Bind(R.id.person_num)
+    TextView personNum;
+    @Bind(R.id.group_chat)
+    LinearLayout groupChat;
     @Bind(R.id.headimages)
     HeadImageView headimages;
-    @Bind(R.id.group_chat)
-    Button groupChat;
+    @Bind(R.id.friends_hsv)
+    LinearLayout friendsHsv;
+    @Bind(R.id.nickname_ll)
+    LinearLayout nicknameLl;
     @Bind(R.id.describe_tv)
     TextView describeTv;
     @Bind(R.id.lunboll)
@@ -102,12 +100,20 @@ public class AdDetailActivity extends BaseActivity {
     LinearLayout bt;
     @Bind(R.id.main_content)
     CoordinatorLayout mainContent;
-    @OnClick(R.id.friends_hsv)void onClick(){
-        startActivity(new Intent(this,MoreFriendsActivity.class).putExtra("userInfos", (Serializable) userInfos));
+
+    @OnClick(R.id.headimages)
+    void onClick() {
+        startActivity(new Intent(this, MoreFriendsActivity.class).putExtra("userInfos", (Serializable) userInfos));
     }
+
+    @OnClick(R.id.friends_hsv)
+    void onClick1() {
+        startActivity(new Intent(this, MoreFriendsActivity.class).putExtra("userInfos", (Serializable) userInfos));
+    }
+
     private ActInfo actInfo;
     private List<UserInfo> userInfos;
-
+    private int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,11 +125,12 @@ public class AdDetailActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
         collapsingToolbar.setTitle("活动详情");
         actInfo = (ActInfo) getIntent().getSerializableExtra("activity");
+        index = getIntent().getIntExtra("index",-1);
         browse();
         //headimages.setDate(getDate());
         setGroupMembers();
@@ -169,7 +176,7 @@ public class AdDetailActivity extends BaseActivity {
     /**
      * 进入主办方详细介绍
      */
-    @OnClick(R.id.hostname_tv)
+    @OnClick(R.id.nickname_ll)
     void getDetail() {
         Intent intent = new Intent(AdDetailActivity.this, OtherInfoActivity.class).putExtra("host_username", actInfo.getHost_username());
         AdDetailActivity.this.startActivity(intent);
@@ -179,20 +186,21 @@ public class AdDetailActivity extends BaseActivity {
     /**
      * 参加活动点击事件
      */
-    String  currentTime(){
+    String currentTime() {
         String strTime;
         Calendar calendar = Calendar.getInstance();
-        strTime = calendar.get(Calendar.MONTH) + "-"+calendar.get(Calendar.DAY_OF_MONTH)+"  "+ calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE);
-        Log.v("时间",strTime);
+        strTime = calendar.get(Calendar.MONTH) + "-" + calendar.get(Calendar.DAY_OF_MONTH) + "  " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+        Log.v("时间", strTime);
 
         return strTime;
     }
+
     @OnClick(R.id.join)
     void onclick() {
 //        if(actInfo.getTime().compareTo(currentTime())<0)
 //            toast(toolbar, "活动已过期！");
-         if (actInfo.getIsJoin()) {
-            showProgressDialog(this,R.string.canceling);
+        if (actInfo.getIsJoin()) {
+            showProgressDialog(this, R.string.canceling);
             new MyStringRequest(Urls.ACTIVITY_JOIN_IN_CANCLE, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
@@ -219,7 +227,7 @@ public class AdDetailActivity extends BaseActivity {
                 }
             });
         } else {
-            showProgressDialog(this,R.string.joining_activity);
+            showProgressDialog(this, R.string.joining_activity);
             new MyStringRequest(Urls.ACTIVITY_JOIN_IN, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
@@ -252,7 +260,7 @@ public class AdDetailActivity extends BaseActivity {
     @OnClick(R.id.collect_ll)
     void onclick1() {
         if (actInfo.getIsCollect()) {
-            showProgressDialog(this,R.string.canceling);
+            showProgressDialog(this, R.string.canceling);
             new MyStringRequest(Urls.ACTIVITY_COLLECT_CANCLE, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
@@ -278,7 +286,7 @@ public class AdDetailActivity extends BaseActivity {
                 }
             });
         } else {
-            showProgressDialog(this,R.string.submiting);
+            showProgressDialog(this, R.string.submiting);
             new MyStringRequest(Urls.ACTIVITY_COLLECT, new InternetListener() {
                 @Override
                 public void success(JSONObject json) {
@@ -305,9 +313,6 @@ public class AdDetailActivity extends BaseActivity {
             });
         }
     }
-
-
-
 
 
     /**
@@ -341,8 +346,8 @@ public class AdDetailActivity extends BaseActivity {
      */
     @OnClick(R.id.group_chat)
     void onclick2() {
-        if(!actInfo.getIsJoin()){
-            Snackbar.make(toolbar,R.string.sorry_you_not_join,Snackbar.LENGTH_LONG).setAction(R.string.goto_join,
+        if (!actInfo.getIsJoin()) {
+            Snackbar.make(toolbar, R.string.sorry_you_not_join, Snackbar.LENGTH_LONG).setAction(R.string.goto_join,
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -367,11 +372,12 @@ public class AdDetailActivity extends BaseActivity {
         new MyStringRequest(Urls.USER_GROUP_MEMBERS, new InternetListener() {
             @Override
             public void success(JSONObject json) {
-               userInfos = JSONHandler.json2ListUser(json);
-                if(userInfos.size()>1) {
+                userInfos = JSONHandler.json2ListUser(json);
+                if (userInfos.size() ==actInfo.getJoinedpeopel()+1) {
                     for (int i = 0; i < userInfos.size(); i++)
-                        if (userInfos.get(i).getNickname().equals(actInfo.getHostname())) {
+                        if (userInfos.get(i).getUsername().equals(actInfo.getHost_username())) {
                             userInfos.remove(i);
+                            break;
                         }
                 }
                 headimages.setDate(userInfos);
@@ -392,4 +398,12 @@ public class AdDetailActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent();
+        intent.putExtra("actInfo",actInfo);
+        intent.putExtra("index",index);
+        this.setResult(ConstantValue.RESULT_OK,intent);
+        finish();
+    }
 }

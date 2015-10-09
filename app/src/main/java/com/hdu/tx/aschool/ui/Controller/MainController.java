@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.MyApplication;
+import com.hdu.tx.aschool.common.utils.ConstantValue;
 import com.hdu.tx.aschool.ui.View.MainView;
 import com.hdu.tx.aschool.ui.activity.AboutActivity;
 import com.hdu.tx.aschool.ui.activity.InterestActivity;
@@ -29,6 +30,8 @@ import com.hdu.tx.aschool.ui.fragment.PersonalFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.transform.Result;
+
 /**
  * Created by Administrator on 2015/8/21.
  */
@@ -37,6 +40,7 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
     private MainActivity mainActivity;
     private MainView mainView;
     private List<Fragment> fragments;
+    private int index;
 
     public MainController(MainActivity mainActivity, MainView mainView) {
         this.mainActivity=mainActivity;
@@ -75,7 +79,7 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
 
     @Override
     public void onClick(View v) {
-        int index=mainView.getCurrentFragement();
+        index=mainView.getCurrentFragement();
         switch (v.getId()){
             case R.id.headimg_iv:
                 mainView.closeDrawers();
@@ -141,5 +145,15 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
 
         }
         return true;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode== ConstantValue.RESULT_CANCLE)return;
+        if(requestCode==ConstantValue.INTENT_ADDETAIL){
+            if(index==1){
+                OfficeFragment fragment=(OfficeFragment)fragments.get(index);
+                fragment.refresh(data);
+            }
+        }
     }
 }

@@ -101,12 +101,12 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         swipeRefresh.setDistanceToTriggerSync(100);// 设置下拉距离
-        swipeRefresh.setSize(SwipeRefreshLayout.LARGE);
+            swipeRefresh.setSize(SwipeRefreshLayout.DEFAULT);
         map=new HashMap<>();
         dialog=new ProgressDialog(getActivity());
         dialog.setMessage("正在加载...");
         initGetAct();
-        onRefresh();
+        //onRefresh();
     }
 
     private boolean isInitComplect;
@@ -195,7 +195,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 schools.setText(schoolsData[position]);
-                queryAct(ACTIVITY_SCHOOL,schoolsData[position]);
+                queryAct(ACTIVITY_SCHOOL, schoolsData[position]);
                 pop.dismiss();
             }
         });
@@ -290,7 +290,7 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
         new MyStringRequest(Urls.ACTIVITY_QUERY_MUTI, new InternetListener() {
             @Override
             public void success(JSONObject json) {
-                    Log.i("TAG",json.toString());
+                    Log.i("TAG", json.toString());
                     if(swipeRefresh!=null)swipeRefresh.setRefreshing(false);
                     List<ActInfo> infos= JSONHandler.json2ListAct(json);
                     adapterData=infos;
@@ -307,5 +307,16 @@ public class OfficeFragment extends BaseFragment implements SwipeRefreshLayout.O
                 return map;
             }
         });
+    }
+
+
+    public void refresh(Intent data) {
+        ActInfo newactInfo= (ActInfo) data.getSerializableExtra("actInfo");
+        int index=data.getIntExtra("index",-1);
+        if(adapterData!=null&&index!=-1){
+            adapterData.remove(index);
+            adapterData.add(index,newactInfo);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

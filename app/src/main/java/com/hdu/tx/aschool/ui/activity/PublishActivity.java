@@ -85,8 +85,6 @@ public class PublishActivity extends BaseActivity {
     @Bind(R.id.et_introdue)
     EditText etIntrodue;
 
-    @Bind(R.id.main_content)
-    CoordinatorLayout mainContent;
 
     @Bind(R.id.choiceType)
     LinearLayout choiceType;
@@ -102,13 +100,7 @@ public class PublishActivity extends BaseActivity {
     String mTime;
     String mDate;
     String id;
-//    @Bind(R.id.add_edit)
-//    TextView addEdit;
-//    @Bind(R.id.bminfo)
-//    LinearLayout bminfo;
-
     private String imagePath;
-//    public int edit_id=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

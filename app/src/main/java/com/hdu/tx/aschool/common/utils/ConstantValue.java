@@ -30,6 +30,11 @@ public class ConstantValue {
     public static final int INTENT_AFTER_TAKE_PHOTOS = 12;
     public static final int  INTENT_AFTER_SELECT_PHOTOS= 13;
     public static final int  INTENT_AFTER_CROPPHOTO= 14;
+    public static final int  INTENT_ADDETAIL= 14;
+
+
+    public static final int RESULT_OK=0;
+    public static final int RESULT_CANCLE=-1;
 
 
 }

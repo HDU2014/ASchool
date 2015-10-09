@@ -1,5 +1,6 @@
 package com.hdu.tx.aschool.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -27,10 +28,8 @@ public class MainActivity extends BaseActivity {
         mPushAgent.enable();
 
         UmengUpdateAgent.update(this);
-
         String device_token = UmengRegistrar.getRegistrationId(this);
         Log.i(TAG,device_token);
-
         mainView = (MainView) findViewById(R.id.dl_main_drawer);
         mainView.initView(this);
         if(getIntent().getBooleanExtra("isRefresh",false)){
@@ -42,5 +41,9 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mainController.onActivityResult(requestCode, resultCode, data);
+    }
 }

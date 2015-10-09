@@ -438,12 +438,13 @@
     <string name="help">帮助</string>
     <string name="callback">反馈</string>
     <string name="Copyright" >Copyright©2015HDU.All Rights Reserved.</string>
-    <string name="qunliao">群   聊</string>
+    <string name="qunliao">进入群聊</string>
     <string name="more">更多</string>
     <string name="sorry_you_not_join">您未参加此次活动，赶快去报名吧！</string>
     <string name="goto_join">去报名</string>
     <string name="joining_activity">正在提交报名信息</string>
     <string name="canceling">正在取消...</string>
     <string name="have_newest_version">当前已是最新版本</string>
+    <string name="has_joined">已报名</string>
 
 </resources>

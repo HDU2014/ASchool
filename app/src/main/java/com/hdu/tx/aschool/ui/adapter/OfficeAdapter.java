@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.hdu.tx.aschool.R;
 import com.hdu.tx.aschool.base.MyApplication;
+import com.hdu.tx.aschool.common.utils.ConstantValue;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.ui.activity.AdDetailActivity;
 import com.squareup.picasso.Picasso;
@@ -26,10 +28,10 @@ import java.util.List;
 
 public class OfficeAdapter extends RecyclerView.Adapter<OfficeAdapter.ViewHolder> {
 
-    private Context mContext;
+    private Activity mContext;
     private List<ActInfo> actInfos;
 
-    public OfficeAdapter(Context mContext,List<ActInfo> data){
+    public OfficeAdapter(Activity mContext,List<ActInfo> data){
         this.mContext = mContext;
         this.actInfos=data;
     }
@@ -42,7 +44,7 @@ public class OfficeAdapter extends RecyclerView.Adapter<OfficeAdapter.ViewHolder
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onBindViewHolder(final OfficeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final OfficeAdapter.ViewHolder holder, final int position) {
         final View view = holder.mView;
         final ActInfo actInfo=actInfos.get(position);
 
@@ -70,7 +72,7 @@ public class OfficeAdapter extends RecyclerView.Adapter<OfficeAdapter.ViewHolder
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        mContext.startActivity(new Intent(mContext,AdDetailActivity.class).putExtra("activity",actInfo));
+                        mContext.startActivityForResult(new Intent(mContext, AdDetailActivity.class).putExtra("activity", actInfo).putExtra("index",position), ConstantValue.INTENT_ADDETAIL);
                     }
                 });
                 animator.start();
