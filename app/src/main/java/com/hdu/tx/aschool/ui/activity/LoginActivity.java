@@ -268,7 +268,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
             @Override
             public void onError(int i, String s) {
-                btLogin.setProgress(-1);
+                toast(toolbar,s);
             }
 
             @Override

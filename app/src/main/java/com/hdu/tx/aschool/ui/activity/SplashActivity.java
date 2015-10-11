@@ -95,7 +95,7 @@ public class SplashActivity extends BaseActivity
 						} catch (InterruptedException e) {
 
 						}
-						startActivity(new Intent(SplashActivity.this, MainActivity.class));
+						startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 						finish();
 					}
 				}

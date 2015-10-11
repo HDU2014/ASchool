@@ -107,7 +107,6 @@ public class MainView extends DrawerLayout {
 
 
 
-
         viewPage= (ViewPager) findViewById(R.id.viewpager);
         if(MyApplication.getInstance().getUserInfo().getLevel()==0){
             Snackbar.make(toolbar,R.string.need_login,Snackbar.LENGTH_LONG).setAction(R.string.now_regist, new OnClickListener() {

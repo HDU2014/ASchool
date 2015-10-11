@@ -153,7 +153,7 @@ public class MainFragment extends BaseFragment {
     }
 
     public void initLunBoView(List<ActInfo> actInfos) {
-        if(actInfos.size()<5)return;
+        if(actInfos==null||actInfos.size()<5)return;
         LunBoAdapter adapter = new LunBoAdapter((MainActivity) getActivity(), lunboll, actInfos);
         adapter.setLunBoOnClickListener(new LunBoOnClickListener() {
             @Override

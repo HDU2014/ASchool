@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -127,13 +128,15 @@ public class AdDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-        collapsingToolbar.setTitle("活动详情");
+        //collapsingToolbar.setCollapsedTitleGravity(Gravity.CENTER);
+        collapsingToolbar.setExpandedTitleGravity(Gravity.CENTER);
         actInfo = (ActInfo) getIntent().getSerializableExtra("activity");
         index = getIntent().getIntExtra("index",-1);
         browse();
