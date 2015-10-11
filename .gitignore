@@ -7,7 +7,6 @@
 
 
 #IDEA
-*.iml
 .idea/.name
 .idea/encodings.xml
 .idea/inspectionProfiles/Project_Default.xml
