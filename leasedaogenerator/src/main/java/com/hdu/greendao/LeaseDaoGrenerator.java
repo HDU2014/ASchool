@@ -13,11 +13,11 @@ public class LeaseDaoGrenerator {
         createActiDao(schema);
         //new DaoGenerator().generateAll(schema, "D://andorid/hdu2014/ASchool/app/src/main/java");
        // new DaoGenerator().generateAll(schema, "F://APP/androidApp/ASchool-master/app/src/main/java");
-        new DaoGenerator().generateAll(schema, "C://Users/Administrator.USER-20150411XJ/Desktop/app/ASchool-dev/app/src/main/java");
-
+       // new DaoGenerator().generateAll(schema, "C://Users/Administrator.USER-20150411XJ/Desktop/app/ASchool-dev/app/src/main/java");
+        new DaoGenerator().generateAll(schema, "C://Android/workhouse/aschool/ASchool/app/src/main/java");
     }
 
-    public static void  createUserDao(Schema schema){
+    public static void  createUserDao(Schema schema) {
         Entity userInfo = schema.addEntity("UserInfo");
         userInfo.addIdProperty();
         userInfo.addIntProperty("loadTimes");
@@ -34,6 +34,7 @@ public class LeaseDaoGrenerator {
         userInfo.addStringProperty("sex");
         userInfo.addStringProperty("city");
         userInfo.addStringProperty("age");
+        userInfo.addStringProperty("interestTabs");
         userInfo.implementsInterface("java.io.Serializable");
     }
 
@@ -68,7 +69,11 @@ public class LeaseDaoGrenerator {
 
 
 
-    public static void createMyTagActiDao(Schema schema){
-
+    public static void createInterestTabsDao(Schema schema){
+        Entity userInfo = schema.addEntity("InterestTabs");
+        userInfo.addIdProperty();
+        userInfo.addStringProperty("tab");
+        userInfo.addBooleanProperty("isSelect");
+        userInfo.implementsInterface("java.io.Serializable");
     }
 }

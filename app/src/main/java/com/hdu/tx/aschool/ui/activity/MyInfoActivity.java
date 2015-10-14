@@ -399,7 +399,8 @@ public class MyInfoActivity extends BaseActivity {
                     public void success(JSONObject desc) {
                         try {
                             toast(toolbar, desc.getString("desc"));
-
+                            userInfo.setHeadimg_url(desc.getString("head_pic"));
+                            MyApplication.getInstance().getDaoSession().update(userInfo);
                             Log.i("TAG", desc.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -440,6 +441,6 @@ public class MyInfoActivity extends BaseActivity {
             MyApplication.getInstance().getDaoSession().update(userInfo);
         }
         finish();
-
     }
+
 }

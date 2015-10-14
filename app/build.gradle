@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "com.hdu.tx.aschool"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 122
-        versionName "1.22"
+        versionCode 124
+        versionName "1.2.4"
     }
     buildTypes {
         release {

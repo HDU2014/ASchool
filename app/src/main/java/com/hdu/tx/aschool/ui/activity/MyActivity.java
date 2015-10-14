@@ -1,5 +1,6 @@
 package com.hdu.tx.aschool.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -50,13 +51,16 @@ public class MyActivity extends BaseActivity {
     private List<ActInfo> adapterData;
     public String str;
     public String MyUrl;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_activity);
         ButterKnife.bind(this);
-
+        dialog=new ProgressDialog(this);
+        dialog.setMessage("正在加载数据，请稍后");
+        dialog.show();
         str = getIntent().getStringExtra("name");
         Log.v("msg", str);
         setSupportActionBar(toolbar);
@@ -89,6 +93,7 @@ public class MyActivity extends BaseActivity {
         new MyStringRequest(MyUrl, new InternetListener() {
             @Override
             public void success(JSONObject json) {
+                dialog.dismiss();
                 List<ActInfo> infos = JSONHandler.json2ListAct(json);
                 adapterData = infos;
                 adapter = new OfficeAdapter(MyActivity.this, adapterData);
@@ -97,7 +102,8 @@ public class MyActivity extends BaseActivity {
 
             @Override
             public void error(String desc) {
-
+                toast(toolbar,desc);
+                dialog.dismiss();
             }
 
             @Override

@@ -38,6 +38,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         public final static Property Sex = new Property(12, String.class, "sex", false, "SEX");
         public final static Property City = new Property(13, String.class, "city", false, "CITY");
         public final static Property Age = new Property(14, String.class, "age", false, "AGE");
+        public final static Property InterestTabs = new Property(15, String.class, "interestTabs", false, "INTEREST_TABS");
     };
 
 
@@ -67,7 +68,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
                 "\"INSTITUTE\" TEXT," + // 11: institute
                 "\"SEX\" TEXT," + // 12: sex
                 "\"CITY\" TEXT," + // 13: city
-                "\"AGE\" TEXT);"); // 14: age
+                "\"AGE\" TEXT," + // 14: age
+                "\"INTEREST_TABS\" TEXT);"); // 15: interestTabs
     }
 
     /** Drops the underlying database table. */
@@ -155,6 +157,11 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (age != null) {
             stmt.bindString(15, age);
         }
+ 
+        String interestTabs = entity.getInterestTabs();
+        if (interestTabs != null) {
+            stmt.bindString(16, interestTabs);
+        }
     }
 
     /** @inheritdoc */
@@ -181,7 +188,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // institute
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // sex
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // city
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // age
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // age
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15) // interestTabs
         );
         return entity;
     }
@@ -204,6 +212,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         entity.setSex(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setCity(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setAge(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setInterestTabs(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
      }
     
     /** @inheritdoc */

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.hdu.tx.aschool.R;
+import com.hdu.tx.aschool.base.MyApplication;
 import com.hdu.tx.aschool.dao.ActInfo;
 import com.hdu.tx.aschool.ui.activity.AdDetailActivity;
 
@@ -44,6 +45,11 @@ public class TagsView extends LinearLayout{
     public void initView(){
             ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             types=context.getResources().getStringArray(R.array.activity_type);
+            int[] indexs=new int[types.length];
+            String s= MyApplication.getInstance().getUserInfo().getInterestTabs();
+            if(s!=null&&s.contains(",")){
+
+            }
             size=types.length-1;
             for(int i = 0; i<types.length-1; i++)
             {
@@ -51,6 +57,7 @@ public class TagsView extends LinearLayout{
             }
             tagViews=new TagView[size];
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             for (int i = 0; i <size ; i++) {
                 tagViews[i]= (TagView) inflater.inflate(R.layout.cardview_tag,null);
                 tagViews[i].setLayoutParams(params);
@@ -102,5 +109,18 @@ public class TagsView extends LinearLayout{
                     break;
             }
         }
+    }
+
+
+    public String[] getTabsString(String s){
+        String[] types=context.getResources().getStringArray(R.array.activity_type);
+        if(s==null||!s.contains(","))return null;
+        else{
+            String[] result=s.split(",");
+            for (int i = 0; i <result.length ; i++) {
+
+            }
+        }
+        return  null;
     }
 }

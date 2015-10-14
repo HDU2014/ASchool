@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
 
     >
@@ -24,8 +25,7 @@
                 android:layout_gravity="center"
                 android:textSize="25sp"
                 android:padding="5dp"
-                android:textColor="@color/white"
-                android:text="用户昵称"/>
+                android:textColor="@color/white" />
 
 
         </LinearLayout>
@@ -46,6 +46,8 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:paddingTop="20dp"
+                    app:border_width="2dp"
+                    app:border_color="@color/grey"
                     android:src="@drawable/ic_user" />
 
                 <ImageView
@@ -138,6 +140,4 @@
 
 
     </LinearLayout>
-
-
 </LinearLayout>

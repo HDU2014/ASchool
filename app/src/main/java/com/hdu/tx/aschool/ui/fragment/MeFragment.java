@@ -114,30 +114,8 @@ public class MeFragment extends BaseFragment {
         Picasso.with(superActivity).load(info.getHeadimg_url()).into(headIv);
         otherHeadSex.setImageDrawable(info.getSex() == null || info.equals("男") ? getResources().getDrawable(R.drawable.sex_man) :
                 getResources().getDrawable(R.drawable.sex_women));
-//        new MyStringRequest(Urls.USER_QUERY_BYID, new InternetListener() {
-//            @Override
-//            public void success(JSONObject json) {
-//                info = JSONHandler.json2UserInfo(json);
-//                otherUserid.setText(info.getNickname());
-//                Picasso.with(superActivity).load(info.getHeadimg_url()).into(headIv);
-//                otherHeadSex.setImageDrawable(info.getSex() == null || info.equals("男") ? getResources().getDrawable(R.drawable.sex_man) :
-//                        getResources().getDrawable(R.drawable.sex_women));
-//
-//            }
-//
-//            @Override
-//            public void error(String desc) {
-//
-//            }
-//
-//            @Override
-//            public Map<String, String> setParams() {
-//                Map<String, String> map = new HashMap<>();
-//                map.put("user_name", MyApplication.getInstance().getUserInfo().getUsername());
-//                return map;
-//            }
-//        });
     }
+
     @OnClick(R.id.head_iv)
     void gotoInfo() {
         if (info.getLevel() == 0) {
@@ -182,5 +160,11 @@ public class MeFragment extends BaseFragment {
                 new Intent(superActivity, LoginActivity.class) :
                 new Intent(superActivity, MyInfoActivity.class);
         superActivity.startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initUserInfo();
     }
 }

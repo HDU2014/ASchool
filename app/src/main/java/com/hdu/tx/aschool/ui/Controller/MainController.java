@@ -157,7 +157,7 @@ public class MainController implements View.OnClickListener, NavigationView.OnNa
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode== ConstantValue.RESULT_CANCLE)return;
         if(requestCode==ConstantValue.INTENT_ADDETAIL){
-            if(index==1){
+            if(mainView.getCurrentFragement()==1){
                 OfficeFragment fragment=(OfficeFragment)fragments.get(index);
                 fragment.refresh(data);
             }

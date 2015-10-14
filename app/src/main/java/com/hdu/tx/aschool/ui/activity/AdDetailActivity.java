@@ -109,11 +109,19 @@ public class AdDetailActivity extends BaseActivity {
 
     @OnClick(R.id.headimages)
     void onClick() {
+        if(userInfos==null||userInfos.size()==0){
+            toast(toolbar,"此活动还未有人参加，赶快去报名吧");
+            return;
+        }
         startActivity(new Intent(this, MoreFriendsActivity.class).putExtra("userInfos", (Serializable) userInfos));
     }
 
     @OnClick(R.id.friends_hsv)
     void onClick1() {
+        if(userInfos==null||userInfos.size()==0){
+            toast(toolbar,"此活动还未有人参加，赶快去报名吧");
+            return;
+        }
         startActivity(new Intent(this, MoreFriendsActivity.class).putExtra("userInfos", (Serializable) userInfos));
     }
 
@@ -136,7 +144,6 @@ public class AdDetailActivity extends BaseActivity {
             }
         });
         //collapsingToolbar.setCollapsedTitleGravity(Gravity.CENTER);
-        collapsingToolbar.setExpandedTitleGravity(Gravity.CENTER);
         actInfo = (ActInfo) getIntent().getSerializableExtra("activity");
         index = getIntent().getIntExtra("index",-1);
         browse();
@@ -158,6 +165,7 @@ public class AdDetailActivity extends BaseActivity {
         if (path != null && !"".equals(path))
             Picasso.with(this).load(actInfo.getHostimageUrl()).into(hostHeadPic);
         title.setText(actInfo.getTitle());
+        collapsingToolbar.setTitle(actInfo.getTitle());
         timeTv.setText(actInfo.getTime());
         collectTv.setText(actInfo.getCollectTimes() + "");
         lookTv.setText(actInfo.getLookTimes() + "");

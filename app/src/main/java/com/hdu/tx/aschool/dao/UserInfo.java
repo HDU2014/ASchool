@@ -21,6 +21,7 @@ public class UserInfo implements java.io.Serializable {
     private String sex;
     private String city;
     private String age;
+    private String interestTabs;
 
     public UserInfo() {
     }
@@ -29,7 +30,7 @@ public class UserInfo implements java.io.Serializable {
         this.id = id;
     }
 
-    public UserInfo(Long id, Integer loadTimes, String username, String nickname, Integer level, String school, String major, String headimg_url, String phoneNumber, Boolean isBindPhone, String grade, String institute, String sex, String city, String age) {
+    public UserInfo(Long id, Integer loadTimes, String username, String nickname, Integer level, String school, String major, String headimg_url, String phoneNumber, Boolean isBindPhone, String grade, String institute, String sex, String city, String age, String interestTabs) {
         this.id = id;
         this.loadTimes = loadTimes;
         this.username = username;
@@ -45,6 +46,7 @@ public class UserInfo implements java.io.Serializable {
         this.sex = sex;
         this.city = city;
         this.age = age;
+        this.interestTabs = interestTabs;
     }
 
     public Long getId() {
@@ -165,6 +167,14 @@ public class UserInfo implements java.io.Serializable {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public String getInterestTabs() {
+        return interestTabs;
+    }
+
+    public void setInterestTabs(String interestTabs) {
+        this.interestTabs = interestTabs;
     }
 
 }

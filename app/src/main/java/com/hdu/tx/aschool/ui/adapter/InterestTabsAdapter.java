@@ -3,6 +3,7 @@ package com.hdu.tx.aschool.ui.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import cn.smssdk.gui.GroupListView;
  * Created by pualgo on 2015/8/31.
  */
 public class InterestTabsAdapter extends RecyclerView.Adapter<InterestTabsAdapter.ViewHolder> {
+    private static final String TAG = InterestTabsAdapter.class.getSimpleName();
     public Context mContext;
     public List<InterestTabsEntitiy>  mData;
     private LayoutInflater inflater;
@@ -47,8 +49,10 @@ public class InterestTabsAdapter extends RecyclerView.Adapter<InterestTabsAdapte
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final InterestTabsEntitiy tab=mData.get(position);
-       holder.tabTv.setText(tab.getTab());
-        holder.tabCb.setSelected(tab.isSelected());
+        holder.tabTv.setText(tab.getTab());
+        selectTab(tab,holder);
+      // holder.tabTv.setText(tab.getTab());
+       // holder.tabCb.setSelected(tab.isSelected());
         MyOnClickListner myListner=new MyOnClickListner(tab,holder);
        holder.tabCv.setOnClickListener(myListner);
         holder.tabCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -114,4 +118,20 @@ public class InterestTabsAdapter extends RecyclerView.Adapter<InterestTabsAdapte
         holder.tabCb.setChecked(tab.isSelected());
         holder.tabCv.setCardBackgroundColor(tab.isSelected() ? mContext.getResources().getColor(R.color.colorPrimary) : mContext.getResources().getColor(R.color.yellow));
     }
+
+    /**
+     * 获取所有选中Tab的下标
+     * @return
+     */
+    public String getTabsIndex(){
+        StringBuffer sb=new StringBuffer();
+        for (int i = 0; i <mData.size(); i++) {
+            if(mData.get(i).isSelected())sb.append(1+",");
+            else sb.append(0+",");
+        }
+        return sb.substring(0,sb.length()-1).toString();
+    }
+
+
+
 }
