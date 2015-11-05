@@ -1,1 +1,31 @@
-/build
+/local.properties
+.DS_Store
+
+#APK
+*.apk
+*.ap_
+
+
+#IDEA
+.idea/.name
+.idea/encodings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/libraries
+
+# Generated files
+antLauncher/bin
+antLauncher/gen
+
+# Log Files
+*.log
+
+# Gradle files
+build/
+.gradle/
+*/build/
