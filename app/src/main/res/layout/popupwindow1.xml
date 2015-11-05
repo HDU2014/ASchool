@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <com.hdu.tx.aschool.ui.widget.pupuwindow.DropdownButton
+            android:id="@+id/chooseType"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="18dp"
+            android:background="#dddddd" />
+
+        <com.hdu.tx.aschool.ui.widget.pupuwindow.DropdownButton
+            android:id="@+id/chooseSchool"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="18dp"
+            android:background="#dddddd" />
+
+        <com.hdu.tx.aschool.ui.widget.pupuwindow.DropdownButton
+            android:id="@+id/chooseTime"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/mask"
+        android:visibility="gone"
+        android:background="#80000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></View>
+
+</LinearLayout>

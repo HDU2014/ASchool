@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <com.hdu.tx.aschool.ui.widget.image.CircleImageView
+
+        android:id="@+id/head_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_user"
+        app:border_color="#AAAAAAAA"
+        app:border_width="2dp" />
+
+    <LinearLayout
+      android:layout_weight="1"
+        android:layout_margin="8dp"
+      android:orientation="vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/nickname_tv"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/jieshao_tv"
+            android:layout_marginTop="5dp"
+            android:textSize="13sp"
+            android:singleLine="true"
+            android:text="jieshaolskajflkdjslfjalskjdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_bt"
+        android:layout_margin="8dp"
+        android:text="添加"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

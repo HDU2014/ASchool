@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    android:fitsSystemWindows="true">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:title="@string/my_info"
+                android:background="?attr/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <TextView
+                    android:layout_marginLeft="200dp"
+                    android:id="@+id/jump_tv"
+                    android:visibility="visible"
+                    android:layout_marginRight="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:gravity="right"
+                    android:text="@string/jump"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        app:layout_anchor="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <include layout="@layout/myinfo"></include>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</LinearLayout>

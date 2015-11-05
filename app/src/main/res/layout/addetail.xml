@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lunboll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="足球赛,约?"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/look_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/title"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/look_iv"
+            android:tint="@color/colorAccent" />
+
+
+        <TextView
+            android:id="@+id/look_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/title"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/look_iv"
+            android:gravity="center_vertical"
+            android:text="78" />
+
+
+        <ImageView
+            android:id="@+id/collect_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/title"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/look_tv"
+            android:padding="2dp"
+            android:src="@drawable/collected"
+            android:tint="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/collect_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/title"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/collect_iv"
+            android:gravity="center_vertical"
+            android:text="67" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/look_tv"
+            android:layout_marginTop="10dp"
+            android:background="@color/little_black" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/adetail_time"
+
+
+                />
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="left"-->
+            <!--android:padding="@dimen/addetail_item"-->
+            <!--android:text="@string/time"-->
+            <!--android:textColor="@color/colorPrimaryDark"-->
+            <!--android:textSize="15sp"/>-->
+
+
+            <TextView
+                android:id="@+id/time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="10dp"
+                android:text="2015-8-20 18:00"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <!--<TextView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:gravity="left"-->
+            <!--android:padding="@dimen/addetail_item"-->
+            <!--android:text="@string/address"-->
+            <!--android:textColor="@color/colorPrimaryDark"-->
+            <!--android:textSize="15sp"/>-->
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/adetail_place" />
+
+            <TextView
+                android:id="@+id/address_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:maxLines="2"
+                android:paddingLeft="10dp"
+                android:text="@string/activity_address_test"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/nickname_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/adetail_host" />
+
+            <TextView
+                android:id="@+id/hostname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:text="杭州电子科技大学学生会"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <com.hdu.tx.aschool.ui.widget.image.CircleImageView
+                android:id="@+id/host_head_pic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_user" />
+
+            <ImageView
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/group_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="6dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bottom4_select" />
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:gravity="left"-->
+                <!--android:padding="@dimen/addetail_item"-->
+                <!--android:text="@string/person_number"-->
+                <!--android:textColor="@color/colorPrimaryDark"-->
+                <!--android:textSize="15sp"/>-->
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/has_joined"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/person_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:text="20/100"
+                    android:textColor="@color/red"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/qunliao"
+                    android:textColor="@color/red" />
+
+                <ImageView
+                    style="@style/Right_arrow_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/friends_hsv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <HorizontalScrollView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:scrollbars="none">
+
+                <com.hdu.tx.aschool.ui.View.HeadImageView
+                    android:id="@+id/headimages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"></com.hdu.tx.aschool.ui.View.HeadImageView>
+            </HorizontalScrollView>
+
+            <ImageView
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+
+            <TextView
+                android:id="@+id/describe_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="这里是活动详情，好多字。这里是活动详情，好多字。这里是活动详情，好多字。这里是活动详情，好多字。这里是活动详情，好多字。这里是活动详情，好多字。这里是活动详情，好多字。这里是活动详情，好多字。这里是活动详情，好多字。"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="更多详情"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+                style="@style/Right_arrow_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"></LinearLayout>
+
+
+</LinearLayout>

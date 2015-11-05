@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edit_introdue"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginRight="60dp"
+            android:background="@android:color/transparent"
+            android:onClick="CancelIntrodue"
+            android:textSize="13dp"
+            android:text="@string/cance"
+            android:textColor="@color/red" />
+
+        <Button
+            android:id="@+id/bt_introdue"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_gravity="right"
+            android:textSize="13dp"
+            android:background="@android:color/transparent"
+            android:onClick="FinishIntrodue"
+            android:text="@string/finish"
+            android:textColor="@color/red" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edit_Text"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="top"
+        android:background="@drawable/edit_no_stroke"
+        android:maxLines="50"
+        android:singleLine="false"
+
+        />
+
+
+</LinearLayout>
