@@ -31,8 +31,12 @@ import com.squareup.picasso.Picasso;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWebPage;
 import com.umeng.socialize.sso.QZoneSsoHandler;
 import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
+import com.umeng.socialize.weixin.media.CircleShareContent;
+import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
 import org.json.JSONObject;
 
@@ -435,13 +439,53 @@ public class AdDetailActivity extends BaseActivity {
         String shareContext="活动："+actInfo.getTitle()+" 主办方："+actInfo.getHostname()+" 时间："+actInfo.getTime()+
                 "地点:"+actInfo.getAddress();
         mController.setShareContent(shareContext);
-        mController.setShareMedia(new UMImage(this,
-                actInfo.getImageUrl()));
+//        mController.setShareMedia(new UMImage(this,
+//                actInfo.getImageUrl()));
+        mController.setShareMedia(new UMWebPage("http://api.xtongtong.cn/share/index.html?" + actInfo.getActId()));
+
+
         UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, "1104899656","UiS3uQHezVho3X6D");
         qqSsoHandler.addToSocialSDK();
+
         QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(this, "1104899656",
                 "UiS3uQHezVho3X6D");
         qZoneSsoHandler.addToSocialSDK();
+
+
+        WeiXinShareContent weixinContent = new WeiXinShareContent();
+//设置分享文字
+        weixinContent.setShareContent(shareContext);
+//设置title
+        weixinContent.setTitle("校时代-微信分享");
+//设置分享内容跳转URL
+        weixinContent.setTargetUrl("http://api.xtongtong.cn/share/index.html?" + actInfo.getActId());
+//设置分享图片
+        weixinContent.setShareImage(new UMImage(this,
+                actInfo.getImageUrl()));
+        mController.setShareMedia(weixinContent);
+
+
+// 添加微信平台
+        UMWXHandler wxHandler = new UMWXHandler(this,"wx5eb2837f59eb10aa","8e09221ec2fbb67bfa576ce057614de2");
+        wxHandler.addToSocialSDK();
+// 添加微信朋友圈
+        UMWXHandler wxCircleHandler = new UMWXHandler(this,"wx5eb2837f59eb10aa","8e09221ec2fbb67bfa576ce057614de2");
+
+        CircleShareContent circleMedia = new CircleShareContent();
+
+        //设置分享文字
+        circleMedia.setShareContent(shareContext);
+//设置title
+        circleMedia.setTitle("校时代-微信分享");
+//设置分享内容跳转URL
+        circleMedia.setTargetUrl("http://api.xtongtong.cn/share/index.html?" + actInfo.getActId());
+//设置分享图片
+        circleMedia.setShareImage(new UMImage(this,
+                actInfo.getImageUrl()));
+        mController.setShareMedia(circleMedia);
+
+        wxCircleHandler.setToCircle(true);
+        wxCircleHandler.addToSocialSDK();
 
     }
 }

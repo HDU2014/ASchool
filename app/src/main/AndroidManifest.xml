@@ -202,6 +202,13 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
     </application>
 
     <!-- Required  一些系统要求的权限，如访问网络等-->
